@@ -1,0 +1,6 @@
+framework module Pods_NWMuseumAR {
+  umbrella header "Pods-NWMuseumAR-umbrella.h"
+
+  export *
+  module * { export * }
+}
