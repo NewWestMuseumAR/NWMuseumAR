@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		44430D8CAA387F56E486A460 /* Pods_NWMuseumAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */; };
+		840ADCCC202418D4004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCB202418D4004313A8 /* .gitkeep */; };
+		840ADCCE202418F3004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCD202418F3004313A8 /* .gitkeep */; };
+		840ADCD020241904004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCF20241904004313A8 /* .gitkeep */; };
 		84402601202270B200AF5839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84402600202270B200AF5839 /* AppDelegate.swift */; };
 		84402603202270B200AF5839 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402602202270B200AF5839 /* art.scnassets */; };
 		84402605202270B200AF5839 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84402604202270B200AF5839 /* ViewController.swift */; };
@@ -18,6 +21,9 @@
 
 /* Begin PBXFileReference section */
 		4184AB7EBD446A16478DA598 /* Pods-NWMuseumAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.release.xcconfig"; sourceTree = "<group>"; };
+		840ADCCB202418D4004313A8 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		840ADCCD202418F3004313A8 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		840ADCCF20241904004313A8 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		844025FD202270B200AF5839 /* NWMuseumAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWMuseumAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84402600202270B200AF5839 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84402602202270B200AF5839 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -87,6 +93,7 @@
 		844026162022710900AF5839 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				840ADCCB202418D4004313A8 /* .gitkeep */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -112,6 +119,7 @@
 		844026192022712000AF5839 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				840ADCCD202418F3004313A8 /* .gitkeep */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -119,6 +127,7 @@
 		8440261A2022712600AF5839 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				840ADCCF20241904004313A8 /* .gitkeep */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -195,8 +204,11 @@
 			files = (
 				84402603202270B200AF5839 /* art.scnassets in Resources */,
 				8440260D202270B200AF5839 /* LaunchScreen.storyboard in Resources */,
+				840ADCCC202418D4004313A8 /* .gitkeep in Resources */,
+				840ADCCE202418F3004313A8 /* .gitkeep in Resources */,
 				8440260A202270B200AF5839 /* Assets.xcassets in Resources */,
 				84402608202270B200AF5839 /* Main.storyboard in Resources */,
+				840ADCD020241904004313A8 /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
