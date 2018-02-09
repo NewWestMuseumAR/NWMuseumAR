@@ -30,6 +30,10 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerDele
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return subViewControllers.count
     }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return 0
+    }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
