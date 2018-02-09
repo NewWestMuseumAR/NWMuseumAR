@@ -1,5 +1,5 @@
 //
-//  TutorialPageViewController.swift
+//  MainPageViewController.swift
 //  NWMuseumAR
 //
 //  Created by Harrison Milbradt on 2018-02-09.
@@ -8,19 +8,18 @@
 
 import UIKit
 
-class TutorialPageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+class MainPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     lazy var subViewControllers:[UIViewController] = {
         return [
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "help1"),
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "help2"),
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "help3")
+            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "progress"),
+            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "camera")
         ]
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.delegate = self
         self.dataSource = self
         
@@ -30,7 +29,7 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerDele
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return subViewControllers.count
     }
-
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         let currentIndex:Int = subViewControllers.index(of: viewController) ?? 0
@@ -48,5 +47,4 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerDele
         }
         return subViewControllers[currentIndex + 1]
     }
-    
 }

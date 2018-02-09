@@ -1,5 +1,5 @@
 //
-//  TutorialPageOneViewController.swift
+//  ProgressViewController.swift
 //  NWMuseumAR
 //
 //  Created by Harrison Milbradt on 2018-02-09.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TutorialPageOneViewController: UIViewController {
+class ProgressViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

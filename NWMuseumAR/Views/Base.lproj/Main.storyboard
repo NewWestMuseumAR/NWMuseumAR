@@ -55,18 +55,28 @@
                     <view key="view" contentMode="scaleToFill" id="Bb4-Fg-sUx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f72-ln-ca1">
+                                <rect key="frame" x="171" y="496" width="64" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start app"/>
+                                <connections>
+                                    <segue destination="BGb-6v-Cm6" kind="show" id="PQw-wk-blC"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.61195443630000002" green="0.89115999580000005" blue="0.91770563469999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="VgD-OP-CbA"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPY-1T-kT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-900" y="151"/>
+            <point key="canvasLocation" x="-900" y="150.67466266866569"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8L2-Nh-7x3">
             <objects>
-                <viewController id="S4g-Kh-RDx" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="progress" id="S4g-Kh-RDx" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0WQ-wb-1oS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -78,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="435" y="151"/>
         </scene>
-        <!--Page View Controller-->
+        <!--Main Page View Controller-->
         <scene sceneID="DAD-co-JPS">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="BGb-6v-Cm6" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="BGb-6v-Cm6" customClass="MainPageViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ojt-Q9-ID1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="434" y="-546"/>
@@ -89,7 +99,7 @@
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="camera" id="BV1-FR-VrT" customClass="ViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
                     <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BrB-h1-WRS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
