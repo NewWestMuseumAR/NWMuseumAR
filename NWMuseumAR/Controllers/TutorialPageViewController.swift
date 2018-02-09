@@ -18,11 +18,15 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerDele
         ]
     }()
     
+    var currentPage : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.delegate = self
         self.dataSource = self
+        
+        currentPage = 0
         
         setViewControllers([subViewControllers[0]], direction: .forward, animated: false, completion: nil)
     }
@@ -41,7 +45,7 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerDele
         if currentIndex <= 0 {
             return nil
         }
-        return subViewControllers[currentIndex]
+        return subViewControllers[currentIndex - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -53,4 +57,9 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerDele
         return subViewControllers[currentIndex + 1]
     }
     
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        
+        guard completed else { return }
+        self.currentPage = pageViewController.viewControllers!.first!.view.tag
+    }
 }
