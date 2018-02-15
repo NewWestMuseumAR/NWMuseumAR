@@ -10,10 +10,13 @@ import UIKit
 
 class MainPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
+    // Any new pages you want go in here
+    // name: refers to the storyboard name,
+    // withIdentifier refers to the identifier you gave it in the storyboard
     lazy var subViewControllers:[UIViewController] = {
         return [
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "progress"),
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "camera")
+            UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress"),
+            UIStoryboard(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "camera")
         ]
     }()
     

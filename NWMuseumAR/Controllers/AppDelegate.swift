@@ -15,7 +15,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+
+        // TODO: Implement skipping tutorial for existing users
+        
+        let homeViewController : UIPageViewController
+        
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        
+        if launchedBefore  {
+            // Skip Tutorial
+            homeViewController = MainPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        } else {
+            // Show tutorial, add launchedbefore to storage
+            homeViewController = TutorialPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
+        
+        // Show our starting controller to the user
+        window!.rootViewController = homeViewController
+        window!.makeKeyAndVisible()
+        
         return true
     }
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Page View Controller-->
+        <scene sceneID="DAD-co-JPS">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ojt-Q9-ID1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController storyboardIdentifier="UIPageViewController-BGb-6v-Cm6" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="BGb-6v-Cm6" customClass="MainPageViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="927" y="-608"/>
+        </scene>
+        <!--ViewC Ontroller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController storyboardIdentifier="camera" id="BV1-FR-VrT" customClass="ARViewCOntroller" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BrB-h1-WRS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </arscnView>
+                    <connections>
+                        <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1727" y="151"/>
+        </scene>
+        <!--help1-->
+        <scene sceneID="flS-MT-4KF">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="help1" storyboardName="Tutorial" referencedIdentifier="help1" id="hkr-eg-RHf" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iGm-65-rGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1895.2" y="150.67466266866569"/>
+        </scene>
+        <!--help3-->
+        <scene sceneID="0ZD-Sb-GNI">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="help3" storyboardName="Tutorial" referencedIdentifier="help3" id="TsX-j1-KO8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PIu-FK-BIG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-560.79999999999995" y="150.67466266866569"/>
+        </scene>
+        <!--help2-->
+        <scene sceneID="lIr-rn-Qg9">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="help2" storyboardName="Tutorial" referencedIdentifier="help2" id="WhC-Bd-acZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ENc-3i-wmU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1231.2" y="149.77511244377811"/>
+        </scene>
+        <!--progress-->
+        <scene sceneID="WFo-sM-E10">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="progress" storyboardName="Progress" referencedIdentifier="progress" id="fDv-Vu-5HJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M1L-r0-w6W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="927" y="151"/>
+        </scene>
+    </scenes>
+</document>
