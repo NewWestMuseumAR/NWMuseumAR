@@ -12,9 +12,9 @@ class TutorialPageViewController: UIPageViewController, UIPageViewControllerDele
 
     lazy var subViewControllers:[UIViewController] = {
         return [
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "help1"),
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "help2"),
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "help3")
+            UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: "help1"),
+            UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: "help2"),
+            UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: "help3")
         ]
     }()
     

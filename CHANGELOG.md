@@ -8,4 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.0.1]
 ### Added
+- Added Model and View Controller for Details
+- Added tutorial page placeholders
+
+## [0.0.2]
+### Added
 - CHANGELOG.md for keeping track of changes
+
