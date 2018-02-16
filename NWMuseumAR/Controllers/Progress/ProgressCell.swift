@@ -11,7 +11,6 @@ import UIKit
 class ProgressCell: UITableViewCell {
     @IBOutlet weak var artifactIcon: UIImageView!
     @IBOutlet weak var artifactDescription: UILabel!
-    
     //Set the image view and label to display artifact information
     func setArtifact(artifact: Artifact) {
         artifactIcon.image = artifact.icon

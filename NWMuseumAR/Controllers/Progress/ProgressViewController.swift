@@ -10,6 +10,7 @@ import UIKit
 
 class ProgressViewController: UIViewController {
 
+    // MARK: - TableView data creation
     @IBOutlet weak var tableView: UITableView!
     
     var artifacts: [Artifact] = []
@@ -53,6 +54,7 @@ class ProgressViewController: UIViewController {
 
 //find the cell and display info as needed
 extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
+    // MARK: - UITableViewDataSource, UITableViewDelegate
     //this function sets how mant rolls are we displaying
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //display all the artifacts in the array
