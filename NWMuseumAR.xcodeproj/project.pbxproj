@@ -23,6 +23,8 @@
 		8489A84720362D5F00243C26 /* Progress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84620362D5F00243C26 /* Progress.storyboard */; };
 		8489A84920362D7400243C26 /* ARScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84820362D7400243C26 /* ARScene.storyboard */; };
 		8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489A84B2036308300243C26 /* EndTutorialViewController.swift */; };
+		D985EF352036CD110072B377 /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF342036CD110072B377 /* Artifact.swift */; };
+		D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF362036D2B00072B377 /* ProgressCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		8489A84B2036308300243C26 /* EndTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTutorialViewController.swift; sourceTree = "<group>"; };
 		BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.debug.xcconfig"; sourceTree = "<group>"; };
 		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D985EF342036CD110072B377 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
+		D985EF362036D2B00072B377 /* ProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				840ADCCB202418D4004313A8 /* .gitkeep */,
+				D985EF342036CD110072B377 /* Artifact.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				8461B1F6202E31F100733885 /* ProgressViewController.swift */,
+				D985EF362036D2B00072B377 /* ProgressCell.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -322,10 +328,12 @@
 			files = (
 				8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */,
 				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
+				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
 				8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */,
 				84402605202270B200AF5839 /* ARViewController.swift in Sources */,
 				84402601202270B200AF5839 /* AppDelegate.swift in Sources */,
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
+				D985EF352036CD110072B377 /* Artifact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
