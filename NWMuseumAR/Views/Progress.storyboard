@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QRu-qJ-lQu">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -22,7 +22,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="progress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pDm-Dg-kjD" customClass="ProgressViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tNk-aI-gEX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="250"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HrJ-f6-OFM" id="LXW-OJ-g8g">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dzd-bG-9Jm" userLabel="ArtifactIcon">
@@ -42,7 +42,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtifactName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vp0-Rs-JbZ" userLabel="ArtifactName">
-                                            <rect key="frame" x="91" y="30.5" width="193" height="20.5"/>
+                                            <rect key="frame" x="91" y="30.666666666666671" width="193" height="20.333333333333329"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20.5" id="oqn-Z1-IBR"/>
                                             </constraints>
@@ -102,44 +102,38 @@
             <objects>
                 <viewController id="FPJ-H5-fAV" customClass="DetailViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vhf-sF-h2J">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="RwD-hu-jZ4">
-                                <rect key="frame" x="10" y="35" width="355" height="558"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UH2-qw-lRS">
-                                        <rect key="frame" x="57.5" y="0.0" width="240" height="128"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="25d-ZN-JzH"/>
-                                            <constraint firstAttribute="width" secondItem="UH2-qw-lRS" secondAttribute="height" multiplier="15:8" id="FQG-1w-V1v"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artifact Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asU-aQ-XMY">
-                                        <rect key="frame" x="120" y="153" width="115.5" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="Swd-Uu-xlP"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artifact Desc" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsH-Ag-lF3">
-                                        <rect key="frame" x="134" y="203" width="87" height="355"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UH2-qw-lRS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="173"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="UH2-qw-lRS" secondAttribute="height" multiplier="375:173" id="qaK-BN-c1P"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Artifact Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asU-aQ-XMY">
+                                <rect key="frame" x="20" y="24" width="334" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artifact Desc" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsH-Ag-lF3">
+                                <rect key="frame" x="18" y="181" width="338" height="509"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="slU-mK-xt4" firstAttribute="bottom" secondItem="RwD-hu-jZ4" secondAttribute="bottom" constant="10" id="H6f-al-iTJ"/>
-                            <constraint firstItem="RwD-hu-jZ4" firstAttribute="leading" secondItem="slU-mK-xt4" secondAttribute="leading" constant="10" id="jCI-kE-AyA"/>
-                            <constraint firstItem="slU-mK-xt4" firstAttribute="trailing" secondItem="RwD-hu-jZ4" secondAttribute="trailing" constant="10" id="kFX-0G-EX7"/>
-                            <constraint firstItem="RwD-hu-jZ4" firstAttribute="top" secondItem="slU-mK-xt4" secondAttribute="top" constant="35" id="qFz-sY-2Gs"/>
+                            <constraint firstItem="UH2-qw-lRS" firstAttribute="trailing" secondItem="slU-mK-xt4" secondAttribute="trailing" id="Jb0-ik-FOL"/>
+                            <constraint firstItem="gsH-Ag-lF3" firstAttribute="leading" secondItem="slU-mK-xt4" secondAttribute="leading" constant="18" id="OKz-yG-2dG"/>
+                            <constraint firstItem="UH2-qw-lRS" firstAttribute="top" secondItem="slU-mK-xt4" secondAttribute="top" id="R1C-Ln-FNx"/>
+                            <constraint firstItem="UH2-qw-lRS" firstAttribute="leading" secondItem="slU-mK-xt4" secondAttribute="leading" id="Tuv-jT-0ao"/>
+                            <constraint firstItem="slU-mK-xt4" firstAttribute="trailing" secondItem="gsH-Ag-lF3" secondAttribute="trailing" constant="19" id="dpo-je-Qb4"/>
+                            <constraint firstItem="gsH-Ag-lF3" firstAttribute="top" secondItem="UH2-qw-lRS" secondAttribute="bottom" constant="8" id="f36-p8-SJw"/>
+                            <constraint firstItem="slU-mK-xt4" firstAttribute="bottom" secondItem="gsH-Ag-lF3" secondAttribute="bottom" id="joN-j3-g5Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="slU-mK-xt4"/>
                     </view>
@@ -160,7 +154,7 @@
                 <navigationController title="Test" automaticallyAdjustsScrollViewInsets="NO" id="QRu-qJ-lQu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lm5-1O-lwh">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="largeTitleTextAttributes">
