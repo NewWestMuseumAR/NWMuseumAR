@@ -50,6 +50,13 @@ class ProgressViewController: UIViewController {
         
         return tempArtifacts
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MasterToDetail" {
+            let destVC = segue.destination as! DetailViewController
+            destVC.artifact = sender as? Artifact
+        }
+    }
 }
 
 //find the cell and display info as needed
@@ -70,5 +77,10 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         cell.setArtifact(artifact: artifact)
         //return the cell after update with icon and description
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let artifact = artifacts[indexPath.row]
+        performSegue(withIdentifier: "MasterToDetail", sender: artifact)
     }
 }

@@ -23,6 +23,7 @@
 		8489A84720362D5F00243C26 /* Progress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84620362D5F00243C26 /* Progress.storyboard */; };
 		8489A84920362D7400243C26 /* ARScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84820362D7400243C26 /* ARScene.storyboard */; };
 		8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489A84B2036308300243C26 /* EndTutorialViewController.swift */; };
+		8A8652642049D8E10089232C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8652632049D8E10089232C /* DetailViewController.swift */; };
 		D985EF352036CD110072B377 /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF342036CD110072B377 /* Artifact.swift */; };
 		D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF362036D2B00072B377 /* ProgressCell.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,8 @@
 		8489A84620362D5F00243C26 /* Progress.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Progress.storyboard; sourceTree = "<group>"; };
 		8489A84820362D7400243C26 /* ARScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARScene.storyboard; sourceTree = "<group>"; };
 		8489A84B2036308300243C26 /* EndTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTutorialViewController.swift; sourceTree = "<group>"; };
+		8A8652632049D8E10089232C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8A8652652049DEBA0089232C /* NWMuseumAR-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NWMuseumAR-Bridging-Header.h"; sourceTree = "<group>"; };
 		BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.debug.xcconfig"; sourceTree = "<group>"; };
 		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D985EF342036CD110072B377 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
@@ -102,6 +105,7 @@
 				84402602202270B200AF5839 /* art.scnassets */,
 				84402609202270B200AF5839 /* Assets.xcassets */,
 				8440260E202270B200AF5839 /* Info.plist */,
+				8A8652652049DEBA0089232C /* NWMuseumAR-Bridging-Header.h */,
 			);
 			path = NWMuseumAR;
 			sourceTree = "<group>";
@@ -176,6 +180,7 @@
 			children = (
 				8461B1F6202E31F100733885 /* ProgressViewController.swift */,
 				D985EF362036D2B00072B377 /* ProgressCell.swift */,
+				8A8652632049D8E10089232C /* DetailViewController.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				TargetAttributes = {
 					844025FC202270B200AF5839 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -326,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A8652642049D8E10089232C /* DetailViewController.swift in Sources */,
 				8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */,
 				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
 				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
@@ -463,6 +470,7 @@
 			baseConfigurationReference = BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N6RP3H788Z;
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -470,6 +478,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/NWMuseumAR-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -480,6 +490,7 @@
 			baseConfigurationReference = 4184AB7EBD446A16478DA598 /* Pods-NWMuseumAR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N6RP3H788Z;
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -487,6 +498,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/NWMuseumAR-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
