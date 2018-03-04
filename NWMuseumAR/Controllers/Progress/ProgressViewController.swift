@@ -14,6 +14,7 @@ class ProgressTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ArtifactName: UILabel!
     
+    @IBOutlet weak var ArtifactDesc: UILabel!
     @IBOutlet weak var ArtifactIcon: UIImageView!
 }
 
@@ -29,6 +30,7 @@ class ProgressViewController : UITableViewController {
         createArtifacts()
         loadArtifacts()
         setupNavBar()
+        updateTableViewStyle()
     }
     //try to display the Navbar but failed so far
     func setupNavBar() {
@@ -46,10 +48,11 @@ class ProgressViewController : UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArtifactCell", for: indexPath) as! ProgressTableViewCell
-        
         let artifact = artifactArray[indexPath.row]
         cell.ArtifactIcon.image = UIImage(named: artifact.icon!)
         cell.ArtifactName.text = artifact.name
+        cell.ArtifactDesc.text = artifact.desc
+        updateCellStyle(cell: cell)
         return cell
     }
     
@@ -112,5 +115,19 @@ class ProgressViewController : UITableViewController {
         } catch {
             print("Error feching data from context \(error)")
         }
+    }
+    
+    //MARK - Style Manupulation Methods
+    func updateCellStyle(cell : ProgressTableViewCell ) {
+        
+        cell.ArtifactIcon.layer.cornerRadius = 50
+        cell.ArtifactIcon.layer.borderColor = UIColor.blue.cgColor
+        cell.ArtifactIcon.layer.borderWidth = 3
+        cell.ArtifactIcon.layer.backgroundColor = UIColor.blue.cgColor
+        cell.ArtifactIcon.layer.opacity = 0.5
+    }
+    
+    func updateTableViewStyle() {
+        self.tableView.separatorStyle = .none
     }
 }

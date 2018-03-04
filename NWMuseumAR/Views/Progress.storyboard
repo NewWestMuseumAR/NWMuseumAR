@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,41 +26,58 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArtifactCell" rowHeight="35" id="HrJ-f6-OFM" customClass="ProgressTableViewCell" customModule="NWMuseumAR" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="35"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArtifactCell" rowHeight="250" id="HrJ-f6-OFM" customClass="ProgressTableViewCell" customModule="NWMuseumAR" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="250"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HrJ-f6-OFM" id="LXW-OJ-g8g">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="34.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dzd-bG-9Jm" userLabel="ArtifactIcon">
-                                            <rect key="frame" x="22" y="5" width="25" height="25"/>
+                                            <rect key="frame" x="75" y="12" width="225" height="225"/>
+                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="F6N-9r-W2f"/>
-                                                <constraint firstAttribute="width" secondItem="Dzd-bG-9Jm" secondAttribute="height" multiplier="1:1" id="deh-O6-xRe"/>
-                                                <constraint firstAttribute="height" constant="25" id="nNo-h0-pQz"/>
+                                                <constraint firstAttribute="width" constant="225" id="8gT-Jh-Fku"/>
+                                                <constraint firstAttribute="height" constant="225" id="v4Y-kV-CEe"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtifactName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vp0-Rs-JbZ" userLabel="ArtifactName">
-                                            <rect key="frame" x="182" y="5" width="193" height="25"/>
+                                            <rect key="frame" x="91" y="30.5" width="193" height="20.5"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="193" id="Bpd-9o-j9W"/>
+                                                <constraint firstAttribute="height" constant="20.5" id="oqn-Z1-IBR"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtifactDesc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbV-Va-07D" userLabel="ArtifactDesc">
+                                            <rect key="frame" x="91" y="116" width="193" height="103"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="103" id="Gh9-kz-SrH"/>
+                                                <constraint firstAttribute="width" constant="193" id="wW3-NX-NGf"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Vp0-Rs-JbZ" firstAttribute="top" secondItem="LXW-OJ-g8g" secondAttribute="top" constant="5" id="7YU-Q0-r6y"/>
-                                        <constraint firstAttribute="bottom" secondItem="Dzd-bG-9Jm" secondAttribute="bottom" constant="4.5" id="Sx5-bq-mmH"/>
-                                        <constraint firstAttribute="trailing" secondItem="Vp0-Rs-JbZ" secondAttribute="trailing" id="ZjC-tx-IDX"/>
-                                        <constraint firstAttribute="bottom" secondItem="Vp0-Rs-JbZ" secondAttribute="bottom" constant="4.5" id="ag0-dI-sPk"/>
-                                        <constraint firstItem="Dzd-bG-9Jm" firstAttribute="leading" secondItem="LXW-OJ-g8g" secondAttribute="leading" constant="22" id="qHK-o7-fuM"/>
-                                        <constraint firstItem="Dzd-bG-9Jm" firstAttribute="top" secondItem="LXW-OJ-g8g" secondAttribute="top" constant="5" id="wtO-ro-iI7"/>
+                                        <constraint firstItem="Vp0-Rs-JbZ" firstAttribute="top" secondItem="LXW-OJ-g8g" secondAttribute="topMargin" constant="19.5" id="2sv-3e-VvF"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Dzd-bG-9Jm" secondAttribute="bottom" constant="2" id="7NV-Ld-hoQ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="NbV-Va-07D" secondAttribute="bottom" constant="20" id="8Eb-jB-WkW"/>
+                                        <constraint firstItem="NbV-Va-07D" firstAttribute="leading" secondItem="LXW-OJ-g8g" secondAttribute="leadingMargin" constant="75" id="8wU-C4-nFV"/>
+                                        <constraint firstItem="NbV-Va-07D" firstAttribute="top" secondItem="Vp0-Rs-JbZ" secondAttribute="bottom" constant="65" id="T3G-TZ-iqd"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Dzd-bG-9Jm" secondAttribute="trailing" constant="59" id="gKs-p0-pTn"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Vp0-Rs-JbZ" secondAttribute="trailing" constant="75" id="iAr-9W-nE9"/>
+                                        <constraint firstItem="Vp0-Rs-JbZ" firstAttribute="leading" secondItem="LXW-OJ-g8g" secondAttribute="leadingMargin" constant="75" id="mhq-Qw-0wX"/>
+                                        <constraint firstItem="NbV-Va-07D" firstAttribute="top" secondItem="Vp0-Rs-JbZ" secondAttribute="bottom" constant="65" id="oLC-HQ-bws"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="NbV-Va-07D" secondAttribute="trailing" constant="75" id="xCY-DZ-k25"/>
+                                        <constraint firstItem="Dzd-bG-9Jm" firstAttribute="top" secondItem="LXW-OJ-g8g" secondAttribute="topMargin" constant="1" id="yJN-LF-s7T"/>
+                                        <constraint firstItem="Dzd-bG-9Jm" firstAttribute="leading" secondItem="LXW-OJ-g8g" secondAttribute="leadingMargin" constant="59" id="zV0-yR-yIs"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="ArtifactDesc" destination="NbV-Va-07D" id="54D-tB-l8f"/>
                                     <outlet property="ArtifactIcon" destination="Dzd-bG-9Jm" id="wL2-H7-gU9"/>
                                     <outlet property="ArtifactName" destination="Vp0-Rs-JbZ" id="Tqd-Ft-Wff"/>
                                 </connections>
