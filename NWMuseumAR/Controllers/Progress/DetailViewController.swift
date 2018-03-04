@@ -27,20 +27,10 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //set up the UI by using the Artifact object was pssed in from master view
     func setUI() {
-        artifactImageView.image = artifact?.icon
+        artifactImageView.image = UIImage(named: artifact!.icon!)
         artifactTitle.text = artifact?.desc
         artifactDesc.text = artifact?.desc
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

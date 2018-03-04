@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QRu-qJ-lQu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,68 +16,68 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Fucked uP-->
-        <scene sceneID="8L2-Nh-7x3">
+        <!--Artifacts-->
+        <scene sceneID="5Pk-2r-xeu">
             <objects>
-                <viewController storyboardIdentifier="progress" id="S4g-Kh-RDx" customClass="ProgressViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0WQ-wb-1oS">
+                <tableViewController storyboardIdentifier="progress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pDm-Dg-kjD" customClass="ProgressViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tNk-aI-gEX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UAD-SW-rOl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oIB-h3-dmb">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArtifactCell" id="S9M-3C-J2t" customClass="ProgressCell" customModule="NWMuseumAR" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S9M-3C-J2t" id="ZmY-zf-3hK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IIS-yY-NcD">
-                                                    <rect key="frame" x="12" y="8" width="132" height="74"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="C4c-HS-Gdr">
-                                                    <rect key="frame" x="156" y="33" width="207" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="artifactDescription" destination="C4c-HS-Gdr" id="qAE-06-IS8"/>
-                                            <outlet property="artifactIcon" destination="IIS-yY-NcD" id="idG-HD-RMf"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="oIB-h3-dmb" firstAttribute="bottom" secondItem="3kE-8r-rd4" secondAttribute="bottom" id="IoP-ma-2De"/>
-                            <constraint firstItem="oIB-h3-dmb" firstAttribute="trailing" secondItem="3kE-8r-rd4" secondAttribute="trailing" id="Pw3-ak-cZN"/>
-                            <constraint firstItem="oIB-h3-dmb" firstAttribute="top" secondItem="3kE-8r-rd4" secondAttribute="top" id="Vkw-Ig-Uq0"/>
-                            <constraint firstItem="oIB-h3-dmb" firstAttribute="leading" secondItem="3kE-8r-rd4" secondAttribute="leading" id="rFB-55-8Mk"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="3kE-8r-rd4"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Fucked uP" id="AOC-rX-rYv"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArtifactCell" rowHeight="35" id="HrJ-f6-OFM" customClass="ProgressTableViewCell" customModule="NWMuseumAR" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="35"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HrJ-f6-OFM" id="LXW-OJ-g8g">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="34.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dzd-bG-9Jm" userLabel="ArtifactIcon">
+                                            <rect key="frame" x="22" y="5" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="F6N-9r-W2f"/>
+                                                <constraint firstAttribute="width" secondItem="Dzd-bG-9Jm" secondAttribute="height" multiplier="1:1" id="deh-O6-xRe"/>
+                                                <constraint firstAttribute="height" constant="25" id="nNo-h0-pQz"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtifactName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vp0-Rs-JbZ" userLabel="ArtifactName">
+                                            <rect key="frame" x="182" y="5" width="193" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="193" id="Bpd-9o-j9W"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Vp0-Rs-JbZ" firstAttribute="top" secondItem="LXW-OJ-g8g" secondAttribute="top" constant="5" id="7YU-Q0-r6y"/>
+                                        <constraint firstAttribute="bottom" secondItem="Dzd-bG-9Jm" secondAttribute="bottom" constant="4.5" id="Sx5-bq-mmH"/>
+                                        <constraint firstAttribute="trailing" secondItem="Vp0-Rs-JbZ" secondAttribute="trailing" id="ZjC-tx-IDX"/>
+                                        <constraint firstAttribute="bottom" secondItem="Vp0-Rs-JbZ" secondAttribute="bottom" constant="4.5" id="ag0-dI-sPk"/>
+                                        <constraint firstItem="Dzd-bG-9Jm" firstAttribute="leading" secondItem="LXW-OJ-g8g" secondAttribute="leading" constant="22" id="qHK-o7-fuM"/>
+                                        <constraint firstItem="Dzd-bG-9Jm" firstAttribute="top" secondItem="LXW-OJ-g8g" secondAttribute="top" constant="5" id="wtO-ro-iI7"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ArtifactIcon" destination="Dzd-bG-9Jm" id="wL2-H7-gU9"/>
+                                    <outlet property="ArtifactName" destination="Vp0-Rs-JbZ" id="Tqd-Ft-Wff"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pDm-Dg-kjD" id="Se5-gE-cMO"/>
+                            <outlet property="delegate" destination="pDm-Dg-kjD" id="NiL-Qg-kFZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Artifacts" id="7lq-af-cS5"/>
                     <connections>
-                        <outlet property="tableView" destination="oIB-h3-dmb" id="VWx-8H-kl2"/>
-                        <segue destination="FPJ-H5-fAV" kind="show" identifier="MasterToDetail" id="toA-dr-VHa"/>
+                        <segue destination="FPJ-H5-fAV" kind="show" identifier="MasterToDetail" id="F3K-3x-gJX"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yx4-Sf-jeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="acp-SE-nPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2805.5999999999999" y="148.87556221889056"/>
+            <point key="canvasLocation" x="3132" y="148.87556221889056"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="19D-IQ-ix0">
@@ -134,25 +134,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8I-0j-pIk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3716" y="148.87556221889056"/>
+            <point key="canvasLocation" x="4055.1999999999998" y="148.87556221889056"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="UVi-7Z-0Tk">
+        <!--Test-->
+        <scene sceneID="bjP-vx-5tM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iq6-eh-oKe" sceneMemberID="viewController">
+                <navigationController title="Test" automaticallyAdjustsScrollViewInsets="NO" id="QRu-qJ-lQu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AVJ-UF-VUi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lm5-1O-lwh">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="S4g-Kh-RDx" kind="relationship" relationship="rootViewController" id="ipr-nv-09t"/>
+                        <segue destination="pDm-Dg-kjD" kind="relationship" relationship="rootViewController" id="xGc-gV-FLx"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kgl-Ya-nDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NDL-7Y-6Jc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857" y="149"/>
+            <point key="canvasLocation" x="2180" y="149"/>
         </scene>
     </scenes>
 </document>
