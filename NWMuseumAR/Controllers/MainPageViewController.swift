@@ -16,6 +16,8 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
             UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "camera")
         ]
     }()
+    @IBAction func startNavigation(_ sender: Any) {
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
