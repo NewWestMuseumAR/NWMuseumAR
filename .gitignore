@@ -4,6 +4,7 @@
 
 ## Build generated
 build/
+!vuforia-sdk-ios-7-0-50/build/
 DerivedData/
 
 ## Various settings
