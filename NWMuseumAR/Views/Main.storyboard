@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yac-GG-7b5">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="mDu-2t-eek">
+            <objects>
+                <navigationController id="Yac-GG-7b5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IAV-jW-N28">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="x4p-RS-HCJ" kind="relationship" relationship="rootViewController" id="C8d-Yw-Xls"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bpc-gi-zyT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1409" y="21"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="8I6-T9-kKY">
+            <objects>
+                <viewController id="x4p-RS-HCJ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zpX-bI-JNK"/>
+                        <viewControllerLayoutGuide type="bottom" id="tZT-R0-4wT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KDo-ap-qvN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="feC-q7-11H">
+                                <rect key="frame" x="166" y="315" width="42" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <segue destination="RNr-b9-dAN" kind="show" id="XBj-TU-GX7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="feC-q7-11H" firstAttribute="centerY" secondItem="KDo-ap-qvN" secondAttribute="centerY" id="QHY-gg-4Dh"/>
+                            <constraint firstItem="feC-q7-11H" firstAttribute="centerX" secondItem="KDo-ap-qvN" secondAttribute="centerX" id="ZUa-wR-ijG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bgL-2b-rv7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yuu-Ne-p9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-537" y="20"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="nPP-g6-3Si">
+            <objects>
+                <viewController id="RNr-b9-dAN" customClass="ViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QcM-Ts-a0Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="7VU-fu-un9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="acZ-S3-OCL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qsU-Sm-WCF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
