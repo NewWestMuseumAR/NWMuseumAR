@@ -22,9 +22,11 @@
 		8489A84720362D5F00243C26 /* Progress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84620362D5F00243C26 /* Progress.storyboard */; };
 		8489A84920362D7400243C26 /* ARScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84820362D7400243C26 /* ARScene.storyboard */; };
 		8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489A84B2036308300243C26 /* EndTutorialViewController.swift */; };
+		B4877C22204D0CE200D42C29 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBFBB134204CCFB70076DE8C /* libVuforia.a */; };
+		B4877C25204D0D8400D42C29 /* Background.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C23204D0D8400D42C29 /* Background.vertsh */; };
+		B4877C26204D0D8400D42C29 /* Background.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C24204D0D8400D42C29 /* Background.fragsh */; };
 		D985EF352036CD110072B377 /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF342036CD110072B377 /* Artifact.swift */; };
 		D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF362036D2B00072B377 /* ProgressCell.swift */; };
-		FB608ED0204CD60300441AB6 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBFBB134204CCFB70076DE8C /* libVuforia.a */; };
 		FB608ED2204CD61000441AB6 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608ED1204CD61000441AB6 /* SpriteKit.framework */; };
 		FB608ED4204CD61700441AB6 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608ED3204CD61700441AB6 /* MediaPlayer.framework */; };
 		FB608ED6204CD61D00441AB6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608ED5204CD61D00441AB6 /* AudioToolbox.framework */; };
@@ -39,7 +41,6 @@
 		FB608EEB204CE51200441AB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB608EEA204CE51200441AB6 /* ViewController.swift */; };
 		FB608EED204CECCC00441AB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB608EEC204CECCC00441AB6 /* Localizable.strings */; };
 		FBFBB13B204CCFB70076DE8C /* license_3rdpartynotice.txt in Resources */ = {isa = PBXBuildFile; fileRef = FBFBB136204CCFB70076DE8C /* license_3rdpartynotice.txt */; };
-		FBFBB13D204CCFB70076DE8C /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = FBFBB139204CCFB70076DE8C /* readme.txt */; };
 		FBFBB184204CCFBD0076DE8C /* building_texture.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FBFBB13F204CCFBD0076DE8C /* building_texture.jpeg */; };
 		FBFBB185204CCFBD0076DE8C /* buildings.txt in Resources */ = {isa = PBXBuildFile; fileRef = FBFBB140204CCFBD0076DE8C /* buildings.txt */; };
 		FBFBB186204CCFBD0076DE8C /* CR.png in Resources */ = {isa = PBXBuildFile; fileRef = FBFBB142204CCFBD0076DE8C /* CR.png */; };
@@ -124,6 +125,8 @@
 		8489A84620362D5F00243C26 /* Progress.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Progress.storyboard; sourceTree = "<group>"; };
 		8489A84820362D7400243C26 /* ARScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARScene.storyboard; sourceTree = "<group>"; };
 		8489A84B2036308300243C26 /* EndTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTutorialViewController.swift; sourceTree = "<group>"; };
+		B4877C23204D0D8400D42C29 /* Background.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.vertsh; sourceTree = "<group>"; };
+		B4877C24204D0D8400D42C29 /* Background.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.fragsh; sourceTree = "<group>"; };
 		BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.debug.xcconfig"; sourceTree = "<group>"; };
 		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D985EF342036CD110072B377 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
@@ -228,7 +231,6 @@
 		FBFBB131204CCFB70076DE8C /* WordResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordResult.h; sourceTree = "<group>"; };
 		FBFBB134204CCFB70076DE8C /* libVuforia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libVuforia.a; sourceTree = "<group>"; };
 		FBFBB136204CCFB70076DE8C /* license_3rdpartynotice.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license_3rdpartynotice.txt; sourceTree = "<group>"; };
-		FBFBB139204CCFB70076DE8C /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		FBFBB13F204CCFBD0076DE8C /* building_texture.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = building_texture.jpeg; sourceTree = "<group>"; };
 		FBFBB140204CCFBD0076DE8C /* buildings.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = buildings.txt; sourceTree = "<group>"; };
 		FBFBB142204CCFBD0076DE8C /* CR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CR.png; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4877C22204D0CE200D42C29 /* libVuforia.a in Frameworks */,
 				FB608EE2204CD64700441AB6 /* CoreMotion.framework in Frameworks */,
 				FB608EE0204CD63E00441AB6 /* AVFoundation.framework in Frameworks */,
 				FB608EDE204CD63900441AB6 /* SystemConfiguration.framework in Frameworks */,
@@ -314,7 +317,6 @@
 				FB608ED6204CD61D00441AB6 /* AudioToolbox.framework in Frameworks */,
 				FB608ED4204CD61700441AB6 /* MediaPlayer.framework in Frameworks */,
 				FB608ED2204CD61000441AB6 /* SpriteKit.framework in Frameworks */,
-				FB608ED0204CD60300441AB6 /* libVuforia.a in Frameworks */,
 				44430D8CAA387F56E486A460 /* Pods_NWMuseumAR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +354,8 @@
 		844025FF202270B200AF5839 /* NWMuseumAR */ = {
 			isa = PBXGroup;
 			children = (
+				B4877C24204D0D8400D42C29 /* Background.fragsh */,
+				B4877C23204D0D8400D42C29 /* Background.vertsh */,
 				844026162022710900AF5839 /* Models */,
 				844026182022711B00AF5839 /* Controllers */,
 				844026172022711300AF5839 /* Views */,
@@ -475,7 +479,6 @@
 			children = (
 				FBFBB0DA204CCFB70076DE8C /* build */,
 				FBFBB135204CCFB70076DE8C /* licenses */,
-				FBFBB138204CCFB70076DE8C /* samples */,
 			);
 			path = "vuforia-sdk-ios-7-0-50";
 			sourceTree = "<group>";
@@ -611,14 +614,6 @@
 				FBFBB136204CCFB70076DE8C /* license_3rdpartynotice.txt */,
 			);
 			path = licenses;
-			sourceTree = "<group>";
-		};
-		FBFBB138204CCFB70076DE8C /* samples */ = {
-			isa = PBXGroup;
-			children = (
-				FBFBB139204CCFB70076DE8C /* readme.txt */,
-			);
-			path = samples;
 			sourceTree = "<group>";
 		};
 		FBFBB13E204CCFBD0076DE8C /* VuforiaAssets */ = {
@@ -844,6 +839,7 @@
 				FBFBB1A2204CCFBD0076DE8C /* TextureTeapotBlue.png in Resources */,
 				84402603202270B200AF5839 /* art.scnassets in Resources */,
 				FBFBB1A0204CCFBD0076DE8C /* TR_about.html in Resources */,
+				B4877C25204D0D8400D42C29 /* Background.vertsh in Resources */,
 				FBFBB196204CCFBD0076DE8C /* FlakesBox.dat in Resources */,
 				FBFBB19A204CCFBD0076DE8C /* TextureBowlAndSpoon.png in Resources */,
 				FBFBB1A7204CCFBD0076DE8C /* button_cancel.png in Resources */,
@@ -879,6 +875,7 @@
 				FBFBB1BA204CCFBD0076DE8C /* reticle@3x.png in Resources */,
 				FBFBB1B1204CCFBD0076DE8C /* UD_about.html in Resources */,
 				FBFBB1B9204CCFBD0076DE8C /* reticle@2x.png in Resources */,
+				B4877C26204D0D8400D42C29 /* Background.fragsh in Resources */,
 				FBFBB184204CCFBD0076DE8C /* building_texture.jpeg in Resources */,
 				FBFBB1A9204CCFBD0076DE8C /* button_cancel_pressed.png in Resources */,
 				FBFBB1A3204CCFBD0076DE8C /* TextureTeapotBrass.png in Resources */,
@@ -890,7 +887,6 @@
 				FBFBB18E204CCFBD0076DE8C /* TextureSoccerBall.png in Resources */,
 				FBFBB1B8204CCFBD0076DE8C /* reticle.png in Resources */,
 				FBFBB194204CCFBD0076DE8C /* Tarmac.dat in Resources */,
-				FBFBB13D204CCFB70076DE8C /* readme.txt in Resources */,
 				FBFBB19C204CCFBD0076DE8C /* CubeWireframe.png in Resources */,
 				FBFBB185204CCFBD0076DE8C /* buildings.txt in Resources */,
 				FBFBB1BC204CCFBD0076DE8C /* VM_about.html in Resources */,
@@ -1131,7 +1127,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/lib/arm",
 				);
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/Libs/Vuforia/VuforiaSwift-Bridging-Header.h";
@@ -1156,7 +1152,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/lib/arm",
 				);
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/Libs/Vuforia/VuforiaSwift-Bridging-Header.h";
