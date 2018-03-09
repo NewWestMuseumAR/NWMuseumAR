@@ -25,6 +25,7 @@
 		8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489A84B2036308300243C26 /* EndTutorialViewController.swift */; };
 		D985EF352036CD110072B377 /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF342036CD110072B377 /* Artifact.swift */; };
 		D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF362036D2B00072B377 /* ProgressCell.swift */; };
+		DD3A4D152051DF7B00108B2B /* handmodel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = DD3A4D142051DF7B00108B2B /* handmodel.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D985EF342036CD110072B377 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
 		D985EF362036D2B00072B377 /* ProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
+		DD3A4D142051DF7B00108B2B /* handmodel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = handmodel.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				84402602202270B200AF5839 /* art.scnassets */,
 				84402609202270B200AF5839 /* Assets.xcassets */,
 				8440260E202270B200AF5839 /* Info.plist */,
+				DD3A4D142051DF7B00108B2B /* handmodel.mlmodel */,
 			);
 			path = NWMuseumAR;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 			files = (
 				8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */,
 				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
+				DD3A4D152051DF7B00108B2B /* handmodel.mlmodel in Sources */,
 				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
 				8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */,
 				84402605202270B200AF5839 /* ARViewController.swift in Sources */,
