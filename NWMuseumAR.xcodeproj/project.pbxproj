@@ -25,6 +25,9 @@
 		B4877C22204D0CE200D42C29 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBFBB134204CCFB70076DE8C /* libVuforia.a */; };
 		B4877C25204D0D8400D42C29 /* Background.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C23204D0D8400D42C29 /* Background.vertsh */; };
 		B4877C26204D0D8400D42C29 /* Background.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C24204D0D8400D42C29 /* Background.fragsh */; };
+		B4C08C8D2053219D000B1107 /* VuforiaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C08C8C2053219D000B1107 /* VuforiaView.swift */; };
+		B4C08C9020534F94000B1107 /* NewWestMuseumAR.xml in Resources */ = {isa = PBXBuildFile; fileRef = B4C08C8E20534F94000B1107 /* NewWestMuseumAR.xml */; };
+		B4C08C9120534F94000B1107 /* NewWestMuseumAR.dat in Resources */ = {isa = PBXBuildFile; fileRef = B4C08C8F20534F94000B1107 /* NewWestMuseumAR.dat */; };
 		D985EF352036CD110072B377 /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF342036CD110072B377 /* Artifact.swift */; };
 		D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF362036D2B00072B377 /* ProgressCell.swift */; };
 		FB608ED2204CD61000441AB6 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608ED1204CD61000441AB6 /* SpriteKit.framework */; };
@@ -36,9 +39,8 @@
 		FB608EDE204CD63900441AB6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608EDD204CD63900441AB6 /* SystemConfiguration.framework */; };
 		FB608EE0204CD63E00441AB6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608EDF204CD63E00441AB6 /* AVFoundation.framework */; };
 		FB608EE2204CD64700441AB6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608EE1204CD64700441AB6 /* CoreMotion.framework */; };
-		FB608EE4204CD6C200441AB6 /* VuforiaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB608EE3204CD6C200441AB6 /* VuforiaViewController.swift */; };
-		FB608EE9204CDF3600441AB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB608EE8204CDF3600441AB6 /* Main.storyboard */; };
-		FB608EEB204CE51200441AB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB608EEA204CE51200441AB6 /* ViewController.swift */; };
+		FB608EE9204CDF3600441AB6 /* Vuforia.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB608EE8204CDF3600441AB6 /* Vuforia.storyboard */; };
+		FB608EEB204CE51200441AB6 /* VuforiaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB608EEA204CE51200441AB6 /* VuforiaController.swift */; };
 		FB608EED204CECCC00441AB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB608EEC204CECCC00441AB6 /* Localizable.strings */; };
 		FBFBB13B204CCFB70076DE8C /* license_3rdpartynotice.txt in Resources */ = {isa = PBXBuildFile; fileRef = FBFBB136204CCFB70076DE8C /* license_3rdpartynotice.txt */; };
 		FBFBB184204CCFBD0076DE8C /* building_texture.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FBFBB13F204CCFBD0076DE8C /* building_texture.jpeg */; };
@@ -127,6 +129,9 @@
 		8489A84B2036308300243C26 /* EndTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTutorialViewController.swift; sourceTree = "<group>"; };
 		B4877C23204D0D8400D42C29 /* Background.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.vertsh; sourceTree = "<group>"; };
 		B4877C24204D0D8400D42C29 /* Background.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.fragsh; sourceTree = "<group>"; };
+		B4C08C8C2053219D000B1107 /* VuforiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuforiaView.swift; sourceTree = "<group>"; };
+		B4C08C8E20534F94000B1107 /* NewWestMuseumAR.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = NewWestMuseumAR.xml; sourceTree = "<group>"; };
+		B4C08C8F20534F94000B1107 /* NewWestMuseumAR.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewWestMuseumAR.dat; sourceTree = "<group>"; };
 		BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.debug.xcconfig"; sourceTree = "<group>"; };
 		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D985EF342036CD110072B377 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
@@ -140,9 +145,8 @@
 		FB608EDD204CD63900441AB6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FB608EDF204CD63E00441AB6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FB608EE1204CD64700441AB6 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		FB608EE3204CD6C200441AB6 /* VuforiaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuforiaViewController.swift; sourceTree = "<group>"; };
-		FB608EE8204CDF3600441AB6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		FB608EEA204CE51200441AB6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FB608EE8204CDF3600441AB6 /* Vuforia.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Vuforia.storyboard; sourceTree = "<group>"; };
+		FB608EEA204CE51200441AB6 /* VuforiaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VuforiaController.swift; sourceTree = "<group>"; };
 		FB608EEC204CECCC00441AB6 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		FBFBB0DD204CCFB70076DE8C /* Anchor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Anchor.h; sourceTree = "<group>"; };
 		FBFBB0DE204CCFB70076DE8C /* AnchorResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnchorResult.h; sourceTree = "<group>"; };
@@ -382,7 +386,7 @@
 		844026172022711300AF5839 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FB608EE8204CDF3600441AB6 /* Main.storyboard */,
+				FB608EE8204CDF3600441AB6 /* Vuforia.storyboard */,
 				8489A84820362D7400243C26 /* ARScene.storyboard */,
 				8489A84620362D5F00243C26 /* Progress.storyboard */,
 				8489A84420362D4400243C26 /* Tutorial.storyboard */,
@@ -431,9 +435,9 @@
 		8489A84D2036345900243C26 /* AR */ = {
 			isa = PBXGroup;
 			children = (
-				FB608EEA204CE51200441AB6 /* ViewController.swift */,
+				FB608EEA204CE51200441AB6 /* VuforiaController.swift */,
 				84402604202270B200AF5839 /* ARViewController.swift */,
-				FB608EE3204CD6C200441AB6 /* VuforiaViewController.swift */,
+				B4C08C8C2053219D000B1107 /* VuforiaView.swift */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -667,6 +671,8 @@
 		FBFBB14D204CCFBD0076DE8C /* ImageTargets */ = {
 			isa = PBXGroup;
 			children = (
+				B4C08C8F20534F94000B1107 /* NewWestMuseumAR.dat */,
+				B4C08C8E20534F94000B1107 /* NewWestMuseumAR.xml */,
 				FBFBB14E204CCFBD0076DE8C /* IT.png */,
 				FBFBB14F204CCFBD0076DE8C /* IT_about.html */,
 				FBFBB150204CCFBD0076DE8C /* StonesAndChips.dat */,
@@ -843,7 +849,9 @@
 				FBFBB196204CCFBD0076DE8C /* FlakesBox.dat in Resources */,
 				FBFBB19A204CCFBD0076DE8C /* TextureBowlAndSpoon.png in Resources */,
 				FBFBB1A7204CCFBD0076DE8C /* button_cancel.png in Resources */,
-				FB608EE9204CDF3600441AB6 /* Main.storyboard in Resources */,
+				FB608EE9204CDF3600441AB6 /* Vuforia.storyboard in Resources */,
+				B4C08C9020534F94000B1107 /* NewWestMuseumAR.xml in Resources */,
+				B4C08C9120534F94000B1107 /* NewWestMuseumAR.dat in Resources */,
 				FBFBB1AC204CCFBD0076DE8C /* button_main@2x.png in Resources */,
 				8440260D202270B200AF5839 /* LaunchScreen.storyboard in Resources */,
 				FBFBB188204CCFBD0076DE8C /* scanline.png in Resources */,
@@ -977,16 +985,16 @@
 				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
 				FBFBB1C9204CCFC70076DE8C /* VuforiaEAGLView.mm in Sources */,
 				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
-				FB608EEB204CE51200441AB6 /* ViewController.swift in Sources */,
+				FB608EEB204CE51200441AB6 /* VuforiaController.swift in Sources */,
 				FBFBB1CA204CCFC70076DE8C /* VuforiaManager.mm in Sources */,
 				8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */,
 				84402605202270B200AF5839 /* ARViewController.swift in Sources */,
 				FBFBB1CC204CCFC70076DE8C /* VuforiaShaderUtils.m in Sources */,
 				84402601202270B200AF5839 /* AppDelegate.swift in Sources */,
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
+				B4C08C8D2053219D000B1107 /* VuforiaView.swift in Sources */,
 				D985EF352036CD110072B377 /* Artifact.swift in Sources */,
 				FBFBB1CB204CCFC70076DE8C /* VuforiaObjects.mm in Sources */,
-				FB608EE4204CD6C200441AB6 /* VuforiaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

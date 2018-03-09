@@ -1,17 +1,20 @@
 //
-//  ViewController.swift
-//  VuforiaSample
+//  VuforiaController.swift
 //
 //  Created by Yoshihiro Kato on 2016/07/02.
 //  Copyright © 2016年 Yoshihiro Kato. All rights reserved.
 //
 
 import UIKit
+import AVFoundation
+import Foundation
 
-class ViewController: UIViewController {
+class VuforiaController: UIViewController {
+    
+    @IBOutlet weak var btn: UIButton!
     
     let vuforiaLicenseKey = "AQeZ0Gz/////AAAAmSCELlO9w0mNqYLh+H2r/jMcwUHFAFXHyrLdS1tYrfR3u8tEbKNHWps7dxcxFd6W5Ol8CWDz7iHjZTYqehE60tIhvbk0sXcMMAN5T3bQPWx8woXFX1IjOhUJpfktcq5dJlUbXjYmjU7krFOjOJKbSAreJsTQbmCotXkRW9QoSZ3xs9YNl3f5YXEDBQLjwq4rpfp0TwZdY0fcIx4rP06kHYONkZYhePRhnT0mA7qCehHFe5GMimrFqVV+0EWmB8a2yXvvFuENI4TWi8a0j7SE+3TI2uPKEIaZW8ESPNiR6xyNZzQeWJwWMGIvjr2ui/jvldzJsiRd7/WVQD4I1wIPZ5enEG5/fjC+Nv2PpNRAfrNt"
-    let vuforiaDataSetFile = "StonesAndChips.xml"
+    let vuforiaDataSetFile = "NewWestMuseumAR.xml"
     
     var vuforiaManager: VuforiaManager? = nil
     
@@ -24,8 +27,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         prepare()
+        self.view.addSubview(btn)
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +51,7 @@ class ViewController: UIViewController {
     }
 }
 
-private extension ViewController {
+private extension VuforiaController {
     func prepare() {
         vuforiaManager = VuforiaManager(licenseKey: vuforiaLicenseKey, dataSetFile: vuforiaDataSetFile)
         if let manager = vuforiaManager {
@@ -67,6 +70,7 @@ private extension ViewController {
                                        name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
         vuforiaManager?.prepare(with: .portrait)
+        
     }
     
     func pause() {
@@ -86,7 +90,7 @@ private extension ViewController {
     }
 }
 
-extension ViewController {
+extension VuforiaController {
     @objc func didRecieveWillResignActiveNotification(_ notification: Notification) {
         pause()
     }
@@ -96,7 +100,7 @@ extension ViewController {
     }
 }
 
-extension ViewController: VuforiaManagerDelegate {
+extension VuforiaController: VuforiaManagerDelegate {
     func vuforiaManagerDidFinishPreparing(_ manager: VuforiaManager!) {
         print("did finish preparing\n")
         
@@ -117,12 +121,12 @@ extension ViewController: VuforiaManagerDelegate {
             let result = state.trackableResult(at: index)
             let trackerableName = result?.trackable.name
             //print("\(trackerableName)")
-            if trackerableName == "stones" {
+            if trackerableName == "github-picture" {
                 boxMaterial.diffuse.contents = UIColor.red
                 
-                if lastSceneName != "stones" {
-                    manager.eaglView.setNeedsChangeSceneWithUserInfo(["scene" : "stones"])
-                    lastSceneName = "stones"
+                if lastSceneName != "github-picture" {
+                    manager.eaglView.setNeedsChangeSceneWithUserInfo(["scene" : "github-picture"])
+                    lastSceneName = "github-picture"
                 }
             }else {
                 boxMaterial.diffuse.contents = UIColor.blue
@@ -137,7 +141,7 @@ extension ViewController: VuforiaManagerDelegate {
     }
 }
 
-extension ViewController: VuforiaEAGLViewSceneSource, VuforiaEAGLViewDelegate {
+extension VuforiaController: VuforiaEAGLViewSceneSource, VuforiaEAGLViewDelegate {
     
     func scene(for view: VuforiaEAGLView!, userInfo: [String : Any]?) -> SCNScene! {
         guard let userInfo = userInfo else {
@@ -145,8 +149,8 @@ extension ViewController: VuforiaEAGLViewSceneSource, VuforiaEAGLViewDelegate {
             return createStonesScene(with: view)
         }
         
-        if let sceneName = userInfo["scene"] as? String , sceneName == "stones" {
-            print("stones scene")
+        if let sceneName = userInfo["scene"] as? String , sceneName == "github-picture" {
+            print("github-picture scene")
             return createStonesScene(with: view)
         }else {
             print("chips scene")
