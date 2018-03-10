@@ -2,8 +2,6 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-.DS_Store
-
 ## Build generated
 build/
 DerivedData/
@@ -70,4 +68,6 @@ fastlane/test_output
 
 
 # Vuforia
-!Libs/Vuforia/*
+!Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/
+
+.DS_Store
