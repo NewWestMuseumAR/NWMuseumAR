@@ -2,9 +2,11 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+!Libs/Vuforia/*
+.DS_Store
+
 ## Build generated
 build/
-!vuforia-sdk-ios-7-0-50/build/
 DerivedData/
 
 ## Various settings
