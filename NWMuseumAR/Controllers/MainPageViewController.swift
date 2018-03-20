@@ -16,8 +16,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
     lazy var subViewControllers:[UIViewController] = {
         return [
             UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress"),
-            UIStoryboard(name: "Vuforia", bundle: nil).instantiateViewController(withIdentifier: "vuforia"),
-            UIStoryboard(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "camera")
+            UIStoryboard(name: "Vuforia", bundle: nil).instantiateViewController(withIdentifier: "vuforia")
         ]
     }()
     
