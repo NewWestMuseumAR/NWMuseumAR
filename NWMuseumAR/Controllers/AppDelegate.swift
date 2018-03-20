@@ -13,20 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
 
         // TODO: Implement skipping tutorial for existing users
         
-        let homeViewController : UIPageViewController
+        let homeViewController : UIViewController
         
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         
         if launchedBefore  {
             // Skip Tutorial
-            homeViewController = MainPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            homeViewController = MainPageViewController()
         } else {
             // Show tutorial, add launchedbefore to storage
             homeViewController = TutorialPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)

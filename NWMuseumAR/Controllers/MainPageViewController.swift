@@ -16,7 +16,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
     lazy var subViewControllers:[UIViewController] = {
         return [
             UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress"),
-            UIStoryboard(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "camera")
+            UIStoryboard(name: "Vuforia", bundle: nil).instantiateViewController(withIdentifier: "vuforia")
         ]
     }()
     
@@ -26,7 +26,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         self.delegate = self
         self.dataSource = self
         
-        setViewControllers([subViewControllers[0]], direction: .forward, animated: false, completion: nil)
+        setViewControllers([subViewControllers[0]], direction: .forward, animated: true, completion: nil)
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
@@ -35,19 +35,40 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        let currentIndex:Int = subViewControllers.index(of: viewController) ?? 0
-        if currentIndex <= 0 {
+        guard let viewControllerIndex = subViewControllers.index(of: viewController) else {
             return nil
         }
-        return subViewControllers[currentIndex]
+        
+        let previousIndex = viewControllerIndex - 1
+        
+        guard previousIndex >= 0 else {
+            return nil
+        }
+        
+        guard subViewControllers.count > previousIndex else {
+            return nil
+        }
+        
+        return subViewControllers[previousIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        let currentIndex:Int = subViewControllers.index(of: viewController) ?? 0
-        if currentIndex >= subViewControllers.count - 1 {
+        guard let viewControllerIndex = subViewControllers.index(of: viewController) else {
             return nil
         }
-        return subViewControllers[currentIndex + 1]
+        
+        let nextIndex = viewControllerIndex + 1
+        let subViewControllersCount = subViewControllers.count
+        
+        guard subViewControllersCount != nextIndex else {
+            return nil
+        }
+        
+        guard subViewControllersCount > nextIndex else {
+            return nil
+        }
+        
+        return subViewControllers[nextIndex]
     }
 }
