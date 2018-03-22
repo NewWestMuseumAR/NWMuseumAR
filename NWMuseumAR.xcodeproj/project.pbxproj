@@ -8,11 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		44430D8CAA387F56E486A460 /* Pods_NWMuseumAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */; };
-<<<<<<< HEAD
 		840ADCCE202418F3004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCD202418F3004313A8 /* .gitkeep */; };
-=======
-		840ADCCC202418D4004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCB202418D4004313A8 /* .gitkeep */; };
->>>>>>> efd36b4e4a6e99770bbb1c87d030adf8710ea11c
+
 		840ADCD020241904004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCF20241904004313A8 /* .gitkeep */; };
 		84402601202270B200AF5839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84402600202270B200AF5839 /* AppDelegate.swift */; };
 		84402603202270B200AF5839 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402602202270B200AF5839 /* art.scnassets */; };
