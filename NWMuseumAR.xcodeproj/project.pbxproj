@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44430D8CAA387F56E486A460 /* Pods_NWMuseumAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */; };
-		840ADCCE202418F3004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCD202418F3004313A8 /* .gitkeep */; };
-
+		840ADCCC202418D4004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCB202418D4004313A8 /* .gitkeep */; };
 		840ADCD020241904004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCF20241904004313A8 /* .gitkeep */; };
 		84402601202270B200AF5839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84402600202270B200AF5839 /* AppDelegate.swift */; };
 		84402603202270B200AF5839 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402602202270B200AF5839 /* art.scnassets */; };
@@ -18,13 +17,11 @@
 		8440260D202270B200AF5839 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8440260B202270B200AF5839 /* LaunchScreen.storyboard */; };
 		8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F0202E2CFB00733885 /* TutorialPageViewController.swift */; };
 		8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F4202E30C700733885 /* MainPageViewController.swift */; };
+		8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F6202E31F100733885 /* ProgressViewController.swift */; };
 		8489A84520362D4400243C26 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84420362D4400243C26 /* Tutorial.storyboard */; };
 		8489A84720362D5F00243C26 /* Progress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84620362D5F00243C26 /* Progress.storyboard */; };
 		8489A84920362D7400243C26 /* ARScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84820362D7400243C26 /* ARScene.storyboard */; };
 		8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489A84B2036308300243C26 /* EndTutorialViewController.swift */; };
-		8A8652642049D8E10089232C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8652632049D8E10089232C /* DetailViewController.swift */; };
-		8A961F19204C7FD30005E730 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A961F18204C7FD30005E730 /* ProgressViewController.swift */; };
-		8A961F1C204C8C500005E730 /* ArtifactDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A961F1A204C8C500005E730 /* ArtifactDataModel.xcdatamodeld */; };
 		B4877C22204D0CE200D42C29 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBFBB134204CCFB70076DE8C /* libVuforia.a */; };
 		B4877C25204D0D8400D42C29 /* Background.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C23204D0D8400D42C29 /* Background.vertsh */; };
 		B4877C26204D0D8400D42C29 /* Background.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C24204D0D8400D42C29 /* Background.fragsh */; };
@@ -110,14 +107,11 @@
 		FBFBB1CA204CCFC70076DE8C /* VuforiaManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBFBB1C4204CCFC70076DE8C /* VuforiaManager.mm */; };
 		FBFBB1CB204CCFC70076DE8C /* VuforiaObjects.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBFBB1C6204CCFC70076DE8C /* VuforiaObjects.mm */; };
 		FBFBB1CC204CCFC70076DE8C /* VuforiaShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFBB1C8204CCFC70076DE8C /* VuforiaShaderUtils.m */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4184AB7EBD446A16478DA598 /* Pods-NWMuseumAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.release.xcconfig"; sourceTree = "<group>"; };
-
 		840ADCCB202418D4004313A8 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-
 		840ADCCF20241904004313A8 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		844025FD202270B200AF5839 /* NWMuseumAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWMuseumAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84402600202270B200AF5839 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,16 +122,11 @@
 		8440260E202270B200AF5839 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8461B1F0202E2CFB00733885 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		8461B1F4202E30C700733885 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		8461B1F6202E31F100733885 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		8489A84420362D4400243C26 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		8489A84620362D5F00243C26 /* Progress.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Progress.storyboard; sourceTree = "<group>"; };
 		8489A84820362D7400243C26 /* ARScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARScene.storyboard; sourceTree = "<group>"; };
 		8489A84B2036308300243C26 /* EndTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTutorialViewController.swift; sourceTree = "<group>"; };
-		8A8652632049D8E10089232C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		8A8652652049DEBA0089232C /* NWMuseumAR-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NWMuseumAR-Bridging-Header.h"; sourceTree = "<group>"; };
-		8A961F18204C7FD30005E730 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
-		8A961F1B204C8C500005E730 /* ArtifactDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArtifactDataModel.xcdatamodel; sourceTree = "<group>"; };
-		BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.debug.xcconfig"; sourceTree = "<group>"; };
-		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4877C23204D0D8400D42C29 /* Background.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.vertsh; sourceTree = "<group>"; };
 		B4877C24204D0D8400D42C29 /* Background.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.fragsh; sourceTree = "<group>"; };
 		B4C08C8C2053219D000B1107 /* VuforiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuforiaView.swift; sourceTree = "<group>"; };
@@ -380,9 +369,6 @@
 				84402609202270B200AF5839 /* Assets.xcassets */,
 				FBFBB13E204CCFBD0076DE8C /* VuforiaAssets */,
 				8440260E202270B200AF5839 /* Info.plist */,
-
-				8A8652652049DEBA0089232C /* NWMuseumAR-Bridging-Header.h */,
-
 				FB608EEC204CECCC00441AB6 /* Localizable.strings */,
 			);
 			path = NWMuseumAR;
@@ -391,7 +377,8 @@
 		844026162022710900AF5839 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8A961F1A204C8C500005E730 /* ArtifactDataModel.xcdatamodeld */,
+				840ADCCB202418D4004313A8 /* .gitkeep */,
+				D985EF342036CD110072B377 /* Artifact.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -458,8 +445,8 @@
 		8489A84E2036346F00243C26 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
-				8A8652632049D8E10089232C /* DetailViewController.swift */,
-				8A961F18204C7FD30005E730 /* ProgressViewController.swift */,
+				8461B1F6202E31F100733885 /* ProgressViewController.swift */,
+				D985EF362036D2B00072B377 /* ProgressCell.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -828,7 +815,6 @@
 				TargetAttributes = {
 					844025FC202270B200AF5839 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -872,9 +858,6 @@
 				FBFBB193204CCFBD0076DE8C /* StonesAndChips.xml in Resources */,
 				FBFBB1AA204CCFBD0076DE8C /* button_cancel_pressed@2x.png in Resources */,
 				8489A84920362D7400243C26 /* ARScene.storyboard in Resources */,
-
-				840ADCCE202418F3004313A8 /* .gitkeep in Resources */,
-
 				FB608EED204CECCC00441AB6 /* Localizable.strings in Resources */,
 				FBFBB18F204CCFBD0076DE8C /* TextureTransparent.png in Resources */,
 				FBFBB199204CCFBD0076DE8C /* MT_about.html in Resources */,
@@ -916,7 +899,6 @@
 				FBFBB185204CCFBD0076DE8C /* buildings.txt in Resources */,
 				FBFBB1BC204CCFBD0076DE8C /* VM_about.html in Resources */,
 				FBFBB19E204CCFBD0076DE8C /* OR_about.html in Resources */,
-
 				8440260A202270B200AF5839 /* Assets.xcassets in Resources */,
 				FBFBB198204CCFBD0076DE8C /* MT.png in Resources */,
 				FBFBB1B3204CCFBD0076DE8C /* VB.png in Resources */,
@@ -999,21 +981,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A8652642049D8E10089232C /* DetailViewController.swift in Sources */,
 				8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */,
-
+				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
 				FBFBB1C9204CCFC70076DE8C /* VuforiaEAGLView.mm in Sources */,
 				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
 				FB608EEB204CE51200441AB6 /* VuforiaController.swift in Sources */,
 				FBFBB1CA204CCFC70076DE8C /* VuforiaManager.mm in Sources */,
 				8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */,
-				8A961F19204C7FD30005E730 /* ProgressViewController.swift in Sources */,
-				8A961F1C204C8C500005E730 /* ArtifactDataModel.xcdatamodeld in Sources */,
 				84402605202270B200AF5839 /* ARViewController.swift in Sources */,
 				FBFBB1CC204CCFC70076DE8C /* VuforiaShaderUtils.m in Sources */,
 				84402601202270B200AF5839 /* AppDelegate.swift in Sources */,
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
-
 				B4C08C8D2053219D000B1107 /* VuforiaView.swift in Sources */,
 				D985EF352036CD110072B377 /* Artifact.swift in Sources */,
 				FBFBB1CB204CCFC70076DE8C /* VuforiaObjects.mm in Sources */,
@@ -1146,7 +1124,6 @@
 			baseConfigurationReference = BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G9QGD8G3YE;
 				ENABLE_BITCODE = NO;
@@ -1161,9 +1138,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
 				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/Libs/Vuforia/VuforiaSwift-Bridging-Header.h";
-
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1174,7 +1149,6 @@
 			baseConfigurationReference = 4184AB7EBD446A16478DA598 /* Pods-NWMuseumAR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G9QGD8G3YE;
 				ENABLE_BITCODE = NO;
@@ -1189,10 +1163,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
-
 				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/Libs/Vuforia/VuforiaSwift-Bridging-Header.h";
-
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1220,19 +1191,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		8A961F1A204C8C500005E730 /* ArtifactDataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8A961F1B204C8C500005E730 /* ArtifactDataModel.xcdatamodel */,
-			);
-			currentVersion = 8A961F1B204C8C500005E730 /* ArtifactDataModel.xcdatamodel */;
-			path = ArtifactDataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 844025F5202270B200AF5839 /* Project object */;
 }
