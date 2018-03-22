@@ -4,6 +4,7 @@ build/*
 DerivedData/
 
 .DS_Store
+NWMuseumAR/VuforiaAssets/.DS_Store
 
 ## Various settings
 *.pbxuser
