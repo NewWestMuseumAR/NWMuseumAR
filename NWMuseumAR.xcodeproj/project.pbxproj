@@ -18,10 +18,23 @@
 		8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F0202E2CFB00733885 /* TutorialPageViewController.swift */; };
 		8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F4202E30C700733885 /* MainPageViewController.swift */; };
 		8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F6202E31F100733885 /* ProgressViewController.swift */; };
+		8468ECC420647B2D002C8723 /* Navigation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8468ECC320647B2D002C8723 /* Navigation.storyboard */; };
 		8489A84520362D4400243C26 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84420362D4400243C26 /* Tutorial.storyboard */; };
 		8489A84720362D5F00243C26 /* Progress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84620362D5F00243C26 /* Progress.storyboard */; };
 		8489A84920362D7400243C26 /* ARScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84820362D7400243C26 /* ARScene.storyboard */; };
 		8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489A84B2036308300243C26 /* EndTutorialViewController.swift */; };
+		848FBAAE20648F3D00E56D77 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA220648F3D00E56D77 /* SCNVector3+Extensions.swift */; };
+		848FBAAF20648F3D00E56D77 /* SceneLocationEstimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA320648F3D00E56D77 /* SceneLocationEstimate.swift */; };
+		848FBAB020648F3D00E56D77 /* SceneLocationEstimate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA420648F3D00E56D77 /* SceneLocationEstimate+Extensions.swift */; };
+		848FBAB120648F3D00E56D77 /* FloatingPoint+Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA520648F3D00E56D77 /* FloatingPoint+Radians.swift */; };
+		848FBAB220648F3D00E56D77 /* LocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA620648F3D00E56D77 /* LocationNode.swift */; };
+		848FBAB320648F3D00E56D77 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA720648F3D00E56D77 /* CGPoint+Extensions.swift */; };
+		848FBAB420648F3D00E56D77 /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA820648F3D00E56D77 /* CLLocation+Extensions.swift */; };
+		848FBAB520648F3D00E56D77 /* SceneLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA920648F3D00E56D77 /* SceneLocationView.swift */; };
+		848FBAB620648F3D00E56D77 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAAA20648F3D00E56D77 /* LocationManager.swift */; };
+		848FBAB720648F3D00E56D77 /* SCNNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAAC20648F3D00E56D77 /* SCNNode+Extensions.swift */; };
+		848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAAD20648F3D00E56D77 /* LinkedList.swift */; };
+		848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAB920648F4700E56D77 /* NavigationViewController.swift */; };
 		B4877C22204D0CE200D42C29 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBFBB134204CCFB70076DE8C /* libVuforia.a */; };
 		B4877C25204D0D8400D42C29 /* Background.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C23204D0D8400D42C29 /* Background.vertsh */; };
 		B4877C26204D0D8400D42C29 /* Background.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C24204D0D8400D42C29 /* Background.fragsh */; };
@@ -123,10 +136,24 @@
 		8461B1F0202E2CFB00733885 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		8461B1F4202E30C700733885 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		8461B1F6202E31F100733885 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		8468ECC320647B2D002C8723 /* Navigation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Navigation.storyboard; sourceTree = "<group>"; };
 		8489A84420362D4400243C26 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		8489A84620362D5F00243C26 /* Progress.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Progress.storyboard; sourceTree = "<group>"; };
 		8489A84820362D7400243C26 /* ARScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARScene.storyboard; sourceTree = "<group>"; };
 		8489A84B2036308300243C26 /* EndTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTutorialViewController.swift; sourceTree = "<group>"; };
+		848FBAA220648F3D00E56D77 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
+		848FBAA320648F3D00E56D77 /* SceneLocationEstimate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationEstimate.swift; sourceTree = "<group>"; };
+		848FBAA420648F3D00E56D77 /* SceneLocationEstimate+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SceneLocationEstimate+Extensions.swift"; sourceTree = "<group>"; };
+		848FBAA520648F3D00E56D77 /* FloatingPoint+Radians.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Radians.swift"; sourceTree = "<group>"; };
+		848FBAA620648F3D00E56D77 /* LocationNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationNode.swift; sourceTree = "<group>"; };
+		848FBAA720648F3D00E56D77 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		848FBAA820648F3D00E56D77 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
+		848FBAA920648F3D00E56D77 /* SceneLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationView.swift; sourceTree = "<group>"; };
+		848FBAAA20648F3D00E56D77 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		848FBAAB20648F3D00E56D77 /* Queue.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Queue.playground; sourceTree = "<group>"; };
+		848FBAAC20648F3D00E56D77 /* SCNNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode+Extensions.swift"; sourceTree = "<group>"; };
+		848FBAAD20648F3D00E56D77 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		848FBAB920648F4700E56D77 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		B4877C23204D0D8400D42C29 /* Background.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.vertsh; sourceTree = "<group>"; };
 		B4877C24204D0D8400D42C29 /* Background.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.fragsh; sourceTree = "<group>"; };
 		B4C08C8C2053219D000B1107 /* VuforiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuforiaView.swift; sourceTree = "<group>"; };
@@ -358,6 +385,7 @@
 		844025FF202270B200AF5839 /* NWMuseumAR */ = {
 			isa = PBXGroup;
 			children = (
+				848FBAA120648F3D00E56D77 /* Source */,
 				B4877C24204D0D8400D42C29 /* Background.fragsh */,
 				B4877C23204D0D8400D42C29 /* Background.vertsh */,
 				844026162022710900AF5839 /* Models */,
@@ -391,6 +419,7 @@
 				8489A84620362D5F00243C26 /* Progress.storyboard */,
 				8489A84420362D4400243C26 /* Tutorial.storyboard */,
 				8440260B202270B200AF5839 /* LaunchScreen.storyboard */,
+				8468ECC320647B2D002C8723 /* Navigation.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -401,6 +430,7 @@
 				84402600202270B200AF5839 /* AppDelegate.swift */,
 				8461B1F0202E2CFB00733885 /* TutorialPageViewController.swift */,
 				8461B1F4202E30C700733885 /* MainPageViewController.swift */,
+				84AF700320642A99003B3FDF /* Navigation */,
 				8489A84E2036346F00243C26 /* Progress */,
 				8489A84D2036345900243C26 /* AR */,
 				8489A84A2036306000243C26 /* Tutorial */,
@@ -449,6 +479,33 @@
 				D985EF362036D2B00072B377 /* ProgressCell.swift */,
 			);
 			path = Progress;
+			sourceTree = "<group>";
+		};
+		848FBAA120648F3D00E56D77 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				848FBAA220648F3D00E56D77 /* SCNVector3+Extensions.swift */,
+				848FBAA320648F3D00E56D77 /* SceneLocationEstimate.swift */,
+				848FBAA420648F3D00E56D77 /* SceneLocationEstimate+Extensions.swift */,
+				848FBAA520648F3D00E56D77 /* FloatingPoint+Radians.swift */,
+				848FBAA620648F3D00E56D77 /* LocationNode.swift */,
+				848FBAA720648F3D00E56D77 /* CGPoint+Extensions.swift */,
+				848FBAA820648F3D00E56D77 /* CLLocation+Extensions.swift */,
+				848FBAA920648F3D00E56D77 /* SceneLocationView.swift */,
+				848FBAAA20648F3D00E56D77 /* LocationManager.swift */,
+				848FBAAB20648F3D00E56D77 /* Queue.playground */,
+				848FBAAC20648F3D00E56D77 /* SCNNode+Extensions.swift */,
+				848FBAAD20648F3D00E56D77 /* LinkedList.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		84AF700320642A99003B3FDF /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				848FBAB920648F4700E56D77 /* NavigationViewController.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		F3FFC83AFF7BF4C90D43A0FE /* Frameworks */ = {
@@ -810,7 +867,7 @@
 					0,
 				);
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = NWMuseumAR;
 				TargetAttributes = {
 					844025FC202270B200AF5839 = {
@@ -898,6 +955,7 @@
 				FBFBB19C204CCFBD0076DE8C /* CubeWireframe.png in Resources */,
 				FBFBB185204CCFBD0076DE8C /* buildings.txt in Resources */,
 				FBFBB1BC204CCFBD0076DE8C /* VM_about.html in Resources */,
+				8468ECC420647B2D002C8723 /* Navigation.storyboard in Resources */,
 				FBFBB19E204CCFBD0076DE8C /* OR_about.html in Resources */,
 				8440260A202270B200AF5839 /* Assets.xcassets in Resources */,
 				FBFBB198204CCFBD0076DE8C /* MT.png in Resources */,
@@ -930,11 +988,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ARCL/ARCL.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ARCL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -984,16 +1046,28 @@
 				8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */,
 				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
 				FBFBB1C9204CCFC70076DE8C /* VuforiaEAGLView.mm in Sources */,
+				848FBAB720648F3D00E56D77 /* SCNNode+Extensions.swift in Sources */,
 				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
+				848FBAB520648F3D00E56D77 /* SceneLocationView.swift in Sources */,
 				FB608EEB204CE51200441AB6 /* VuforiaController.swift in Sources */,
 				FBFBB1CA204CCFC70076DE8C /* VuforiaManager.mm in Sources */,
+				848FBAB320648F3D00E56D77 /* CGPoint+Extensions.swift in Sources */,
+				848FBAAF20648F3D00E56D77 /* SceneLocationEstimate.swift in Sources */,
+				848FBAB420648F3D00E56D77 /* CLLocation+Extensions.swift in Sources */,
 				8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */,
 				84402605202270B200AF5839 /* ARViewController.swift in Sources */,
 				FBFBB1CC204CCFC70076DE8C /* VuforiaShaderUtils.m in Sources */,
 				84402601202270B200AF5839 /* AppDelegate.swift in Sources */,
+				848FBAB220648F3D00E56D77 /* LocationNode.swift in Sources */,
+				848FBAB120648F3D00E56D77 /* FloatingPoint+Radians.swift in Sources */,
+				848FBAAE20648F3D00E56D77 /* SCNVector3+Extensions.swift in Sources */,
+				848FBAB020648F3D00E56D77 /* SceneLocationEstimate+Extensions.swift in Sources */,
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
+				848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */,
+				848FBAB620648F3D00E56D77 /* LocationManager.swift in Sources */,
 				B4C08C8D2053219D000B1107 /* VuforiaView.swift in Sources */,
 				D985EF352036CD110072B377 /* Artifact.swift in Sources */,
+				848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */,
 				FBFBB1CB204CCFC70076DE8C /* VuforiaObjects.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1026,6 +1100,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1033,6 +1108,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1083,6 +1159,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1090,6 +1167,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1125,7 +1203,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G9QGD8G3YE;
+				DEVELOPMENT_TEAM = N6RP3H788Z;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -1136,7 +1214,7 @@
 					"$(PROJECT_DIR)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/lib/arm",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bcit.comp4977.NWMuseumAR;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/Libs/Vuforia/VuforiaSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -1150,7 +1228,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G9QGD8G3YE;
+				DEVELOPMENT_TEAM = N6RP3H788Z;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -1161,7 +1239,7 @@
 					"$(PROJECT_DIR)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/lib/arm",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bcit.comp4977.NWMuseumAR;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/Libs/Vuforia/VuforiaSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
