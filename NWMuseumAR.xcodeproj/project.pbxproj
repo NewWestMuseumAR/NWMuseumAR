@@ -35,7 +35,6 @@
 		848FBAB720648F3D00E56D77 /* SCNNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAAC20648F3D00E56D77 /* SCNNode+Extensions.swift */; };
 		848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAAD20648F3D00E56D77 /* LinkedList.swift */; };
 		848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAB920648F4700E56D77 /* NavigationViewController.swift */; };
-		84C0CF072064907600903409 /* NotSupportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0CF062064907600903409 /* NotSupportedViewController.swift */; };
 		B4877C22204D0CE200D42C29 /* libVuforia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBFBB134204CCFB70076DE8C /* libVuforia.a */; };
 		B4877C25204D0D8400D42C29 /* Background.vertsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C23204D0D8400D42C29 /* Background.vertsh */; };
 		B4877C26204D0D8400D42C29 /* Background.fragsh in Resources */ = {isa = PBXBuildFile; fileRef = B4877C24204D0D8400D42C29 /* Background.fragsh */; };
@@ -155,7 +154,6 @@
 		848FBAAC20648F3D00E56D77 /* SCNNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode+Extensions.swift"; sourceTree = "<group>"; };
 		848FBAAD20648F3D00E56D77 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		848FBAB920648F4700E56D77 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		84C0CF062064907600903409 /* NotSupportedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotSupportedViewController.swift; path = "../../../../../Downloads/NWWayFinding-2/ARKit+CoreLocation/NotSupportedViewController.swift"; sourceTree = "<group>"; };
 		B4877C23204D0D8400D42C29 /* Background.vertsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.vertsh; sourceTree = "<group>"; };
 		B4877C24204D0D8400D42C29 /* Background.fragsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Background.fragsh; sourceTree = "<group>"; };
 		B4C08C8C2053219D000B1107 /* VuforiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuforiaView.swift; sourceTree = "<group>"; };
@@ -505,7 +503,6 @@
 		84AF700320642A99003B3FDF /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				84C0CF062064907600903409 /* NotSupportedViewController.swift */,
 				848FBAB920648F4700E56D77 /* NavigationViewController.swift */,
 			);
 			path = Navigation;
@@ -1066,7 +1063,6 @@
 				848FBAAE20648F3D00E56D77 /* SCNVector3+Extensions.swift in Sources */,
 				848FBAB020648F3D00E56D77 /* SceneLocationEstimate+Extensions.swift in Sources */,
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
-				84C0CF072064907600903409 /* NotSupportedViewController.swift in Sources */,
 				848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */,
 				848FBAB620648F3D00E56D77 /* LocationManager.swift in Sources */,
 				B4C08C8D2053219D000B1107 /* VuforiaView.swift in Sources */,
@@ -1207,7 +1203,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F665AXEWKQ;
+				DEVELOPMENT_TEAM = N6RP3H788Z;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -1218,7 +1214,7 @@
 					"$(PROJECT_DIR)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/lib/arm",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bcit.comp4977.NWMuseumAR;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/Libs/Vuforia/VuforiaSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -1232,7 +1228,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F665AXEWKQ;
+				DEVELOPMENT_TEAM = N6RP3H788Z;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -1243,7 +1239,7 @@
 					"$(PROJECT_DIR)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/lib/arm",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bcit.comp4977.NWMuseumAR;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.comp4977.NWMuseumAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NWMuseumAR/Libs/Vuforia/VuforiaSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
