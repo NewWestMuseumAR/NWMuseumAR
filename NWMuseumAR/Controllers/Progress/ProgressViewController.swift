@@ -131,3 +131,4 @@ class ProgressViewController : UITableViewController {
         self.tableView.separatorStyle = .none
     }
 }
+

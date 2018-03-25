@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
     @IBOutlet weak var artifactImageView: UIImageView!
     @IBOutlet weak var artifactTitle: UILabel!
     @IBOutlet weak var artifactDesc: UILabel!
@@ -21,7 +21,7 @@ class DetailViewController: UIViewController {
         self.navigationController?.navigationBar.backItem?.title = "Back"
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -34,3 +34,4 @@ class DetailViewController: UIViewController {
         artifactDesc.text = artifact?.desc
     }
 }
+

@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // Show tutorial, add launchedbefore to storage
             homeViewController = TutorialPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            //UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         
         // Show our starting controller to the user
@@ -58,9 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         self.saveContext()
     }
-    
+
     // MARK: - Core Data stack
     //lazy means only run when we call it, and var would only init when we need it
     lazy var persistentContainer: NSPersistentContainer = {
@@ -88,7 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 
 }
 

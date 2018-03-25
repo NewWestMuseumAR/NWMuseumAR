@@ -15,3 +15,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - CHANGELOG.md for keeping track of changes
 
+## [0.0.3] - March 24, 2018
+### Added
+- CHANGELOG.md for keeping track of changes
+- Progress page - CL
+- Progress Detailed Page - CL
+- Core data setup -CL
+
+

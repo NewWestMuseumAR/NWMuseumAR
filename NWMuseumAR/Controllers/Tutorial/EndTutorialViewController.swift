@@ -20,6 +20,16 @@ class EndTutorialViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func navigate(_ sender: UIButton) {
+        
+        // This instantiates a page viewcontroller for the main pages, and inits the transition style to not look bad
+        let viewController = NavigationViewController.init()
+        
+        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
+        
+        // Present our viewcontroller to the screen
+        self.present(viewController, animated: false, completion: nil)
+    }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         
