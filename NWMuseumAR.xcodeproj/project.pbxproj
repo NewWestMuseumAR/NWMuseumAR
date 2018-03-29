@@ -20,7 +20,7 @@
 		8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F0202E2CFB00733885 /* TutorialPageViewController.swift */; };
 		8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F4202E30C700733885 /* MainPageViewController.swift */; };
 		8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F6202E31F100733885 /* ProgressViewController.swift */; };
-		DDB42BBF204C9898003FF8F2 /* WayFindToMuseum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB42BBE204C9898003FF8F2 /* WayFindToMuseum.swift */; };
+		DDB42BC3204C9CDE003FF8F2 /* WayFindToMuseumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB42BC2204C9CDE003FF8F2 /* WayFindToMuseumController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		8461B1F6202E31F100733885 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.debug.xcconfig"; sourceTree = "<group>"; };
 		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DDB42BBE204C9898003FF8F2 /* WayFindToMuseum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayFindToMuseum.swift; sourceTree = "<group>"; };
+		DDB42BC2204C9CDE003FF8F2 /* WayFindToMuseumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayFindToMuseumController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +123,7 @@
 				8461B1F0202E2CFB00733885 /* TutorialPageViewController.swift */,
 				8461B1F4202E30C700733885 /* MainPageViewController.swift */,
 				8461B1F6202E31F100733885 /* ProgressViewController.swift */,
-				DDB42BBE204C9898003FF8F2 /* WayFindToMuseum.swift */,
+				DDB42BC2204C9CDE003FF8F2 /* WayFindToMuseumController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -291,9 +291,9 @@
 				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
 				8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */,
 				84402605202270B200AF5839 /* ARViewController.swift in Sources */,
-				DDB42BBF204C9898003FF8F2 /* WayFindToMuseum.swift in Sources */,
 				84402601202270B200AF5839 /* AppDelegate.swift in Sources */,
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
+				DDB42BC3204C9CDE003FF8F2 /* WayFindToMuseumController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
