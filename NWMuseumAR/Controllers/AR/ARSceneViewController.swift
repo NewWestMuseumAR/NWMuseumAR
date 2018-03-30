@@ -32,6 +32,9 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.delegate = self
         sceneView.session.delegate = self
+        sceneView.automaticallyUpdatesLighting = true
+        sceneView.debugOptions =  [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+
         
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
@@ -70,6 +73,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         
         let configuration = ARWorldTrackingConfiguration()
         configuration.detectionImages = referenceImages
+        configuration.planeDetection = .vertical
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         
         statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
@@ -78,6 +82,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - ARSCNViewDelegate (Image detection results)
     /// - Tag: ARImageAnchor-Visualizing
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
         updateQueue.async {
@@ -86,7 +91,14 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
             let planeNode = SCNNode(geometry: plane)
-            planeNode.opacity = 0.25
+            //planeNode.opacity = 0.25
+            
+            // create our coin for animation
+            // TODO: - Attach coin to anchor
+            // TODO: - animate coin ( Spin??)
+            let coin = SCNScene(named: "coin.scn", inDirectory: "art.scnassets")!
+            coin.rootNode.transform = SCNMatrix4Scale(planeNode.worldTransform, 0.06, 0.06, 0.06)
+            planeNode.addChildNode(coin.rootNode)
             
             /*
              `SCNPlane` is vertically oriented in its local coordinate space, but
@@ -94,13 +106,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
              rotate the plane to match.
              */
             planeNode.eulerAngles.x = -.pi / 2
-            
-            // create our coin for animation
-            let coin = SCNScene(named: "coin.scn", inDirectory: "art.scnassets")!
-            
-            coin.rootNode.transform = SCNMatrix4MakeTranslation(0, 0, -10)
-            
-            planeNode.addChildNode(coin.rootNode)
             
             /*
              Image anchors are not tracked after initial detection, so create an
@@ -121,12 +126,12 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     var imageHighlightAction: SCNAction {
         return .sequence([
-            .wait(duration: 0.25),
-            .fadeOpacity(to: 0.85, duration: 0.25),
-            .fadeOpacity(to: 0.15, duration: 0.25),
-            .fadeOpacity(to: 0.85, duration: 0.25),
-            .fadeOut(duration: 0.5),
-            //.removeFromParentNode()
+                .wait(duration: 4),
+                .fadeOpacity(to: 0.85, duration: 0.25),
+                .fadeOpacity(to: 0.15, duration: 0.25),
+                .fadeOpacity(to: 0.85, duration: 0.25),
+                .fadeOut(duration: 0.5),
+                .removeFromParentNode()
             ])
     }
 }
