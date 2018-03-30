@@ -19,6 +19,8 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
             UIStoryboard(name: "Vuforia", bundle: nil).instantiateViewController(withIdentifier: "vuforia")
         ]
     }()
+    @IBAction func startNavigation(_ sender: Any) {
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

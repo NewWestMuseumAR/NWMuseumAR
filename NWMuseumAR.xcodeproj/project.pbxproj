@@ -120,6 +120,7 @@
 		FBFBB1CA204CCFC70076DE8C /* VuforiaManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBFBB1C4204CCFC70076DE8C /* VuforiaManager.mm */; };
 		FBFBB1CB204CCFC70076DE8C /* VuforiaObjects.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBFBB1C6204CCFC70076DE8C /* VuforiaObjects.mm */; };
 		FBFBB1CC204CCFC70076DE8C /* VuforiaShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFBB1C8204CCFC70076DE8C /* VuforiaShaderUtils.m */; };
+		DDB42BC3204C9CDE003FF8F2 /* WayFindToMuseumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB42BC2204C9CDE003FF8F2 /* WayFindToMuseumController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -331,6 +332,7 @@
 		FBFBB1C7204CCFC70076DE8C /* VuforiaShaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VuforiaShaderUtils.h; sourceTree = "<group>"; };
 		FBFBB1C8204CCFC70076DE8C /* VuforiaShaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VuforiaShaderUtils.m; sourceTree = "<group>"; };
 		FBFBB1CD204CCFCD0076DE8C /* VuforiaSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VuforiaSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		DDB42BC2204C9CDE003FF8F2 /* WayFindToMuseumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayFindToMuseumController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,6 +436,7 @@
 				8489A84E2036346F00243C26 /* Progress */,
 				8489A84D2036345900243C26 /* AR */,
 				8489A84A2036306000243C26 /* Tutorial */,
+				DDB42BC2204C9CDE003FF8F2 /* WayFindToMuseumController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1069,6 +1072,7 @@
 				D985EF352036CD110072B377 /* Artifact.swift in Sources */,
 				848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */,
 				FBFBB1CB204CCFC70076DE8C /* VuforiaObjects.mm in Sources */,
+				DDB42BC3204C9CDE003FF8F2 /* WayFindToMuseumController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
