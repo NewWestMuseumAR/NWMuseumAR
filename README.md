@@ -16,6 +16,15 @@ No installation necasary. We have included all the Pod files so you DO NOT have 
 
 ## Contributing
 
+### AR Image Assets
+
+With iOS 11.3 now out, we now have access to native static image recognition.  Use the following steps to add a new image into the project:
+
+1. Ensure image height and width is at least 480px.
+2. Drag image into the AR Resources folder within assets.
+3. Click image inside AR Resources folder and go to the attributes inspector.
+4. Update the images size as found in the real world.
+
 ### Gitflow
 
 1. Fork it (<https://github.com/NewWestMuseumAR/NWMuseumAR/fork>)
