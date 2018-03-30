@@ -12,7 +12,6 @@
 		840ADCD020241904004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCF20241904004313A8 /* .gitkeep */; };
 		84402601202270B200AF5839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84402600202270B200AF5839 /* AppDelegate.swift */; };
 		84402603202270B200AF5839 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402602202270B200AF5839 /* art.scnassets */; };
-		84402605202270B200AF5839 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84402604202270B200AF5839 /* ARViewController.swift */; };
 		8440260A202270B200AF5839 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402609202270B200AF5839 /* Assets.xcassets */; };
 		8440260D202270B200AF5839 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8440260B202270B200AF5839 /* LaunchScreen.storyboard */; };
 		8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F0202E2CFB00733885 /* TutorialPageViewController.swift */; };
@@ -59,7 +58,6 @@
 		844025FD202270B200AF5839 /* NWMuseumAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWMuseumAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84402600202270B200AF5839 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84402602202270B200AF5839 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		84402604202270B200AF5839 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		84402609202270B200AF5839 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8440260C202270B200AF5839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8440260E202270B200AF5839 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 		8489A84D2036345900243C26 /* AR */ = {
 			isa = PBXGroup;
 			children = (
-				84402604202270B200AF5839 /* ARViewController.swift */,
 				84E8CFA7206DFED5006B5FCB /* StatusViewController.swift */,
 				84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */,
 			);
@@ -443,7 +440,6 @@
 				848FBAAF20648F3D00E56D77 /* SceneLocationEstimate.swift in Sources */,
 				848FBAB420648F3D00E56D77 /* CLLocation+Extensions.swift in Sources */,
 				8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */,
-				84402605202270B200AF5839 /* ARViewController.swift in Sources */,
 				84402601202270B200AF5839 /* AppDelegate.swift in Sources */,
 				848FBAB220648F3D00E56D77 /* LocationNode.swift in Sources */,
 				848FBAB120648F3D00E56D77 /* FloatingPoint+Radians.swift in Sources */,
