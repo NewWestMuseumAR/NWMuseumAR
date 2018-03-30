@@ -95,6 +95,13 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
              */
             planeNode.eulerAngles.x = -.pi / 2
             
+            // create our coin for animation
+            let coin = SCNScene(named: "coin.scn", inDirectory: "art.scnassets")!
+            
+            coin.rootNode.transform = SCNMatrix4MakeTranslation(0, 0, -10)
+            
+            planeNode.addChildNode(coin.rootNode)
+            
             /*
              Image anchors are not tracked after initial detection, so create an
              animation that limits the duration for which the plane visualization appears.
@@ -119,7 +126,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             .fadeOpacity(to: 0.15, duration: 0.25),
             .fadeOpacity(to: 0.85, duration: 0.25),
             .fadeOut(duration: 0.5),
-            .removeFromParentNode()
+            //.removeFromParentNode()
             ])
     }
 }
