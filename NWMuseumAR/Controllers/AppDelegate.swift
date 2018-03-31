@@ -16,10 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-
-        // TODO: Implement skipping tutorial for existing users
         
-        let homeViewController : UIViewController
+        let homeViewController: UIViewController
         
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         
