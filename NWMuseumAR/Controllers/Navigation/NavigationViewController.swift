@@ -64,22 +64,12 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         //Checkout the comments in the property description and on the readme on this.
 //        sceneLocationView.orientToTrueNorth = false
         
-//        sceneLocationView.locationEstimateMethod = .coreLocationDataOnly
         sceneLocationView.showAxesNode = true
         sceneLocationView.locationDelegate = self
         
         if displayDebugging {
             sceneLocationView.showFeaturePoints = true
         }
-        
-        //Added updated location 49.2489415,-122.9899965
-        // ,,15.61
-//        let pinCoordinate = CLLocationCoordinate2D(latitude: 49.2545494, longitude: -123.1587709)
-//        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
-//        let pinImage = UIImage(named: "pin")!
-//        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
-//        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
-        
         view.addSubview(sceneLocationView)
         
     
@@ -119,7 +109,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         let sourceCoordinates = location.coordinate
         //            let destCoordinates = CLLocationCoordinate2DMake(49.2489415, -122.9899965)
         
-        let destCoordinates = CLLocationCoordinate2DMake(49.249815, -123.148864)
+        let destCoordinates = CLLocationCoordinate2DMake(49.249212, -123.010059)
         
         let sourcePlacemark = MKPlacemark(coordinate: sourceCoordinates)
         let destPlacemark = MKPlacemark(coordinate: destCoordinates)
@@ -132,6 +122,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         directionRequest.destination = destItem
         directionRequest.transportType = .walking
         
+        //Need to add and remove child
         let directions = MKDirections(request: directionRequest)
         directions.calculate(completionHandler: {(response, error) in
             
@@ -143,12 +134,8 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 
                 let rekt = route?.polyline.boundingMapRect
                 self.mapView.setRegion(MKCoordinateRegionForMapRect(rekt!), animated: true)
-                
-                //Added
-                var isFirst = true
-                
+
                 for route in response!.routes {
-                    
                     
                     print(route.steps.count)
                     
@@ -172,47 +159,11 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                             }
                             print("step coordinate[\(i)] = \(coord.latitude),\(coord.longitude)")
                         }
-                        
-                        //Adding first GEOFENCE
-                        isFirst = false
-                        if  isFirst && CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-                            
-                            // 2. region data
-                            let title = "Lorrenzillo's"
-                            let coordinate = CLLocationCoordinate2DMake(array[0].latitude, array[0].longitude)
-                            print("Lorenzillos lat " + String(coordinate.latitude))
-                            print("Lorenzillos lon " + String(coordinate.longitude))
-                            let regionRadius = 200.0
-                            
-                            // 3. setup region
-                            let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude,
-                                                                                         longitude: coordinate.longitude), radius: regionRadius, identifier: title)
-                            region.notifyOnExit = true;
-                            region.notifyOnEntry = true
-                            self.locationManager.startMonitoring(for: region)
-                            
-                            // 4. setup annotation
-                            let restaurantAnnotation = MKPointAnnotation()
-                            restaurantAnnotation.coordinate = coordinate;
-                            restaurantAnnotation.title = "\(title)";
-                            self.mapView.addAnnotation(restaurantAnnotation)
-                            //
-                        }
-                        else {
-                            print("System can't track regions")
-                        }
                         array.deallocate(capacity: pointCount)
                     }
                 }
             }
         })
-        
-        //            updateUserLocationTimer = Timer.scheduledTimer(
-        //                timeInterval: 0.5,
-        //                target: self,
-        //                selector: #selector(ViewController.updateUserLocation),
-        //                userInfo: nil,
-        //                repeats: true)
     }
     
 
@@ -410,8 +361,10 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         }
         if let currentLocation = sceneLocationView.locationManager.currentLocation,
             let nextPoint = sceneLocationView.activeLocationNodeQueue.peek()?.location {
-            
+            let nextPointDesc = sceneLocationView.activeLocationNodeQueue.peek()?.locationDescription
             infoLabel.text!.append("Distance to next node: " + sceneLocationView.distanceBetweenTwoPoints(a: currentLocation, b: nextPoint).description)
+            print("checkLoDEQUUUUUUUUUUUUUUEEED nextPoint " + nextPointDesc!)
+
         }
         
         let date = Date()

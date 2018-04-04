@@ -49,6 +49,7 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     var nodeToBeVisited = 0
     var activeLocationNodeQueue = Queue<LocationNode>()
     var isFirstRun = true
+    var curNode = SCNNode()
     
     public weak var locationDelegate: SceneLocationViewDelegate?
     
@@ -297,6 +298,8 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         var numOfNodes = locationNodes.count
         activeLocationNodeQueue.enqueue(locationNode)
         
+        print("")
+        
         //sceneNode?.addChildNode(locationNode)
     }
     
@@ -525,47 +528,34 @@ extension SceneLocationView{
     //Need to ignore the first locaitonNode, as it appears to be garbage, like 300 meters from the starting point on the map... really weird
     func checkLocVsNode(){
         print("checkLocVsNode: nodeToBeVisited " + String(describing: nodeToBeVisited))
-
         print("checkLocVsNode: currentLoc " + String(describing: currentLocation()))
-
-        print("----------------------------------------------------------")
         
         //Just added this for testing purposes to see if the Queue implementation actually works, which it does
         // I was thinking of having a queue of like 5 points, and only showing those on the map
         if let currentLocation = currentLocation() {
             
+            
             if isFirstRun && locationNodes.count > 1 {
-                var curNode = self.activeLocationNodeQueue.peek()!
-                print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + curNode.locationDescription!)
-                self.sceneNode?.addChildNode(self.activeLocationNodeQueue.dequeue()!)
-
-                curNode = self.activeLocationNodeQueue.peek()!
-                print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + curNode.locationDescription!)
-                self.sceneNode?.addChildNode(self.activeLocationNodeQueue.dequeue()!)
+                var nextNode = self.activeLocationNodeQueue.peek()!
+                print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + nextNode.locationDescription!)
+                curNode = nextNode
+                self.sceneNode?.addChildNode(curNode)
                 isFirstRun = false
                 return
             }
             
             //TODO: Check for distance such that ther eis only one node between current node and destination
-            if !isFirstRun && locationNodes.count > 3 {
-                if compareTwoPos(a: (activeLocationNodeQueue.peek()?.location)!, b: currentLocation) {
-                   
-                    var curNode = self.activeLocationNodeQueue.peek()!
-                    print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + curNode.locationDescription!)
-                    self.sceneNode?.addChildNode(self.activeLocationNodeQueue.dequeue()!)
-                    
-                    curNode = self.activeLocationNodeQueue.peek()!
-                    print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + curNode.locationDescription!)
-                    self.sceneNode?.addChildNode(self.activeLocationNodeQueue.dequeue()!)
-
-
+            if !isFirstRun && locationNodes.count > 1 {
+                if compareTwoPos(a: (curNode as! LocationNode).location, b: currentLocation) {
+                    curNode.removeFromParentNode()
+                    self.activeLocationNodeQueue.dequeue()
+                    var nextNode = self.activeLocationNodeQueue.peek()!
+                    curNode = nextNode
+                    print("checkLoDEQUUUUUUUUUUUUUUEEED: 12 " + nextNode.locationDescription!)
+                    self.sceneNode?.addChildNode(curNode)
                 }
-                
             }
-            
         }
-        
-        
     }
     
     func compareTwoPos(a: CLLocation, b: CLLocation) -> Bool {
@@ -573,7 +563,7 @@ extension SceneLocationView{
         
         //These distance values still need some work, I belive it is currently checking in like a 20 meter radius.
         // At 40° north or south the distance between a degree of longitude is 53 miles (85 km)
-        if distanceBetweenTwoPoints(a: a, b: b) > 20.0 {
+        if distanceBetweenTwoPoints(a: a, b: b) > 10.0 {
             return false;
         }
         return true;
