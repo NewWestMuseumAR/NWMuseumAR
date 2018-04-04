@@ -17,6 +17,9 @@ open class LocationNode: SCNNode {
     ///Location can be changed and confirmed later by SceneLocationView.
     public var location: CLLocation!
     
+    //ADDED:
+   public var locationDescription: String?
+    
     ///Whether the location of the node has been confirmed.
     ///This is automatically set to true when you create a node using a location.
     ///Otherwise, this is false, and becomes true once the user moves 100m away from the node,
@@ -43,8 +46,14 @@ open class LocationNode: SCNNode {
     public init(location: CLLocation?) {
         self.location = location
         self.locationConfirmed = location != nil
+        self.locationDescription = "not set"
         super.init()
     }
+    
+    public func setText(text: String) {
+        self.locationDescription = text
+    }
+    
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

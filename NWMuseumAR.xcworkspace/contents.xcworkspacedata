@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:WayFind2.gpx">
+   </FileRef>
+   <FileRef
       location = "group:NWMuseumAR.xcodeproj">
    </FileRef>
    <FileRef

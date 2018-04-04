@@ -74,11 +74,11 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         //Added updated location 49.2489415,-122.9899965
         // ,,15.61
-        let pinCoordinate = CLLocationCoordinate2D(latitude: 49.2545494, longitude: -123.1587709)
-        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
-        let pinImage = UIImage(named: "pin")!
-        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+//        let pinCoordinate = CLLocationCoordinate2D(latitude: 49.2545494, longitude: -123.1587709)
+//        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
+//        let pinImage = UIImage(named: "pin")!
+//        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
+//        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
         
         view.addSubview(sceneLocationView)
         
@@ -168,7 +168,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                             if i == pointCount - 1 {
                                 self.addAnnotationAndLabelToCoordinate(withCoordinate: coord, text: step.instructions)
                             } else {
-                                self.addAnnotationToCoordinate(withCoordinate: coord)
+                               // self.addAnnotationToCoordinate(withCoordinate: coord)
                             }
                             print("step coordinate[\(i)] = \(coord.latitude),\(coord.longitude)")
                         }
@@ -232,6 +232,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         let annotationNode = LocationAnnotationNode(location: location, image: image)
         annotationNode.scaleRelativeToDistance = true
+        annotationNode.setText(text: text)
         
         let geoText = SCNText(string: text, extrusionDepth: 1.0)
         
@@ -406,6 +407,11 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         if let heading = sceneLocationView.locationManager.heading,
             let accuracy = sceneLocationView.locationManager.headingAccuracy {
             infoLabel.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
+        }
+        if let currentLocation = sceneLocationView.locationManager.currentLocation,
+            let nextPoint = sceneLocationView.activeLocationNodeQueue.peek()?.location {
+            
+            infoLabel.text!.append("Distance to next node: " + sceneLocationView.distanceBetweenTwoPoints(a: currentLocation, b: nextPoint).description)
         }
         
         let date = Date()

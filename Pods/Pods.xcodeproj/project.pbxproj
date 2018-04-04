@@ -184,6 +184,7 @@
 		DAEAEDCFBEB13FD1C21A5FBABDBF3719 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
 		DB51239D73D237B91C3F2A50237E2BB6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		DD56F7C4761BFF7E8EA35561268A908E /* Pods-NWMuseumAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NWMuseumAR.release.xcconfig"; sourceTree = "<group>"; };
+		DDF991EE206C5AD700AA45B2 /* WayFind.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WayFind.gpx; path = ../WayFind.gpx; sourceTree = "<group>"; };
 		E0220578C59EBCF94648E2B521BFA9C2 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "SCNVector3+Extensions.swift"; path = "ARKit+CoreLocation/Source/SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		E09856401E8D8FE70BE4549262201FF3 /* Pods-NWMuseumAR-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NWMuseumAR-resources.sh"; sourceTree = "<group>"; };
 		E46F6462E1285CED598543B261AF57B0 /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
@@ -351,6 +352,7 @@
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
+				DDF991EE206C5AD700AA45B2 /* WayFind.gpx */,
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				0F75DF6C7C5F002280EC53F48E80B587 /* Frameworks */,
 				A6CB188A56A4750B555C48C455B7567D /* Pods */,

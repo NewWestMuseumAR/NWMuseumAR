@@ -48,7 +48,8 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     var numOfNodes = 0
     var nodeToBeVisited = 0
     var activeLocationNodeQueue = Queue<LocationNode>()
-
+    var isFirstRun = true
+    
     public weak var locationDelegate: SceneLocationViewDelegate?
     
     ///The method to use for determining locations.
@@ -60,6 +61,7 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     public var showAxesNode = false
     
     private(set) var locationNodes = [LocationNode]()
+    private(set) var locationNodeWithText = [LocationNode]()
     
     private var sceneLocationEstimates = [SceneLocationEstimate]()
     
@@ -293,7 +295,9 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         
         locationNodes.append(locationNode)
         var numOfNodes = locationNodes.count
-        sceneNode?.addChildNode(locationNode)
+        activeLocationNodeQueue.enqueue(locationNode)
+        
+        //sceneNode?.addChildNode(locationNode)
     }
     
     public func removeLocationNode(locationNode: LocationNode) {
@@ -312,8 +316,6 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         
         for locationNode in locationNodes {
             if !locationNode.locationConfirmed {
-                print("confirmLocationOfDistantLocationNodes: ")
-
                 let currentPoint = CGPoint.pointWithVector(vector: currentPosition)
                 let locationNodePoint = CGPoint.pointWithVector(vector: locationNode.position)
                 
@@ -531,44 +533,34 @@ extension SceneLocationView{
         //Just added this for testing purposes to see if the Queue implementation actually works, which it does
         // I was thinking of having a queue of like 5 points, and only showing those on the map
         if let currentLocation = currentLocation() {
-            if locationNodes.count > 5 {
-                activeLocationNodeQueue.enqueue(locationNodes[0])
-                activeLocationNodeQueue.enqueue(locationNodes[1])
-                activeLocationNodeQueue.enqueue(locationNodes[2])
-                activeLocationNodeQueue.enqueue(locationNodes[3])
-                activeLocationNodeQueue.enqueue(locationNodes[4])
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 1asdf" + String(describing: first.location))
-                }
-                
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 2asdf" + String(describing: first.location))
-                }
-                
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 3asdf" + String(describing: first.location))
-                }
-                
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 4asfd" + String(describing: first.location))
-                }
-                
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 5asdf" + String(describing: first.location))
-                }
-                
-                print("deque size: " + String(describing: activeLocationNodeQueue.isEmpty))
-                if let nextNodetoVisit = locationNodes[2].location {
-                    print("checkLocVsNode: .count " + String(describing: locationNodes.count))
-                    print("checkLocVsNode: .nextNodetoVisit " + String(describing: nextNodetoVisit))
-                    print("checkLocVsNode: .location " + String(describing: locationNodes.count))
+            
+            if isFirstRun && locationNodes.count > 1 {
+                var curNode = self.activeLocationNodeQueue.peek()!
+                print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + curNode.locationDescription!)
+                self.sceneNode?.addChildNode(self.activeLocationNodeQueue.dequeue()!)
+
+                curNode = self.activeLocationNodeQueue.peek()!
+                print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + curNode.locationDescription!)
+                self.sceneNode?.addChildNode(self.activeLocationNodeQueue.dequeue()!)
+                isFirstRun = false
+                return
+            }
+            
+            //TODO: Check for distance such that ther eis only one node between current node and destination
+            if !isFirstRun && locationNodes.count > 3 {
+                if compareTwoPos(a: (activeLocationNodeQueue.peek()?.location)!, b: currentLocation) {
+                   
+                    var curNode = self.activeLocationNodeQueue.peek()!
+                    print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + curNode.locationDescription!)
+                    self.sceneNode?.addChildNode(self.activeLocationNodeQueue.dequeue()!)
                     
-                    if (compareTwoPos(a: currentLocation, b: nextNodetoVisit)){
-                        //removeLocationNode(locationNode: locationNodes[nodeToBeVisited])
-                        nodeToBeVisited = nodeToBeVisited + 1
-                        print("checkLocVsNode: Reached check success")
-                    }
+                    curNode = self.activeLocationNodeQueue.peek()!
+                    print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + curNode.locationDescription!)
+                    self.sceneNode?.addChildNode(self.activeLocationNodeQueue.dequeue()!)
+
+
                 }
+                
             }
             
         }
@@ -579,29 +571,32 @@ extension SceneLocationView{
     func compareTwoPos(a: CLLocation, b: CLLocation) -> Bool {
         // 0.000000000005 - Precision of current latlon points
         
-        let distLat = abs(abs(a.coordinate.latitude) - abs(b.coordinate.latitude))
-        print("Converstion distLat" + String(describing: distLat))
         //These distance values still need some work, I belive it is currently checking in like a 20 meter radius.
         // At 40° north or south the distance between a degree of longitude is 53 miles (85 km)
-        if abs(abs(a.coordinate.latitude) - abs(b.coordinate.latitude)) > 0.00005 {
-            print("compareTwoPos xFail: ")
-            return false;
-        }
-        let distLon = abs(abs(a.coordinate.longitude) - abs(b.coordinate.longitude))
-        if distLon > 0.00005 {
-            print("compareTwoPos yFail: ")
+        if distanceBetweenTwoPoints(a: a, b: b) > 20.0 {
             return false;
         }
         return true;
     }
     
-    // Started to make this converter, but I decided it wasn't wo
-    func degreeToMeterConverter(degreeChange: Double) -> Double {
-        let numOfKmPerDegreeChange = 85.0 // At 40° north or south the distance between a degree of longitude is 53 miles (85 km)
-        let conversion = 1000 * (degreeChange / numOfKmPerDegreeChange)
-        print("Converstion: " + String(describing: conversion))
-        return conversion
+    func distanceBetweenTwoPoints(a: CLLocation, b: CLLocation) -> Double {
+        let earthRadius = 6371000.0
+        let lat1Radian = Double(a.coordinate.latitude).degreesToRadians
+        let lat2Radian = Double(b.coordinate.latitude).degreesToRadians
+        
+        let lon1Radian = Double(b.coordinate.longitude).degreesToRadians
+        let lon2Radian = Double(b.coordinate.longitude).degreesToRadians
+        let deltaLat = abs(lat2Radian - lat1Radian)
+        let deltaLon = abs(lon2Radian - lon1Radian)
+        
+        let temp = sin(deltaLat / 2) * sin(deltaLat / 2) + cos(lat1Radian) * cos(lat2Radian) * sin(deltaLon / 2) * sin(deltaLon / 2)
+        
+        let temp2 = 2 * atan2(sqrt(temp), sqrt(1.0 - temp))
+        
+        let result = earthRadius * temp2
+        return result
     }
+    
 }
 
 public struct Queue<T> {
@@ -628,3 +623,5 @@ public struct Queue<T> {
         return list.first?.value
     }
 }
+
+
