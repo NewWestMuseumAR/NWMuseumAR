@@ -7,4 +7,6 @@ target 'NWMuseumAR' do
 
   # Pods for NWMuseumAR
   pod "Alamofire"
+  pod 'ARCL'
+  pod 'CocoaLumberjack'
 end
