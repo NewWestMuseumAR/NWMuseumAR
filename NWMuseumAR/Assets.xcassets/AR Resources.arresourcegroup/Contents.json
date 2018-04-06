@@ -32,9 +32,6 @@
       "filename" : "iPhone 5.5-inch.arreferenceimage"
     },
     {
-      "filename" : "iPhone X.arreferenceimage"
-    },
-    {
       "filename" : "MacBook 12-inch.arreferenceimage"
     },
     {
@@ -42,6 +39,12 @@
     },
     {
       "filename" : "MacBook Pro 15-inch.arreferenceimage"
+    },
+    {
+      "filename" : "notebook.arreferenceimage"
+    },
+    {
+      "filename" : "Test.arreferenceimage"
     }
   ]
 }
