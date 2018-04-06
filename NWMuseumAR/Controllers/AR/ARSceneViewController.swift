@@ -50,6 +50,16 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         
         // Start the AR experience
         resetTracking()
+        
+        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
+            fatalError("Missing expected asset catalog resources.")
+        }
+        
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.detectionImages = referenceImages
+        session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,14 +101,26 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
             let planeNode = SCNNode(geometry: plane)
-            //planeNode.opacity = 0.25
+            planeNode.opacity = 1
             
             // create our coin for animation
             // TODO: - Attach coin to anchor
             // TODO: - animate coin ( Spin??)
-            let coin = SCNScene(named: "coin.scn", inDirectory: "art.scnassets")!
-            coin.rootNode.transform = SCNMatrix4Scale(planeNode.worldTransform, 0.06, 0.06, 0.06)
-            planeNode.addChildNode(coin.rootNode)
+//            let coin = SCNScene(named: "coin.scn", inDirectory: "art.scnassets")!
+//            coin.rootNode.transform = SCNMatrix4Scale(planeNode.worldTransform, 0.06, 0.06, 0.06)
+//            planeNode.addChildNode(coin.rootNode)
+            
+            let videoNode = SKVideoNode(fileNamed: "test1.mp4")
+            videoNode.play()
+            
+            let skScene = SKScene(size: CGSize(width: 640, height: 480))
+            skScene.addChild(videoNode)
+            
+            videoNode.position = CGPoint(x: skScene.size.width/2, y: skScene.size.height/2)
+            videoNode.size = skScene.size
+            
+            plane.firstMaterial?.diffuse.contents = skScene
+            plane.firstMaterial?.isDoubleSided = true
             
             /*
              `SCNPlane` is vertically oriented in its local coordinate space, but
@@ -111,7 +133,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
              Image anchors are not tracked after initial detection, so create an
              animation that limits the duration for which the plane visualization appears.
              */
-            planeNode.runAction(self.imageHighlightAction)
+//            planeNode.runAction(self.imageHighlightAction)
             
             // Add the plane visualization to the scene.
             node.addChildNode(planeNode)
