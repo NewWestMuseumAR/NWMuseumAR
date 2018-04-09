@@ -31,11 +31,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         
+        let seeded = UserDefaults.standard.bool(forKey: "seeded")
+        
+        if seeded {
+            seedDatabase()
+            UserDefaults.standard.set(true, forKey: "seeded")
+        }
+        
         // Show our starting controller to the user
         window!.rootViewController = homeViewController
         window!.makeKeyAndVisible()
         
         return true
+    }
+    
+    func seedDatabase() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let canoe = Artifact(context: context)
+        canoe.imageName = "canoe"
+        canoe.completed = false
+        
+        let fire = Artifact(context: context)
+        fire.imageName = "fire"
+        fire.completed = false
+        
+        let freedom = Artifact(context: context)
+        freedom.imageName = "freedom"
+        freedom.completed = false
+        
+        let proclamation = Artifact(context: context)
+        proclamation.imageName = "proclamation"
+        proclamation.completed = false
+        
+        let train = Artifact(context: context)
+        train.imageName = "train"
+        train.completed = false
+        
+        let wanted = Artifact(context: context)
+        wanted.imageName = "wanted"
+        wanted.completed = false
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
