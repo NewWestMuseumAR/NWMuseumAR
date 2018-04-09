@@ -5,6 +5,15 @@
   },
   "resources" : [
     {
+      "filename" : "canoe.arreferenceimage"
+    },
+    {
+      "filename" : "fire.arreferenceimage"
+    },
+    {
+      "filename" : "freedom.arreferenceimage"
+    },
+    {
       "filename" : "Github Logo.arreferenceimage"
     },
     {
@@ -44,7 +53,16 @@
       "filename" : "notebook.arreferenceimage"
     },
     {
+      "filename" : "proclamation.arreferenceimage"
+    },
+    {
       "filename" : "Test.arreferenceimage"
+    },
+    {
+      "filename" : "train.arreferenceimage"
+    },
+    {
+      "filename" : "wanted.arreferenceimage"
     }
   ]
 }
