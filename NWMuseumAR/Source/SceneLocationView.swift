@@ -525,11 +525,7 @@ extension SceneLocationView: LocationManagerDelegate {
 extension SceneLocationView{
     
     
-    //Need to ignore the first locaitonNode, as it appears to be garbage, like 300 meters from the starting point on the map... really weird
     func checkLocVsNode(){
-        print("checkLocVsNode: nodeToBeVisited " + String(describing: nodeToBeVisited))
-        print("checkLocVsNode: currentLoc " + String(describing: currentLocation()))
-        
         //Just added this for testing purposes to see if the Queue implementation actually works, which it does
         // I was thinking of having a queue of like 5 points, and only showing those on the map
         if let currentLocation = currentLocation() {
@@ -537,24 +533,33 @@ extension SceneLocationView{
             
             if isFirstRun && locationNodes.count > 1 {
                 var nextNode = self.activeLocationNodeQueue.peek()!
-                print("checkLoDEQUUUUUUUUUUUUUUEEED: 1 " + nextNode.locationDescription!)
+                print("DebugCLVN: First Run: Next Location: " + nextNode.locationDescription!)
                 curNode = nextNode
                 self.sceneNode?.addChildNode(curNode)
                 isFirstRun = false
                 return
             }
             
-            //TODO: Check for distance such that ther eis only one node between current node and destination
-            if !isFirstRun && locationNodes.count > 1 {
-                if compareTwoPos(a: (curNode as! LocationNode).location, b: currentLocation) {
-                    curNode.removeFromParentNode()
-                    self.activeLocationNodeQueue.dequeue()
-                    var nextNode = self.activeLocationNodeQueue.peek()!
-                    curNode = nextNode
-                    print("checkLoDEQUUUUUUUUUUUUUUEEED: 12 " + nextNode.locationDescription!)
-                    self.sceneNode?.addChildNode(curNode)
+            if !activeLocationNodeQueue.isEmpty {
+                if !isFirstRun && locationNodes.count > 1 {
+                    print("DebugCLVN: Next location to be compared too " + (curNode as! LocationNode).locationDescription!)
+                    print("DebugCLVN: Distance: " + distanceBetweenTwoPoints(a: (curNode as! LocationNode).location, b: currentLocation).description)
+                    if distanceBetweenTwoPoints(a: (curNode as! LocationNode).location, b: currentLocation) < 5.0 {
+                        print("DebugCLVN: coord Node found to be close: " + (curNode as! LocationNode).locationDescription!)
+                        print("DebugCLVN: coord currentLoc: " + currentLocation.coordinate.latitude.description + ", " + currentLocation.coordinate.longitude.description)
+                        print("DebugCLVN: coord dest: " + (curNode as! LocationNode).location.coordinate.latitude.description + ", " + (curNode as! LocationNode).location.coordinate.longitude.description)
+                        curNode.removeFromParentNode()
+                        self.activeLocationNodeQueue.dequeue()
+                        let nextNode = self.activeLocationNodeQueue.peek()!
+                        curNode = nextNode
+                        self.sceneNode?.addChildNode(curNode)
+                    }
                 }
+            } else {
+                // This instantiates a page viewcontroller for the main pages, and inits the transition style to not look bad
             }
+            //TODO: Check for distance such that ther eis only one node between current node and destination
+            
         }
     }
     
