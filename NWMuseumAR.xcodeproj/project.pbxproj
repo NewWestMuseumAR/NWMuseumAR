@@ -33,10 +33,10 @@
 		848FBAB720648F3D00E56D77 /* SCNNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAAC20648F3D00E56D77 /* SCNNode+Extensions.swift */; };
 		848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAAD20648F3D00E56D77 /* LinkedList.swift */; };
 		848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAB920648F4700E56D77 /* NavigationViewController.swift */; };
+		84B1FC96207C297400387E94 /* NWMuseumAR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84B1FC94207C297400387E94 /* NWMuseumAR.xcdatamodeld */; };
 		84E8CFA2206DF9DB006B5FCB /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 84E8CFA1206DF9DB006B5FCB /* .gitkeep */; };
 		84E8CFA6206DFACE006B5FCB /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */; };
 		84E8CFA8206DFED5006B5FCB /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8CFA7206DFED5006B5FCB /* StatusViewController.swift */; };
-		D985EF352036CD110072B377 /* Artifact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF342036CD110072B377 /* Artifact.swift */; };
 		D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF362036D2B00072B377 /* ProgressCell.swift */; };
 		DD9044E8207710C7006375A3 /* test1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DD9044E7207710C7006375A3 /* test1.mp4 */; };
 		FB608ED2204CD61000441AB6 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608ED1204CD61000441AB6 /* SpriteKit.framework */; };
@@ -78,16 +78,16 @@
 		848FBAA820648F3D00E56D77 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		848FBAA920648F3D00E56D77 /* SceneLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationView.swift; sourceTree = "<group>"; };
 		848FBAAA20648F3D00E56D77 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		848FBAAB20648F3D00E56D77 /* Queue.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Queue.playground; sourceTree = "<group>"; };
+		848FBAAB20648F3D00E56D77 /* Queue.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Queue.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848FBAAC20648F3D00E56D77 /* SCNNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode+Extensions.swift"; sourceTree = "<group>"; };
 		848FBAAD20648F3D00E56D77 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		848FBAB920648F4700E56D77 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		84B1FC95207C297400387E94 /* NWMuseumAR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NWMuseumAR.xcdatamodel; sourceTree = "<group>"; };
 		84E8CFA1206DF9DB006B5FCB /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
 		84E8CFA7206DFED5006B5FCB /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.debug.xcconfig"; sourceTree = "<group>"; };
 		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D985EF342036CD110072B377 /* Artifact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artifact.swift; sourceTree = "<group>"; };
 		D985EF362036D2B00072B377 /* ProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 		DD9044E7207710C7006375A3 /* test1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.mp4; sourceTree = "<group>"; };
 		FB608ED1204CD61000441AB6 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -173,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				840ADCCB202418D4004313A8 /* .gitkeep */,
-				D985EF342036CD110072B377 /* Artifact.swift */,
+				84B1FC94207C297400387E94 /* NWMuseumAR.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -448,6 +448,7 @@
 				848FBAB720648F3D00E56D77 /* SCNNode+Extensions.swift in Sources */,
 				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
 				848FBAB520648F3D00E56D77 /* SceneLocationView.swift in Sources */,
+				84B1FC96207C297400387E94 /* NWMuseumAR.xcdatamodeld in Sources */,
 				848FBAB320648F3D00E56D77 /* CGPoint+Extensions.swift in Sources */,
 				848FBAAF20648F3D00E56D77 /* SceneLocationEstimate.swift in Sources */,
 				848FBAB420648F3D00E56D77 /* CLLocation+Extensions.swift in Sources */,
@@ -461,7 +462,6 @@
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
 				848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */,
 				848FBAB620648F3D00E56D77 /* LocationManager.swift in Sources */,
-				D985EF352036CD110072B377 /* Artifact.swift in Sources */,
 				84E8CFA8206DFED5006B5FCB /* StatusViewController.swift in Sources */,
 				848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */,
 			);
@@ -598,7 +598,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N6RP3H788Z;
+				DEVELOPMENT_TEAM = F665AXEWKQ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -622,7 +622,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N6RP3H788Z;
+				DEVELOPMENT_TEAM = F665AXEWKQ;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -662,6 +662,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84B1FC94207C297400387E94 /* NWMuseumAR.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84B1FC95207C297400387E94 /* NWMuseumAR.xcdatamodel */,
+			);
+			currentVersion = 84B1FC95207C297400387E94 /* NWMuseumAR.xcdatamodel */;
+			path = NWMuseumAR.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 844025F5202270B200AF5839 /* Project object */;
 }

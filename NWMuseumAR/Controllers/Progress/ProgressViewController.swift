@@ -34,20 +34,20 @@ class ProgressViewController: UIViewController {
     {
         var tempArtifacts: [Artifact] = []
         
-        let Artifact1 = Artifact(icon: #imageLiteral(resourceName: "icon1"), desc: "Pick up that skull")
-        let Artifact2 = Artifact(icon: #imageLiteral(resourceName: "icon2"), desc: "Lighting in that box")
-        let Artifact3 = Artifact(icon: #imageLiteral(resourceName: "icon3"), desc: "Need a flower")
-        let Artifact4 = Artifact(icon: #imageLiteral(resourceName: "icon4"), desc: "Protect Binary")
-        let Artifact5 = Artifact(icon: #imageLiteral(resourceName: "icon5"), desc: "No idea whats this")
-        let Artifact6 = Artifact(icon: #imageLiteral(resourceName: "icon6"), desc: "Grow up")
-        
-        tempArtifacts.append(Artifact1)
-        tempArtifacts.append(Artifact2)
-        tempArtifacts.append(Artifact3)
-        tempArtifacts.append(Artifact4)
-        tempArtifacts.append(Artifact5)
-        tempArtifacts.append(Artifact6)
-        
+//        let Artifact1 = Artifact(icon: #imageLiteral(resourceName: "icon1"), desc: "Pick up that skull")
+//        let Artifact2 = Artifact(icon: #imageLiteral(resourceName: "icon2"), desc: "Lighting in that box")
+//        let Artifact3 = Artifact(icon: #imageLiteral(resourceName: "icon3"), desc: "Need a flower")
+//        let Artifact4 = Artifact(icon: #imageLiteral(resourceName: "icon4"), desc: "Protect Binary")
+//        let Artifact5 = Artifact(icon: #imageLiteral(resourceName: "icon5"), desc: "No idea whats this")
+//        let Artifact6 = Artifact(icon: #imageLiteral(resourceName: "icon6"), desc: "Grow up")
+//
+//        tempArtifacts.append(Artifact1)
+//        tempArtifacts.append(Artifact2)
+//        tempArtifacts.append(Artifact3)
+//        tempArtifacts.append(Artifact4)
+//        tempArtifacts.append(Artifact5)
+//        tempArtifacts.append(Artifact6)
+//
         return tempArtifacts
     }
 }

@@ -77,6 +77,11 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     /// - Tag: ARReferenceImage-Loading
     func resetTracking() {
         
+        
+        debugPrint("Entering \(#function)")
+        
+        
+        
         guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }
@@ -87,11 +92,32 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         
         statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
+        debugPrint("Leaving \(#function)")
     }
+    
+//    func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
+//
+//        debugPrint("Entering \(#function)")
+//
+//
+//
+//        debugPrint("Leaving \(#function)")
+//    }
+//
+//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+//
+//        debugPrint("Entering \(#function)")
+//
+//
+//
+//        debugPrint("Leaving \(#function)")
+//    }
     
     // MARK: - ARSCNViewDelegate (Image detection results)
     /// - Tag: ARImageAnchor-Visualizing
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        
+        debugPrint("Entering \(#function)")
         
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
@@ -133,10 +159,20 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
              Image anchors are not tracked after initial detection, so create an
              animation that limits the duration for which the plane visualization appears.
              */
-//            planeNode.runAction(self.imageHighlightAction)
+            planeNode.runAction(self.imageHighlightAction)
             
             // Add the plane visualization to the scene.
-            node.addChildNode(planeNode)
+            
+            //node.addChildNode(planeNode)
+            
+            let newNode = SCNNode()
+            newNode.addChildNode(planeNode)
+            
+            newNode.transform = node.worldTransform
+            
+            self.sceneView.scene.rootNode.addChildNode(newNode)
+            
+            debugPrint("Leaving \(#function)")
         }
         
         DispatchQueue.main.async {
@@ -148,10 +184,15 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     var imageHighlightAction: SCNAction {
         return .sequence([
-                .wait(duration: 4),
-                .fadeOpacity(to: 0.85, duration: 0.25),
-                .fadeOpacity(to: 0.15, duration: 0.25),
-                .fadeOpacity(to: 0.85, duration: 0.25),
+                .wait(duration: 2),
+                SCNAction.moveBy(x: 0, y: 0, z: -0.01, duration: 0.5),
+                SCNAction.moveBy(x: 0, y: 0, z: 0.01, duration: 0.5),
+                .fadeOpacity(to: 0.15, duration: 0.5),
+                .fadeOpacity(to: 0.85, duration: 0.5),
+                .fadeOpacity(to: 0.15, duration: 0.5),
+                .fadeOpacity(to: 0.85, duration: 0.5),
+                .fadeOpacity(to: 0.15, duration: 0.5),
+                .fadeOpacity(to: 0.85, duration: 0.5),
                 .fadeOut(duration: 0.5),
                 .removeFromParentNode()
             ])
