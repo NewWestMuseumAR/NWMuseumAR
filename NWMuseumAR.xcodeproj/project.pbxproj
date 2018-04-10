@@ -18,6 +18,7 @@
 		8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F4202E30C700733885 /* MainPageViewController.swift */; };
 		8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F6202E31F100733885 /* ProgressViewController.swift */; };
 		8468ECC420647B2D002C8723 /* Navigation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8468ECC320647B2D002C8723 /* Navigation.storyboard */; };
+		847A2632207C703300D81192 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A2631207C703300D81192 /* PermissionService.swift */; };
 		8489A84520362D4400243C26 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84420362D4400243C26 /* Tutorial.storyboard */; };
 		8489A84720362D5F00243C26 /* Progress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8489A84620362D5F00243C26 /* Progress.storyboard */; };
 		8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489A84B2036308300243C26 /* EndTutorialViewController.swift */; };
@@ -68,6 +69,7 @@
 		8461B1F4202E30C700733885 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		8461B1F6202E31F100733885 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		8468ECC320647B2D002C8723 /* Navigation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Navigation.storyboard; sourceTree = "<group>"; };
+		847A2631207C703300D81192 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		8489A84420362D4400243C26 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		8489A84620362D5F00243C26 /* Progress.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Progress.storyboard; sourceTree = "<group>"; };
 		8489A84B2036308300243C26 /* EndTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTutorialViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				848FBAAB20648F3D00E56D77 /* Queue.playground */,
 				848FBAAC20648F3D00E56D77 /* SCNNode+Extensions.swift */,
 				848FBAAD20648F3D00E56D77 /* LinkedList.swift */,
+				847A2631207C703300D81192 /* PermissionService.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				848FBAAE20648F3D00E56D77 /* SCNVector3+Extensions.swift in Sources */,
 				848FBAB020648F3D00E56D77 /* SceneLocationEstimate+Extensions.swift in Sources */,
 				84E8CFA6206DFACE006B5FCB /* ARSceneViewController.swift in Sources */,
+				847A2632207C703300D81192 /* PermissionService.swift in Sources */,
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
 				848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */,
 				848FBAB620648F3D00E56D77 /* LocationManager.swift in Sources */,
