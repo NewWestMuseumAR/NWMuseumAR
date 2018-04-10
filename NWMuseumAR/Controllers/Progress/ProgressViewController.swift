@@ -60,6 +60,7 @@ class ProgressViewController: UIViewController {
                 objectUpdate.setValue(true, forKey: "completed")
                 do {
                     try context.save()
+                    tableView.reloadData()
                 }
                 catch
                 {
@@ -92,5 +93,12 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         cell.setArtifact(artifact: artifact)
         //return the cell after update with icon and description
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! ProgressCell
+        cell.artifactDescription.text = "complete"
+        
+        completeArtifact(withName: cell.name!)
     }
 }

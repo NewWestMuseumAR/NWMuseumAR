@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !seeded {
             debugPrint("Seeding database")
             seedDatabase()
-            UserDefaults.standard.set(false, forKey: "seeded")
+            UserDefaults.standard.set(true, forKey: "seeded")
         }
         
         // Show our starting controller to the user
