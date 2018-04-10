@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "macbookpro-15.jpg"
+      "filename" : "fire.jpg"
     }
   ],
   "info" : {
@@ -10,7 +10,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 13.090999999999999,
-    "unit" : "inches"
+    "width" : 1.4060000000000001
   }
 }

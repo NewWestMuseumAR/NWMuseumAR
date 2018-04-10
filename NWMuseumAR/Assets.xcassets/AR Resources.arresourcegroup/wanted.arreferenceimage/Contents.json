@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "macbookpro-13.jpg"
+      "filename" : "wanted.jpg"
     }
   ],
   "info" : {
@@ -10,7 +10,7 @@
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 11.278,
+    "width" : 7.4433333333333334,
     "unit" : "inches"
   }
 }

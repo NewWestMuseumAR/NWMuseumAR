@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iphone-4.7.jpg"
+      "filename" : "canoe.jpg"
     }
   ],
   "info" : {
@@ -10,7 +10,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 2.3010000000000002,
-    "unit" : "inches"
+    "width" : 1.7866948257655755
   }
 }

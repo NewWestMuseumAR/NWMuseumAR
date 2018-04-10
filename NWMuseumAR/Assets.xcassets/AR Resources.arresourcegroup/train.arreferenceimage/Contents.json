@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ipad-12.9.jpg"
+      "filename" : "train.jpg"
     }
   ],
   "info" : {
@@ -10,7 +10,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 10.348000000000001,
-    "unit" : "inches"
+    "width" : 1.4060000000000001
   }
 }
