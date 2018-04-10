@@ -50,6 +50,8 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     var activeLocationNodeQueue = Queue<LocationNode>()
     var isFirstRun = true
     var curNode = SCNNode()
+    var navigationDelegate: NavigationViewControllerDelegate?
+    var leftRightLabel: String?
     
     public weak var locationDelegate: SceneLocationViewDelegate?
     
@@ -521,19 +523,24 @@ extension SceneLocationView: LocationManagerDelegate {
     }
 }
 
-@available(iOS 11.0, *)
-extension SceneLocationView{
+protocol NavigationViewControllerDelegate {
     
+    func userFinishedNavigation()
+}
+
+@available(iOS 11.0, *)
+extension SceneLocationView {
     
     func checkLocVsNode(){
         //Just added this for testing purposes to see if the Queue implementation actually works, which it does
         // I was thinking of having a queue of like 5 points, and only showing those on the map
         if let currentLocation = currentLocation() {
-            
-            
+            let bearingTolerance = 30.0
+        
             if isFirstRun && locationNodes.count > 1 {
+                
                 var nextNode = self.activeLocationNodeQueue.peek()!
-                print("DebugCLVN: First Run: Next Location: " + nextNode.locationDescription!)
+                
                 curNode = nextNode
                 self.sceneNode?.addChildNode(curNode)
                 isFirstRun = false
@@ -542,32 +549,64 @@ extension SceneLocationView{
             
             if !activeLocationNodeQueue.isEmpty {
                 if !isFirstRun && locationNodes.count > 1 {
-                    print("DebugCLVN: Next location to be compared too " + (curNode as! LocationNode).locationDescription!)
-                    print("DebugCLVN: Distance: " + distanceBetweenTwoPoints(a: (curNode as! LocationNode).location, b: currentLocation).description)
                     if distanceBetweenTwoPoints(a: (curNode as! LocationNode).location, b: currentLocation) < 5.0 {
-                        print("DebugCLVN: coord Node found to be close: " + (curNode as! LocationNode).locationDescription!)
-                        print("DebugCLVN: coord currentLoc: " + currentLocation.coordinate.latitude.description + ", " + currentLocation.coordinate.longitude.description)
-                        print("DebugCLVN: coord dest: " + (curNode as! LocationNode).location.coordinate.latitude.description + ", " + (curNode as! LocationNode).location.coordinate.longitude.description)
                         curNode.removeFromParentNode()
-                        self.activeLocationNodeQueue.dequeue()
-                        let nextNode = self.activeLocationNodeQueue.peek()!
+                        let nextNode = self.activeLocationNodeQueue.dequeue()!
                         curNode = nextNode
                         self.sceneNode?.addChildNode(curNode)
+                        
+                      
                     }
+                    
                 }
-            } else {
-                // This instantiates a page viewcontroller for the main pages, and inits the transition style to not look bad
+                var myBearing = locationManager.heading
+                var destBearing = getBearingBetweenTwoPoints1(point1: currentLocation, point2: (curNode as! LocationNode).location)
+                if myBearing! < .pi / 2 {
+                    var bearingDiff = abs(myBearing! - destBearing)
+                    //TODO:  Add in tolerances and add in alert for when user reaches destination and make pins look gud
+                    //      Add Arrows to scene
+                    //      Stop pin appearing when user taps screen
+                    if destBearing > myBearing! {
+                        self.leftRightLabel = "Left"
+                    } else {
+                        self.leftRightLabel = "Right"
+                    }
+                    
+                } else if (.pi / 2) > (.pi - myBearing! + destBearing) {
+                    self.leftRightLabel = "Left"
+                } else {
+                    self.leftRightLabel = "Right"
+                }
+                
+            } else if !isFirstRun {
+               navigationDelegate?.userFinishedNavigation()
             }
-            //TODO: Check for distance such that ther eis only one node between current node and destination
             
         }
+        
+    }
+    
+    func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
+    func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
+    
+    func getBearingBetweenTwoPoints1(point1 : CLLocation, point2 : CLLocation) -> Double {
+        
+        let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
+        let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
+        
+        let lat2 = degreesToRadians(degrees: point2.coordinate.latitude)
+        let lon2 = degreesToRadians(degrees: point2.coordinate.longitude)
+        
+        let dLon = lon2 - lon1
+        
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        let radiansBearing = atan2(y, x)
+        
+        return radiansToDegrees(radians: radiansBearing)
     }
     
     func compareTwoPos(a: CLLocation, b: CLLocation) -> Bool {
-        // 0.000000000005 - Precision of current latlon points
-        
-        //These distance values still need some work, I belive it is currently checking in like a 20 meter radius.
-        // At 40° north or south the distance between a degree of longitude is 53 miles (85 km)
         if distanceBetweenTwoPoints(a: a, b: b) > 10.0 {
             return false;
         }

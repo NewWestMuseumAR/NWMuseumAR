@@ -31,9 +31,6 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     
     var centerMapOnUserLocation: Bool = true
     
-    ///Whether to display some debugging data
-    ///This currently displays the coordinate of the best location estimate
-    ///The initial value is respected
     var displayDebugging = false
     
     var infoLabel = UILabel()
@@ -52,6 +49,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         infoLabel.textColor = UIColor.white
         infoLabel.numberOfLines = 0
         sceneLocationView.addSubview(infoLabel)
+        sceneLocationView.navigationDelegate = self
         
         updateInfoLabelTimer = Timer.scheduledTimer(
             timeInterval: 0.1,
@@ -59,16 +57,12 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             selector: #selector(self.updateInfoLabel),
             userInfo: nil,
             repeats: true)
-        
-        //Set to true to display an arrow which points north.
-        //Checkout the comments in the property description and on the readme on this.
-//        sceneLocationView.orientToTrueNorth = false
-        
         sceneLocationView.showAxesNode = true
         sceneLocationView.locationDelegate = self
         
         if displayDebugging {
             sceneLocationView.showFeaturePoints = true
+            
         }
         view.addSubview(sceneLocationView)
         
@@ -85,15 +79,11 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             locationManager.requestWhenInUseAuthorization()
             
             view.addSubview(mapView)
-            self.setUpGeofenceForPlayaGrandeBeach()
-            
-            //Added
+
             if CLLocationManager.locationServicesEnabled() {
                 locationManager.delegate = self
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager.startUpdatingLocation()
-//                locationManager.startUpdatingHeading()
-                print("lcoaitonManager" + locationManager.location.debugDescription)
             } else {
                 print("not enabled")
             }
@@ -109,8 +99,9 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         let sourceCoordinates = location.coordinate
         //            let destCoordinates = CLLocationCoordinate2DMake(49.2489415, -122.9899965)
         
-        let destCoordinates = CLLocationCoordinate2DMake(49.249212, -123.010059)
-        
+//        let destCoordinates = CLLocationCoordinate2DMake(49.249212, -123.010059)
+        let destCoordinates = CLLocationCoordinate2DMake(49.245648063009874, -122.99804483566106)
+
         let sourcePlacemark = MKPlacemark(coordinate: sourceCoordinates)
         let destPlacemark = MKPlacemark(coordinate: destCoordinates)
         
@@ -122,7 +113,6 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         directionRequest.destination = destItem
         directionRequest.transportType = .walking
         
-        //Need to add and remove child
         let directions = MKDirections(request: directionRequest)
         directions.calculate(completionHandler: {(response, error) in
             
@@ -154,10 +144,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                             
                             if i == pointCount - 1 {
                                 self.addAnnotationAndLabelToCoordinate(withCoordinate: coord, text: step.instructions)
-                            } else {
-                               // self.addAnnotationToCoordinate(withCoordinate: coord)
                             }
-                            print("step coordinate[\(i)] = \(coord.latitude),\(coord.longitude)")
                         }
                         array.deallocate(capacity: pointCount)
                     }
@@ -166,15 +153,6 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         })
     }
     
-
-    func setUpGeofenceForPlayaGrandeBeach() {
-
-        let geofenceRegionCenter = CLLocationCoordinate2DMake(49.257307,-123.152949);
-        let geofenceRegion = CLCircularRegion(center: geofenceRegionCenter, radius: 100.0, identifier: "The Restaurant");
-        geofenceRegion.notifyOnExit = true;
-        geofenceRegion.notifyOnEntry = true;
-        self.locationManager.startMonitoring(for: geofenceRegion)
-    }
 
     func addAnnotationAndLabelToCoordinate(withCoordinate coordinate: CLLocationCoordinate2D, text: String) {
         
@@ -212,31 +190,9 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
     }
-    
-    
-    //Added: for geofencing
-    // 1. user enter region
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            print("hello")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            print("goodbye")
-        }
-    }
 
     
-    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-        print("Monitoring failed for region with identifier: \(region!.identifier)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location Manager failed with the following error: \(error)")
-    }
-    
+
     
     
     //Added: This will return the overlay polylines
@@ -302,9 +258,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 
                 if let bestEstimate = self.sceneLocationView.bestLocationEstimate(),
                     let position = self.sceneLocationView.currentScenePosition() {
-
                     let translation = bestEstimate.translatedLocation(to: position)
-                    
                 }
                 
                 if self.userAnnotation == nil {
@@ -359,12 +313,15 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             let accuracy = sceneLocationView.locationManager.headingAccuracy {
             infoLabel.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
         }
+        
+        if let leftRight = sceneLocationView.leftRightLabel {
+            infoLabel.text!.append("leftRight: \(leftRight)")
+        }
+        
         if let currentLocation = sceneLocationView.locationManager.currentLocation,
             let nextPoint = sceneLocationView.activeLocationNodeQueue.peek()?.location {
             let nextPointDesc = sceneLocationView.activeLocationNodeQueue.peek()?.locationDescription
             infoLabel.text!.append("Distance to next node: " + sceneLocationView.distanceBetweenTwoPoints(a: currentLocation, b: nextPoint).description)
-            print("checkLoDEQUUUUUUUUUUUUUUEEED nextPoint " + nextPointDesc!)
-
         }
         
         let date = Date()
@@ -373,10 +330,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
             infoLabel.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
         }
-        //ADDED: Call this to check the next node location with respect to the current location
         sceneLocationView.checkLocVsNode()
-
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -473,5 +427,15 @@ extension UIView {
         
         return recursiveSubviews
     }
+}
+
+extension NavigationViewController: NavigationViewControllerDelegate {
+    
+    func userFinishedNavigation() {
+        let mainPage = MainPageViewController.init()
+        present(mainPage, animated: true)
+    }
+    
+    
 }
 
