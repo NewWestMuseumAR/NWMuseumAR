@@ -5,13 +5,13 @@
   },
   "resources" : [
     {
-      "filename" : "canoe.arreferenceimage"
+      "filename" : "Canoe.arreferenceimage"
     },
     {
-      "filename" : "fire.arreferenceimage"
+      "filename" : "Fire.arreferenceimage"
     },
     {
-      "filename" : "freedom.arreferenceimage"
+      "filename" : "Freedom.arreferenceimage"
     },
     {
       "filename" : "Github Logo.arreferenceimage"
@@ -20,16 +20,16 @@
       "filename" : "notebook.arreferenceimage"
     },
     {
-      "filename" : "proclamation.arreferenceimage"
+      "filename" : "Proclamation.arreferenceimage"
     },
     {
       "filename" : "Test.arreferenceimage"
     },
     {
-      "filename" : "train.arreferenceimage"
+      "filename" : "Train.arreferenceimage"
     },
     {
-      "filename" : "wanted.arreferenceimage"
+      "filename" : "Wanted.arreferenceimage"
     }
   ]
 }
