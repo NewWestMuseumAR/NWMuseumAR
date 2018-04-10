@@ -12,6 +12,7 @@ import ARKit
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     /// The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
@@ -66,6 +67,62 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         
         session.pause()
+    }
+    
+    func handleTouch(node: SCNNode) {
+        print(node)
+        createExplosion(geometry: node.geometry!, position: node.presentation.position,
+                        rotation: node.presentation.rotation)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // 1
+        let touch = touches.first!
+        // 2
+        let location = touch.location(in: sceneView)
+        // 3
+        let hitResults = sceneView.hitTest(location, options: nil)
+        // 4
+        if hitResults.count > 0 {
+            // 5
+            let result = hitResults.first!
+            // 6
+            handleTouch(node: result.node)
+        }
+    }
+    
+    // 1
+    func createExplosion(geometry: SCNGeometry, position: SCNVector3,
+                         rotation: SCNVector4) {
+        // 2
+        let explosion =
+            SCNParticleSystem(named: "Explode.scnp", inDirectory:
+                nil)!
+        explosion.emitterShape = geometry
+        explosion.birthLocation = .surface
+        // 3
+        let rotationMatrix =
+            SCNMatrix4MakeRotation(rotation.w, rotation.x,
+                                   rotation.y, rotation.z)
+        let translationMatrix =
+            SCNMatrix4MakeTranslation(position.x, position.y,
+                                      position.z)
+        let transformMatrix =
+            SCNMatrix4Mult(rotationMatrix, translationMatrix)
+        // 4
+        sceneView.scene.addParticleSystem(explosion, transform:
+            transformMatrix)
+    }
+    
+    func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem {
+        // 2
+        let trail = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!
+        // 3
+        trail.particleColor = color
+        // 4
+        trail.emitterShape = geometry
+        // 5
+        return trail
     }
     
     // MARK: - Session management (Image detection setup)
@@ -159,7 +216,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
              Image anchors are not tracked after initial detection, so create an
              animation that limits the duration for which the plane visualization appears.
              */
-            planeNode.runAction(self.imageHighlightAction)
+//            planeNode.runAction(self.imageHighlightAction)
             
             // Add the plane visualization to the scene.
             
@@ -279,5 +336,32 @@ extension ARSceneViewController: ARSessionDelegate {
             self.isRestartAvailable = true
         }
     }
+    
+//    func completeArtifact(withName name: String) {
+//        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
+//        let predicate = NSPredicate(format: "imageName = '\(name)'")
+//        fetchRequest.predicate = predicate
+//        do
+//        {
+//            let test = try context.fetch(fetchRequest)
+//            if test.count == 1
+//            {
+//                let objectUpdate = test[0] as! NSManagedObject
+//                objectUpdate.setValue(true, forKey: "completed")
+//                do {
+//                    try context.save()
+//                    tableView.reloadData()
+//                }
+//                catch
+//                {
+//                    print(error)
+//                }
+//            }
+//        }
+//        catch
+//        {
+//            print(error)
+//        }
+//    }
     
 }

@@ -13,10 +13,10 @@ class ProgressViewController: UIViewController {
 
     // MARK: - TableView data creation
     @IBOutlet weak var tableView: UITableView!
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var artifacts: [Artifact] = []
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -73,6 +73,7 @@ class ProgressViewController: UIViewController {
             print(error)
         }
     }
+    
 }
 
 //find the cell and display info as needed
