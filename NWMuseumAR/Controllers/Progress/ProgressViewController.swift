@@ -15,12 +15,15 @@ class ProgressViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var artifacts: [Artifact] = []
-    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        artifacts = createArtifacts()
+
+        
+        getArtifacts()
         
         //assigned tableview to the controller
         //in order to use the extension methods
@@ -31,9 +34,8 @@ class ProgressViewController: UIViewController {
 
     //creates an array of artifacts as dummy data for testing
     //This will be replaced by database of some sort later on
-    func createArtifacts() -> [Artifact]
+    func getArtifacts()
     {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Artifact")
         
         do {
@@ -43,7 +45,32 @@ class ProgressViewController: UIViewController {
         }catch let err as NSError {
             print(err.debugDescription)
         }
-        return artifacts
+    }
+    
+    func completeArtifact(withName name: String) {
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
+        let predicate = NSPredicate(format: "imageName = '\(name)'")
+        fetchRequest.predicate = predicate
+        do
+        {
+            let test = try context.fetch(fetchRequest)
+            if test.count == 1
+            {
+                let objectUpdate = test[0] as! NSManagedObject
+                objectUpdate.setValue(true, forKey: "completed")
+                do {
+                    try context.save()
+                }
+                catch
+                {
+                    print(error)
+                }
+            }
+        }
+        catch
+        {
+            print(error)
+        }
     }
 }
 
