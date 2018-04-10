@@ -25,6 +25,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     
     var updateUserLocationTimer: Timer?
     
+
     ///Whether to show a map view
     ///The initial value is respected
     var showMapView: Bool = true
@@ -192,9 +193,6 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
 
     
-
-    
-    
     //Added: This will return the overlay polylines
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -315,7 +313,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         }
         
         if let leftRight = sceneLocationView.leftRightLabel {
-            infoLabel.text!.append("leftRight: \(leftRight)")
+            infoLabel.text!.append("leftRight: \(leftRight) \n")
         }
         
         if let currentLocation = sceneLocationView.locationManager.currentLocation,

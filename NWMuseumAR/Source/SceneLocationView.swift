@@ -561,21 +561,28 @@ extension SceneLocationView {
                 }
                 var myBearing = locationManager.heading
                 var destBearing = getBearingBetweenTwoPoints1(point1: currentLocation, point2: (curNode as! LocationNode).location)
+                
+                let bearingDiff = abs(myBearing! - destBearing)
+
                 if myBearing! < .pi / 2 {
-                    var bearingDiff = abs(myBearing! - destBearing)
                     //TODO:  Add in tolerances and add in alert for when user reaches destination and make pins look gud
                     //      Add Arrows to scene
                     //      Stop pin appearing when user taps screen
-                    if destBearing > myBearing! {
+                    if destBearing > myBearing! && bearingDiff > bearingTolerance {
                         self.leftRightLabel = "Left"
-                    } else {
+                    } else if bearingDiff > bearingTolerance {
                         self.leftRightLabel = "Right"
+                    } else {
+                        self.leftRightLabel = "Straight"
                     }
                     
-                } else if (.pi / 2) > (.pi - myBearing! + destBearing) {
+                } else if (.pi / 2) > (.pi - myBearing! + destBearing) && bearingDiff > bearingTolerance {
+                    
                     self.leftRightLabel = "Left"
-                } else {
+                } else if bearingDiff > bearingTolerance {
                     self.leftRightLabel = "Right"
+                } else {
+                    self.leftRightLabel = "Straight"
                 }
                 
             } else if !isFirstRun {
