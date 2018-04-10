@@ -27,11 +27,11 @@ extension Artifact {
         }
     }
     
-    static func complete(withName name: String) -> Bool {
+    static func complete(withTitle title: String) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
-        let predicate = NSPredicate(format: "image = '\(name)'")
+        let predicate = NSPredicate(format: "title = '\(title)'")
         fetchRequest.predicate = predicate
         
         do {
@@ -43,7 +43,7 @@ extension Artifact {
                 
                 do {
                     try context.save()
-                    return true
+                    debugPrint("Artifact completion saved")
                 } catch {
                     print(error)
                 }
@@ -52,6 +52,5 @@ extension Artifact {
         } catch {
             print(error)
         }
-        return false
     }
 }
