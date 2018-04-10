@@ -49,7 +49,7 @@ class ProgressViewController: UIViewController {
     
     func completeArtifact(withName name: String) {
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
-        let predicate = NSPredicate(format: "imageName = '\(name)'")
+        let predicate = NSPredicate(format: "image = '\(name)'")
         fetchRequest.predicate = predicate
         do
         {
@@ -99,6 +99,6 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! ProgressCell
         cell.artifactDescription.text = "complete"
         
-        completeArtifact(withName: cell.name!)
+        completeArtifact(withName: cell.name!.lowercased())
     }
 }
