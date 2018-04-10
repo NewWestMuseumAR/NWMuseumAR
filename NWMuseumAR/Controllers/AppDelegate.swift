@@ -17,10 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        permissionService.delegate = self
-        permissionService.requestCameraPermission()
-        permissionService.requestLocationPermission()
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let homeViewController: UIViewController
@@ -154,20 +150,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-
-extension AppDelegate: PermissionServiceDelegate {
-    
-    func permissionService(didGrant permission: PermissionType) {
-        debugPrint("service granted: \(permission)")
-    }
-    
-    func permissionService(didDeny permission: PermissionType) {
-        debugPrint("service denied: \(permission)")
-
-    }
-    
-    func permissionService(didFail permission: PermissionType) {
-        debugPrint("service failed: \(permission)")
-    }
-}
-
