@@ -28,27 +28,16 @@ class PermissionService: NSObject {
     
     override init() {
         super.init()
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
     }
     
     func requestLocationPermission() {
         
-        if !CLLocationManager.locationServicesEnabled() {
-            self.delegate?.permissionService(didFail: .camera)
-        }
-            
-        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways ||
-            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
-            self.delegate?.permissionService(didGrant: .location)
-        }
+        debugPrint("Entering \(#function)")
+
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
         
-        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.denied ||
-            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.restricted {
-            self.delegate?.permissionService(didDeny: .location)
-        }
-        
-        self.locationManager?.requestWhenInUseAuthorization()
+        debugPrint("Leaving \(#function)")
     }
     
     func requestCameraPermission() {
@@ -72,18 +61,27 @@ extension PermissionService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
+        debugPrint("Entering \(#function)")
+        
+        if !CLLocationManager.locationServicesEnabled() {
+            self.delegate?.permissionService(didFail: .location)
+            return
+        }
+        
         switch status {
             
-            case .authorizedAlways,
-                 .authorizedWhenInUse:
-                self.delegate?.permissionService(didGrant: .location)
+        case .authorizedAlways,
+             .authorizedWhenInUse:
+            self.delegate?.permissionService(didGrant: .location)
             
-            case  .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-
-            case .denied,
-                 .restricted:
-                self.delegate?.permissionService(didDeny: .location)
+        case  .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            
+        case .denied,
+             .restricted:
+            self.delegate?.permissionService(didDeny: .location)
         }
+        
+        debugPrint("Leaving \(#function)")
     }
 }
