@@ -32,10 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let seeded = UserDefaults.standard.bool(forKey: "seeded")
-        
-        if seeded {
+        debugPrint("Seeded? \(seeded)")
+        if !seeded {
+            debugPrint("Seeding database")
             seedDatabase()
-            UserDefaults.standard.set(true, forKey: "seeded")
+            UserDefaults.standard.set(false, forKey: "seeded")
         }
         
         // Show our starting controller to the user
@@ -73,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         wanted.completed = false
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        debugPrint("database seeded")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

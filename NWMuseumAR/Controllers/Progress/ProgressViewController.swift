@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProgressViewController: UIViewController {
 
@@ -32,23 +33,17 @@ class ProgressViewController: UIViewController {
     //This will be replaced by database of some sort later on
     func createArtifacts() -> [Artifact]
     {
-        var tempArtifacts: [Artifact] = []
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Artifact")
         
-//        let Artifact1 = Artifact(icon: #imageLiteral(resourceName: "icon1"), desc: "Pick up that skull")
-//        let Artifact2 = Artifact(icon: #imageLiteral(resourceName: "icon2"), desc: "Lighting in that box")
-//        let Artifact3 = Artifact(icon: #imageLiteral(resourceName: "icon3"), desc: "Need a flower")
-//        let Artifact4 = Artifact(icon: #imageLiteral(resourceName: "icon4"), desc: "Protect Binary")
-//        let Artifact5 = Artifact(icon: #imageLiteral(resourceName: "icon5"), desc: "No idea whats this")
-//        let Artifact6 = Artifact(icon: #imageLiteral(resourceName: "icon6"), desc: "Grow up")
-//
-//        tempArtifacts.append(Artifact1)
-//        tempArtifacts.append(Artifact2)
-//        tempArtifacts.append(Artifact3)
-//        tempArtifacts.append(Artifact4)
-//        tempArtifacts.append(Artifact5)
-//        tempArtifacts.append(Artifact6)
-//
-        return tempArtifacts
+        do {
+            artifacts = try context.fetch(fetchRequest) as! [Artifact]
+            debugPrint(artifacts)
+            self.tableView.reloadData()
+        }catch let err as NSError {
+            print(err.debugDescription)
+        }
+        return artifacts
     }
 }
 
