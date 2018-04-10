@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -18,14 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAK-Wm-Jw7">
-                                <rect key="frame" x="0.0" y="610" width="375" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.37265018830000002" blue="0.32935606690000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkR-6N-1hn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </arscnView>
@@ -129,6 +122,7 @@
                             <constraint firstItem="tcE-bi-NGH" firstAttribute="top" secondItem="rrx-Fx-S34" secondAttribute="topMargin" constant="10" id="NJT-cK-TZq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tcE-bi-NGH" secondAttribute="trailing" constant="10" id="lDZ-W9-gMt"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="1WP-Rm-5XJ"/>
                     </view>
                     <connections>
                         <outlet property="messageLabel" destination="uAb-2V-Obx" id="wwX-zU-hOl"/>
