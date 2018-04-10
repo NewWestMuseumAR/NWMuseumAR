@@ -25,7 +25,13 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     
     var updateUserLocationTimer: Timer?
     
+    var rightArrowImageName: String?
+    var rightArrowImage: UIImage?
+    var rightArrowImageView: UIImageView?
 
+    var leftArrowImageName: String?
+    var leftArrowImage: UIImage?
+    var leftArrowImageView: UIImageView?
     ///Whether to show a map view
     ///The initial value is respected
     var showMapView: Bool = true
@@ -61,11 +67,22 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         sceneLocationView.showAxesNode = true
         sceneLocationView.locationDelegate = self
         
+        self.rightArrowImageName = "rightArrow.pdf"
+        self.leftArrowImageName = "leftArrow.pdf"
+
+        self.rightArrowImage = UIImage(named: self.rightArrowImageName!)
+        self.leftArrowImage = UIImage(named: self.leftArrowImageName!)
+        
+        leftArrowImageView?.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        rightArrowImageView?.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        self.view.addSubview(leftArrowImageView!)
+        self.view.addSubview(rightArrowImageView!)
+
         if displayDebugging {
             sceneLocationView.showFeaturePoints = true
             
         }
-        view.addSubview(sceneLocationView)
+        self.view.addSubview(sceneLocationView)
         
     
         
