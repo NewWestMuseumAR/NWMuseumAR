@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProgressViewController: UIViewController {
 
@@ -14,12 +15,15 @@ class ProgressViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var artifacts: [Artifact] = []
-    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        artifacts = createArtifacts()
+
+        
+        getArtifacts()
         
         //assigned tableview to the controller
         //in order to use the extension methods
@@ -30,25 +34,44 @@ class ProgressViewController: UIViewController {
 
     //creates an array of artifacts as dummy data for testing
     //This will be replaced by database of some sort later on
-    func createArtifacts() -> [Artifact]
+    func getArtifacts()
     {
-        var tempArtifacts: [Artifact] = []
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Artifact")
         
-        let Artifact1 = Artifact(icon: #imageLiteral(resourceName: "icon1"), desc: "Pick up that skull")
-        let Artifact2 = Artifact(icon: #imageLiteral(resourceName: "icon2"), desc: "Lighting in that box")
-        let Artifact3 = Artifact(icon: #imageLiteral(resourceName: "icon3"), desc: "Need a flower")
-        let Artifact4 = Artifact(icon: #imageLiteral(resourceName: "icon4"), desc: "Protect Binary")
-        let Artifact5 = Artifact(icon: #imageLiteral(resourceName: "icon5"), desc: "No idea whats this")
-        let Artifact6 = Artifact(icon: #imageLiteral(resourceName: "icon6"), desc: "Grow up")
-        
-        tempArtifacts.append(Artifact1)
-        tempArtifacts.append(Artifact2)
-        tempArtifacts.append(Artifact3)
-        tempArtifacts.append(Artifact4)
-        tempArtifacts.append(Artifact5)
-        tempArtifacts.append(Artifact6)
-        
-        return tempArtifacts
+        do {
+            artifacts = try context.fetch(fetchRequest) as! [Artifact]
+            debugPrint(artifacts)
+            self.tableView.reloadData()
+        }catch let err as NSError {
+            print(err.debugDescription)
+        }
+    }
+    
+    func completeArtifact(withName name: String) {
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
+        let predicate = NSPredicate(format: "imageName = '\(name)'")
+        fetchRequest.predicate = predicate
+        do
+        {
+            let test = try context.fetch(fetchRequest)
+            if test.count == 1
+            {
+                let objectUpdate = test[0] as! NSManagedObject
+                objectUpdate.setValue(true, forKey: "completed")
+                do {
+                    try context.save()
+                    tableView.reloadData()
+                }
+                catch
+                {
+                    print(error)
+                }
+            }
+        }
+        catch
+        {
+            print(error)
+        }
     }
 }
 
@@ -70,5 +93,12 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         cell.setArtifact(artifact: artifact)
         //return the cell after update with icon and description
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! ProgressCell
+        cell.artifactDescription.text = "complete"
+        
+        completeArtifact(withName: cell.name!)
     }
 }
