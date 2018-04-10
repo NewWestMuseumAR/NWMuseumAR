@@ -41,7 +41,6 @@
 		D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF362036D2B00072B377 /* ProgressCell.swift */; };
 		DD044B28207C325400BF20FD /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = DD044B26207C325400BF20FD /* spark.png */; };
 		DD044B29207C325400BF20FD /* Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = DD044B27207C325400BF20FD /* Explosion.scnp */; };
-		DD044B39207C531D00BF20FD /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = DD044B38207C531D00BF20FD /* Explode.scnp */; };
 		DD9044E8207710C7006375A3 /* test1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DD9044E7207710C7006375A3 /* test1.mp4 */; };
 		FB608ED2204CD61000441AB6 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608ED1204CD61000441AB6 /* SpriteKit.framework */; };
 		FB608ED4204CD61700441AB6 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB608ED3204CD61700441AB6 /* MediaPlayer.framework */; };
@@ -96,7 +95,6 @@
 		D985EF362036D2B00072B377 /* ProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 		DD044B26207C325400BF20FD /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		DD044B27207C325400BF20FD /* Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explosion.scnp; sourceTree = "<group>"; };
-		DD044B38207C531D00BF20FD /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
 		DD9044E7207710C7006375A3 /* test1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test1.mp4; sourceTree = "<group>"; };
 		FB608ED1204CD61000441AB6 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FB608ED3204CD61700441AB6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -287,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				DD044B26207C325400BF20FD /* spark.png */,
-				DD044B38207C531D00BF20FD /* Explode.scnp */,
 				DD044B27207C325400BF20FD /* Explosion.scnp */,
 			);
 			path = Particles;
@@ -394,7 +391,6 @@
 				8440260A202270B200AF5839 /* Assets.xcassets in Resources */,
 				8489A84720362D5F00243C26 /* Progress.storyboard in Resources */,
 				8489A84520362D4400243C26 /* Tutorial.storyboard in Resources */,
-				DD044B39207C531D00BF20FD /* Explode.scnp in Resources */,
 				840ADCD020241904004313A8 /* .gitkeep in Resources */,
 				84E8CFA2206DF9DB006B5FCB /* .gitkeep in Resources */,
 				DD044B29207C325400BF20FD /* Explosion.scnp in Resources */,
