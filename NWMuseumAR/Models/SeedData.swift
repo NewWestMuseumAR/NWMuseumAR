@@ -9,10 +9,10 @@
 import Foundation
 
 let SEED_DATA = [
-    "Canoe",
-    "Fire",
-    "Freedom",
-    "Proclamation",
-    "Train",
-    "Wanted"
+    ["name": "Canoe", "hint": "Look for the fucking canoe"],
+    ["name": "Fire", "hint": "Look for the fucking Fire"],
+    ["name": "Freedom", "hint": "Look for the fucking Freedom"],
+    ["name": "Proclamation", "hint": "Look for the fucking Procl..."],
+    ["name": "Train", "hint": "Look for the fucking train"],
+    ["name": "Wanted", "hint": "Look for the fucking wanted"],
 ]

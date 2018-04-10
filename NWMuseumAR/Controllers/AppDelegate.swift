@@ -72,8 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         debugPrint("Seeding database")
 
-        for name in SEED_DATA {
-            Artifact.save(withName: name)
+        for artifact in SEED_DATA {
+            Artifact.save(withTitle: artifact["title"]!, hint: artifact["hint"]!)
         }
         
         debugPrint("database seeded")

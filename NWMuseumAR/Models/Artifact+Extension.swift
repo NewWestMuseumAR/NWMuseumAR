@@ -12,12 +12,12 @@ import UIKit
 
 extension Artifact {
     
-    static func save(withName name: String) {
+    static func save(withTitle title: String, hint: String) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
         let artifact = Artifact(context: context)
-        artifact.title = name
-        artifact.image = name.lowercased()
+        artifact.title = title
+        artifact.hint = hint
         artifact.completed = false
         
         do {
