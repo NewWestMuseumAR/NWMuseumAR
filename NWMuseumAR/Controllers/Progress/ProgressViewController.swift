@@ -20,9 +20,7 @@ class ProgressViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
 
-        
         getArtifacts()
         
         //assigned tableview to the controller
@@ -46,34 +44,6 @@ class ProgressViewController: UIViewController {
             print(err.debugDescription)
         }
     }
-    
-    func completeArtifact(withName name: String) {
-        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
-        let predicate = NSPredicate(format: "image = '\(name)'")
-        fetchRequest.predicate = predicate
-        do
-        {
-            let test = try context.fetch(fetchRequest)
-            if test.count == 1
-            {
-                let objectUpdate = test[0] as! NSManagedObject
-                objectUpdate.setValue(true, forKey: "completed")
-                do {
-                    try context.save()
-                    tableView.reloadData()
-                }
-                catch
-                {
-                    print(error)
-                }
-            }
-        }
-        catch
-        {
-            print(error)
-        }
-    }
-    
 }
 
 //find the cell and display info as needed
@@ -100,6 +70,6 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! ProgressCell
         cell.artifactDescription.text = "complete"
         
-        completeArtifact(withName: cell.name!.lowercased())
+        Artifact.complete(withTitle: cell.name!)
     }
 }
