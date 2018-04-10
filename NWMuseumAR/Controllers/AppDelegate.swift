@@ -50,27 +50,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         let canoe = Artifact(context: context)
-        canoe.imageName = "canoe"
+        canoe.title = "Canoe"
+        canoe.image = "canoe"
         canoe.completed = false
         
         let fire = Artifact(context: context)
-        fire.imageName = "fire"
+        fire.title = "Fire"
+        fire.image = "fire"
         fire.completed = false
         
         let freedom = Artifact(context: context)
-        freedom.imageName = "freedom"
+        freedom.title = "Freedom"
+        freedom.image = "freedom"
         freedom.completed = false
         
         let proclamation = Artifact(context: context)
-        proclamation.imageName = "proclamation"
+        proclamation.title = "Proclamation"
+        proclamation.image = "proclamation"
         proclamation.completed = false
         
         let train = Artifact(context: context)
-        train.imageName = "train"
+        train.title = "Train"
+        train.image = "train"
         train.completed = false
         
         let wanted = Artifact(context: context)
-        wanted.imageName = "wanted"
+        wanted.title = "Wanted"
+        wanted.image = "wanted"
         wanted.completed = false
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
