@@ -12,6 +12,8 @@ import ARKit
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var detectedArtifact: String? = nil
     
     /// The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
@@ -66,6 +68,44 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         
         session.pause()
+    }
+    
+    /*
+        Detect touch event
+    */
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //get first touch
+        let touch = touches.first!
+        
+        //get location of touch in scene
+        let location = touch.location(in: sceneView)
+        
+        //get hit results
+        let hitResults = sceneView.hitTest(location, options: nil)
+        
+        if hitResults.count > 0 {
+            handleTouch()
+        }
+    }
+    
+    func handleTouch() {
+        if detectedArtifact == nil { return }
+        
+        let node = sceneView.scene.rootNode.childNode(withName: "artifact", recursively: true)
+        
+        if (node != nil) {
+            createExplosion(node: node!, geometry: node!.geometry!, position: node!.presentation.position,
+                            rotation: node!.presentation.rotation)
+        }
+    }
+    
+    func createExplosion(node: SCNNode, geometry: SCNGeometry, position: SCNVector3,
+                         rotation: SCNVector4) {
+        let explosion = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!
+        explosion.emitterShape = geometry
+        explosion.birthLocation = .surface
+
+        node.addParticleSystem(explosion)
     }
     
     // MARK: - Session management (Image detection setup)
@@ -128,23 +168,23 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
                                  height: referenceImage.physicalSize.height)
             let planeNode = SCNNode(geometry: plane)
             planeNode.opacity = 1
+            planeNode.name = "artifact"
             
-            // create our coin for animation
-            // TODO: - Attach coin to anchor
-            // TODO: - animate coin ( Spin??)
+            /* coin */
 //            let coin = SCNScene(named: "coin.scn", inDirectory: "art.scnassets")!
 //            coin.rootNode.transform = SCNMatrix4Scale(planeNode.worldTransform, 0.06, 0.06, 0.06)
 //            planeNode.addChildNode(coin.rootNode)
             
+            /* Video plane */
             let videoNode = SKVideoNode(fileNamed: "test1.mp4")
             videoNode.play()
-            
+
             let skScene = SKScene(size: CGSize(width: 640, height: 480))
             skScene.addChild(videoNode)
-            
+
             videoNode.position = CGPoint(x: skScene.size.width/2, y: skScene.size.height/2)
             videoNode.size = skScene.size
-            
+
             plane.firstMaterial?.diffuse.contents = skScene
             plane.firstMaterial?.isDoubleSided = true
             
@@ -159,18 +199,18 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
              Image anchors are not tracked after initial detection, so create an
              animation that limits the duration for which the plane visualization appears.
              */
-            planeNode.runAction(self.imageHighlightAction)
+//            planeNode.runAction(self.imageHighlightAction)
             
-            // Add the plane visualization to the scene.
+            /* add video plane to scene */
+            node.addChildNode(planeNode)
             
-            //node.addChildNode(planeNode)
-            
-            let newNode = SCNNode()
-            newNode.addChildNode(planeNode)
-            
-            newNode.transform = node.worldTransform
-            
-            self.sceneView.scene.rootNode.addChildNode(newNode)
+            /* add coin to scene */
+//            let newNode = SCNNode()
+//            newNode.addChildNode(planeNode)
+//
+//            newNode.transform = node.worldTransform
+//
+//            self.sceneView.scene.rootNode.addChildNode(newNode)
             
             debugPrint("Leaving \(#function)")
         }
@@ -179,6 +219,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             let imageName = referenceImage.name ?? ""
             self.statusViewController.cancelAllScheduledMessages()
             self.statusViewController.showMessage("Detected image “\(imageName)”")
+            self.detectedArtifact = imageName
         }
     }
     
@@ -279,5 +320,32 @@ extension ARSceneViewController: ARSessionDelegate {
             self.isRestartAvailable = true
         }
     }
+    
+//    func completeArtifact(withName name: String) {
+//        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
+//        let predicate = NSPredicate(format: "imageName = '\(name)'")
+//        fetchRequest.predicate = predicate
+//        do
+//        {
+//            let test = try context.fetch(fetchRequest)
+//            if test.count == 1
+//            {
+//                let objectUpdate = test[0] as! NSManagedObject
+//                objectUpdate.setValue(true, forKey: "completed")
+//                do {
+//                    try context.save()
+//                    tableView.reloadData()
+//                }
+//                catch
+//                {
+//                    print(error)
+//                }
+//            }
+//        }
+//        catch
+//        {
+//            print(error)
+//        }
+//    }
     
 }
