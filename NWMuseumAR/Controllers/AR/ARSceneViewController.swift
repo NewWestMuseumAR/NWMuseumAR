@@ -24,6 +24,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var detectedArtifact: String? = nil
     var isRestartAvailable = true
+    var overlayMode = false
     
     /// The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
@@ -79,6 +80,38 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func collectButton(_ sender: UIButton) {
         print("collect")
+        
+        handleTouch()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            self.collectItem()
+        }
+    }
+    
+    func collectItem() {
+        self.overlayBlurredBackgroundView()
+        overlayMode = true
+        
+        let continueButton = UIButton.init(type: .roundedRect)
+        continueButton.setTitle("Continue", for: .normal)
+        continueButton.addTarget(self, action: #selector(continueButtonClicked(_ :)), for: .touchUpInside)
+        self.view.addSubview(continueButton)
+    }
+    
+    @objc func continueButtonClicked(_ : UIButton) {
+        performSeque()
+    }
+    
+    func overlayBlurredBackgroundView() {
+//        self.definesPresentationContext = true
+//        self.providesPresentationContextTransitionStyle = true
+        
+        let blurredBackgroundView = UIVisualEffectView()
+        
+        blurredBackgroundView.frame = view.frame
+        blurredBackgroundView.effect = UIBlurEffect(style: .dark)
+        
+        view.addSubview(blurredBackgroundView)
+        
     }
 }
 
@@ -100,7 +133,8 @@ extension ARSceneViewController {
         let hitResults = sceneView.hitTest(location, options: nil)
         
         if hitResults.count > 0 {
-            handleTouch()
+            if (overlayMode) { return }
+//            handleTouch()
         }
     }
     
@@ -115,8 +149,9 @@ extension ARSceneViewController {
                         rotation: node.presentation.rotation)
         fadeAndRemoveNode(node: node, time: 0.5)
         
+        detectedArtifact = nil
+        
         Artifact.setComplete(withTitle: artifactSelected!, to: true)
-     
     }
 }
 
