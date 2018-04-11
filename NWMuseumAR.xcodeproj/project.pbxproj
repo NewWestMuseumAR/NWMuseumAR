@@ -18,6 +18,8 @@
 		845AA636207E0FF60096D9E3 /* ArtifactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AA635207E0FF60096D9E3 /* ArtifactCell.swift */; };
 		8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F6202E31F100733885 /* ProgressViewController.swift */; };
 		84646F4B207E8F3E00C77781 /* lottie_confetti_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 84646F4A207E8F3E00C77781 /* lottie_confetti_data.json */; };
+		84646F4D207E8FE200C77781 /* ArtifactDetailOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84646F4C207E8FE200C77781 /* ArtifactDetailOverlay.swift */; };
+		84646F4F207E8FF400C77781 /* ArtifactDetailOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84646F4E207E8FF400C77781 /* ArtifactDetailOverlay.xib */; };
 		8468ECC420647B2D002C8723 /* Navigation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8468ECC320647B2D002C8723 /* Navigation.storyboard */; };
 		847A2632207C703300D81192 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A2631207C703300D81192 /* PermissionService.swift */; };
 		848FBAAE20648F3D00E56D77 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAA220648F3D00E56D77 /* SCNVector3+Extensions.swift */; };
@@ -69,6 +71,8 @@
 		845AA635207E0FF60096D9E3 /* ArtifactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactCell.swift; sourceTree = "<group>"; };
 		8461B1F6202E31F100733885 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		84646F4A207E8F3E00C77781 /* lottie_confetti_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_confetti_data.json; sourceTree = "<group>"; };
+		84646F4C207E8FE200C77781 /* ArtifactDetailOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtifactDetailOverlay.swift; sourceTree = "<group>"; };
+		84646F4E207E8FF400C77781 /* ArtifactDetailOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtifactDetailOverlay.xib; sourceTree = "<group>"; };
 		8468ECC320647B2D002C8723 /* Navigation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Navigation.storyboard; sourceTree = "<group>"; };
 		847A2631207C703300D81192 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		848FBAA220648F3D00E56D77 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				8440260B202270B200AF5839 /* LaunchScreen.storyboard */,
 				8468ECC320647B2D002C8723 /* Navigation.storyboard */,
 				DD9BA272207DE84C008B826E /* OverlayView.xib */,
+				84646F4E207E8FF400C77781 /* ArtifactDetailOverlay.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 			children = (
 				8461B1F6202E31F100733885 /* ProgressViewController.swift */,
 				845AA635207E0FF60096D9E3 /* ArtifactCell.swift */,
+				84646F4C207E8FE200C77781 /* ArtifactDetailOverlay.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 				DD044B28207C325400BF20FD /* spark.png in Resources */,
 				DD9BA273207DE84C008B826E /* OverlayView.xib in Resources */,
 				8468ECC420647B2D002C8723 /* Navigation.storyboard in Resources */,
+				84646F4F207E8FF400C77781 /* ArtifactDetailOverlay.xib in Resources */,
 				84646F4B207E8F3E00C77781 /* lottie_confetti_data.json in Resources */,
 				8440260A202270B200AF5839 /* Assets.xcassets in Resources */,
 				DD044B29207C325400BF20FD /* Explosion.scnp in Resources */,
@@ -466,6 +473,7 @@
 				845AA636207E0FF60096D9E3 /* ArtifactCell.swift in Sources */,
 				848FBAB020648F3D00E56D77 /* SceneLocationEstimate+Extensions.swift in Sources */,
 				84E8CFA6206DFACE006B5FCB /* ARSceneViewController.swift in Sources */,
+				84646F4D207E8FE200C77781 /* ArtifactDetailOverlay.swift in Sources */,
 				847A2632207C703300D81192 /* PermissionService.swift in Sources */,
 				848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */,
 				84F650D3207D803D0019D1F4 /* SeedData.swift in Sources */,

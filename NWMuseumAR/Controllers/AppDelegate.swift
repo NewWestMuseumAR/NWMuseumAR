@@ -12,7 +12,7 @@ import ARKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     // MARK: - Core Data stack
@@ -27,11 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-    
+        
         let homeViewController: UIViewController
         
         // iOS 11.3 required, ARWorldTracking capable chip required
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 layout.scrollDirection = .horizontal
                 homeViewController = OnboardingController(collectionViewLayout: layout)
                 // TODO: - Remove this shit
-                //UserDefaults.standard.set(true, forKey: "launchedBefore")
+                UserDefaults.standard.set(true, forKey: "launchedBefore")
             }
             
             // seed database if not already seeded
@@ -60,12 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         } else {
+            fatalError("Device not supported")
             // TODO: - Set this to unsupported device controller
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
-            homeViewController = OnboardingController(collectionViewLayout: layout)
         }
-
+        
         // Show our starting controller to the user
         window!.rootViewController = homeViewController
         window!.makeKeyAndVisible()
@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func seedDatabase() {
         
         debugPrint("Seeding database")
-
+        
         for artifact in SEED_DATA {
             debugPrint(artifact)
             Artifact.save(withTitle: artifact["title"]!, hint: artifact["hint"]!, image: artifact["image"]!)
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         debugPrint("database seeded")
     }
-
+    
     func applicationWillTerminate(_ application: UIApplication) {
         self.saveContext()
     }

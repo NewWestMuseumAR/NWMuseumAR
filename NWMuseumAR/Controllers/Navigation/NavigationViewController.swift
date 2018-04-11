@@ -61,9 +61,9 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         navigationExitButton.addTarget(self, action: #selector(performSeque), for: .touchUpInside)
         navigationBar.addSubview(navigationExitButton)
-
         
-       
+        
+        
         
         updateInfoLabelTimer = Timer.scheduledTimer(
             timeInterval: 0.1,
@@ -90,12 +90,12 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             sceneLocationView.showFeaturePoints = true
         }
         self.view.addSubview(sceneLocationView)
-
+        
         rightArrowImageView?.frame = CGRect(x: screenWidth - 100, y: (screenHeight / 2) - 70, width: 70, height: 70)
         leftArrowImageView?.frame = CGRect(x: 10, y: (screenHeight / 2) - 70, width: 70, height: 70)
         
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
-
+        
         let test = UIView()
         test.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         test.addSubview(rightArrowImageView!)
@@ -109,7 +109,6 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             // Added
             mapView.showsUserLocation = true
             mapView.showsPointsOfInterest = true
-            locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
             mapView.isHidden = true
             view.addSubview(mapView)
