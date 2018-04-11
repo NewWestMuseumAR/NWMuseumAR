@@ -38,6 +38,8 @@
 		84E8CFA2206DF9DB006B5FCB /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 84E8CFA1206DF9DB006B5FCB /* .gitkeep */; };
 		84E8CFA6206DFACE006B5FCB /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */; };
 		84E8CFA8206DFED5006B5FCB /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8CFA7206DFED5006B5FCB /* StatusViewController.swift */; };
+		84F650D0207D7D020019D1F4 /* Artifact+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F650CF207D7D020019D1F4 /* Artifact+Extension.swift */; };
+		84F650D3207D803D0019D1F4 /* SeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F650D2207D803D0019D1F4 /* SeedData.swift */; };
 		D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D985EF362036D2B00072B377 /* ProgressCell.swift */; };
 		DD044B28207C325400BF20FD /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = DD044B26207C325400BF20FD /* spark.png */; };
 		DD044B29207C325400BF20FD /* Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = DD044B27207C325400BF20FD /* Explosion.scnp */; };
@@ -90,6 +92,8 @@
 		84E8CFA1206DF9DB006B5FCB /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
 		84E8CFA7206DFED5006B5FCB /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		84F650CF207D7D020019D1F4 /* Artifact+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artifact+Extension.swift"; sourceTree = "<group>"; };
+		84F650D2207D803D0019D1F4 /* SeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedData.swift; sourceTree = "<group>"; };
 		BBBE01153F70E483ABFCA655 /* Pods-NWMuseumAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.debug.xcconfig"; sourceTree = "<group>"; };
 		CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D985EF362036D2B00072B377 /* ProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 			children = (
 				840ADCCB202418D4004313A8 /* .gitkeep */,
 				84B1FC94207C297400387E94 /* NWMuseumAR.xcdatamodeld */,
+				84F650CF207D7D020019D1F4 /* Artifact+Extension.swift */,
+				84F650D2207D803D0019D1F4 /* SeedData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -463,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8489A84C2036308300243C26 /* EndTutorialViewController.swift in Sources */,
+				84F650D0207D7D020019D1F4 /* Artifact+Extension.swift in Sources */,
 				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
 				848FBAB720648F3D00E56D77 /* SCNNode+Extensions.swift in Sources */,
 				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
@@ -481,6 +488,7 @@
 				847A2632207C703300D81192 /* PermissionService.swift in Sources */,
 				8461B1F1202E2CFB00733885 /* TutorialPageViewController.swift in Sources */,
 				848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */,
+				84F650D3207D803D0019D1F4 /* SeedData.swift in Sources */,
 				848FBAB620648F3D00E56D77 /* LocationManager.swift in Sources */,
 				84E8CFA8206DFED5006B5FCB /* StatusViewController.swift in Sources */,
 				848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */,

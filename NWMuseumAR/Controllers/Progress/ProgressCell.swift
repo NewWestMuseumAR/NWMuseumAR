@@ -14,8 +14,7 @@ class ProgressCell: UITableViewCell {
     @IBOutlet weak var artifactDescription: UILabel!
     //Set the image view and label to display artifact information
     func setArtifact(artifact: Artifact) {
-        debugPrint(artifact.image)
-        artifactIcon.image = UIImage(named: artifact.image!)
+        artifactIcon.image = UIImage(named: artifact.title!)
         name = artifact.title!
         artifactDescription.text = "Completed: \(artifact.completed)"
     }

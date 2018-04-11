@@ -52,7 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let seeded = UserDefaults.standard.bool(forKey: "seeded")
             debugPrint("Seeded? \(seeded)")
             if !seeded {
-                debugPrint("Seeding database")
                 seedDatabase()
                 UserDefaults.standard.set(true, forKey: "seeded")
             }
@@ -70,39 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func seedDatabase() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        let canoe = Artifact(context: context)
-        canoe.title = "Canoe"
-        canoe.image = "canoe"
-        canoe.completed = false
+        debugPrint("Seeding database")
+
+        for artifact in SEED_DATA {
+            debugPrint(artifact)
+            Artifact.save(withTitle: artifact["title"]!, hint: artifact["hint"]!)
+        }
         
-        let fire = Artifact(context: context)
-        fire.title = "Fire"
-        fire.image = "fire"
-        fire.completed = false
-        
-        let freedom = Artifact(context: context)
-        freedom.title = "Freedom"
-        freedom.image = "freedom"
-        freedom.completed = false
-        
-        let proclamation = Artifact(context: context)
-        proclamation.title = "Proclamation"
-        proclamation.image = "proclamation"
-        proclamation.completed = false
-        
-        let train = Artifact(context: context)
-        train.title = "Train"
-        train.image = "train"
-        train.completed = false
-        
-        let wanted = Artifact(context: context)
-        wanted.title = "Wanted"
-        wanted.image = "wanted"
-        wanted.completed = false
-        
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         debugPrint("database seeded")
     }
 
