@@ -3,13 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4097920791D3386E1D90F316A3EF1FFB /* Pods-NWMuseumAR-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E61476D1AA3FEBC72F8DF63BA6F950D /* Pods-NWMuseumAR-dummy.m */; };
 		43619B86B384FADE9EF615BBC9FE9FD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		5F6F9D9E0FBA5209E056CBA34E97EEB5 /* Pods-NWMuseumAR-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BD03310BC21FDDC48CBBEDCB24AA6A49 /* Pods-NWMuseumAR-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,8 +15,8 @@
 		1E61476D1AA3FEBC72F8DF63BA6F950D /* Pods-NWMuseumAR-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NWMuseumAR-dummy.m"; sourceTree = "<group>"; };
 		3A82482B230EAB728AFE8156E0502C01 /* Pods-NWMuseumAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NWMuseumAR.release.xcconfig"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6CDB515A2236B5CB4CB9401064BEF278 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_NWMuseumAR.framework; path = "Pods-NWMuseumAR.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		6CDB515A2236B5CB4CB9401064BEF278 /* Pods_NWMuseumAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWMuseumAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93B43D270EACAC538CBDBDBBED0CBA3D /* Pods-NWMuseumAR-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NWMuseumAR-resources.sh"; sourceTree = "<group>"; };
 		9DE5C89A6EEE4A8681B22153AF930BF3 /* Pods-NWMuseumAR.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NWMuseumAR.modulemap"; sourceTree = "<group>"; };
 		A432FFE62244A458C40023E9CC2271DB /* Pods-NWMuseumAR-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NWMuseumAR-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F6F9D9E0FBA5209E056CBA34E97EEB5 /* Pods-NWMuseumAR-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +159,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4097920791D3386E1D90F316A3EF1FFB /* Pods-NWMuseumAR-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
