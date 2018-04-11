@@ -1,28 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ViewC Ontroller-->
-        <scene sceneID="tXr-a1-R10">
+        <!--Scene View Controller-->
+        <scene sceneID="nPP-g6-3Si">
             <objects>
-                <viewController storyboardIdentifier="camera" id="BV1-FR-VrT" customClass="ARViewCOntroller" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wD8-qj-Ep0">
+                <viewController storyboardIdentifier="arscene" id="RNr-b9-dAN" customClass="ARSceneViewController" customModule="NWMuseumAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="acZ-S3-OCL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkR-6N-1hn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xd-eb-gXO">
+                                <rect key="frame" x="334" y="40" width="30" height="39"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="22"/>
+                                <state key="normal" title="X"/>
+                                <connections>
+                                    <action selector="exitButton:" destination="RNr-b9-dAN" eventType="touchUpInside" id="BT0-MG-hlu"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="5pD-Af-nmo"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hkR-6N-1hn" secondAttribute="trailing" id="KW9-6b-fg4"/>
+                            <constraint firstItem="9Xd-eb-gXO" firstAttribute="top" secondItem="Efm-eH-0j7" secondAttribute="top" constant="20" id="KpW-LE-8ZF"/>
+                            <constraint firstItem="hkR-6N-1hn" firstAttribute="leading" secondItem="acZ-S3-OCL" secondAttribute="leading" id="MGI-Wa-6OF"/>
+                            <constraint firstAttribute="bottom" secondItem="hkR-6N-1hn" secondAttribute="bottom" id="N3s-JM-94r"/>
+                            <constraint firstItem="hkR-6N-1hn" firstAttribute="top" secondItem="acZ-S3-OCL" secondAttribute="top" id="gdG-VY-Kyn"/>
+                            <constraint firstItem="Efm-eH-0j7" firstAttribute="trailing" secondItem="9Xd-eb-gXO" secondAttribute="trailing" constant="11" id="nlJ-GG-Ot5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Efm-eH-0j7"/>
                     </view>
+                    <connections>
+                        <outlet property="sceneView" destination="hkR-6N-1hn" id="n7p-jy-57d"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qsU-Sm-WCF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1727" y="151"/>
+            <point key="canvasLocation" x="312.80000000000001" y="19.340329835082461"/>
         </scene>
     </scenes>
 </document>
