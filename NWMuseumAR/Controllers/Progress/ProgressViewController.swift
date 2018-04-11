@@ -191,8 +191,24 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         // Set detected artifact back to nil to disable click
     }
     
+    func dismissOverlay() {
+        
+        if let viewWithTag = self.view.viewWithTag(10) {
+            viewWithTag.removeFromSuperview()
+        }else{
+            print("No!")
+        }
+        
+        if let view = self.view.viewWithTag(100) {
+            view.removeFromSuperview()
+        }else{
+            print("No!")
+        }
+    }
+    
     func overlayBlurredBackgroundView() {
         let blurredBackgroundView = UIVisualEffectView()
+        blurredBackgroundView.tag = 100
         
         blurredBackgroundView.frame = view.frame
         blurredBackgroundView.effect = UIBlurEffect(style: .dark)
@@ -203,6 +219,7 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
     func instantiateOverlayContainer(artifactName: String) {
         overlayView = ArtifactDetailOverlay(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
         overlayView.artifact = artifactName
+        overlayView.tag = 10
         overlayView.image = UIImage.init(named: "" + artifactName + "Icon")
         overlayView.parentController = self
         view.addSubview(overlayView)
@@ -239,5 +256,11 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
     /** Sets the size of each cell. */
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 120)
+    }
+    
+    /** Hide Status Bar */
+    override var prefersStatusBarHidden: Bool
+    {
+        return true
     }
 }

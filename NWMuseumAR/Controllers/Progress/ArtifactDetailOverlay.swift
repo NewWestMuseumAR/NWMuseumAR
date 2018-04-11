@@ -26,7 +26,7 @@ class ArtifactDetailOverlay: UIView {
     @IBAction func continueButton(_ sender: Any) {
         performSeque()
     }
-    weak var parentController: UIViewController?
+    weak var parentController: ProgressViewController?
     
     var artifact: String? {
         get { return artifactTitleView?.text }
@@ -103,7 +103,6 @@ class ArtifactDetailOverlay: UIView {
     }
     
     func performSeque() {
-        let progressViewController = ProgressViewController()
-        parentController?.show(progressViewController, sender: nil)
+        self.parentController?.dismissOverlay()
     }
 }
