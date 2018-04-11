@@ -355,9 +355,9 @@ extension ARSceneViewController: ARSessionDelegate {
     }
     
     func performSeque() {
-        let parent = self.parent as! UIPageViewController
         
         let progressViewController = UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress") as! ProgressViewController
-        parent.setViewControllers([progressViewController], direction: .reverse, animated: true, completion: nil)
+        
+        show(progressViewController, sender: self)
     }
 }
