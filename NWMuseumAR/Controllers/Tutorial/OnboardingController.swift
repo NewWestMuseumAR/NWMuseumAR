@@ -16,7 +16,7 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         "Onboarding_2",
         "Onboarding_3",
         "Onboarding_4",
-        "Onboarding_5",
+        // "Onboarding_5",
         ]
     
     /** Onboarding titles. */
@@ -25,7 +25,7 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         "INTERACT",
         "HAVE FUN",
         "ACCESS",
-        "ACCESS"
+        // "ACCESS"
     ]
     
     /** Onboarding Subtitles. */
@@ -34,7 +34,7 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         "UNLOCK UNIQUE ARTIFACTS",
         "FIND ARTIFACTS WITH FRIENDS",
         "FOR THE FULL EXPERIENCE",
-        "ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
+        // "ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
     ]
     
     /** Prev Button */
@@ -163,17 +163,13 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         cell.titleTextView.text = titles[indexPath.item]
         cell.subtitleTextView.text = subtitles[indexPath.item]
         
-        if indexPath.row == icons.count - 1 {
-            permissionService?.requestCameraPermission()
-            permissionService?.requestLocationPermission()
-        }
-        
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == icons.count - 1 {
-            // Last cell is visible
+            permissionService?.requestCameraPermission()
+            permissionService?.requestLocationPermission()
         }
     }
     
