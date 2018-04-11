@@ -77,7 +77,7 @@ class ArtifactDetailOverlay: UIView {
         let animationView: LOTAnimationView = LOTAnimationView(name: "lottie_confetti_data")
         animationView.contentMode = .scaleAspectFill
         animationView.frame = CGRect(x: 0, y: 0, width: lottieView.frame.width, height: lottieView.frame.height)
-        lottieView.addSubview(animationView)
+        lottieView.insertSubview(animationView, at: 0)
         animationView.loopAnimation = true
         animationView.play()
     }
