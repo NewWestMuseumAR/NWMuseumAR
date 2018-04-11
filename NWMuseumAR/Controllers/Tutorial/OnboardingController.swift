@@ -166,7 +166,9 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        debugPrint("Cell \(indexPath.item)")
+        
         if indexPath.row == icons.count - 1 {
             permissionService?.requestCameraPermission()
             permissionService?.requestLocationPermission()
@@ -198,6 +200,15 @@ extension OnboardingController: PermissionServiceDelegate {
             print("Location Denied")
         case .camera:
             print("camera denied")
+            
+            DispatchQueue.main.async {
+                let indexPath = self.collectionView?.indexPathsForVisibleItems.first
+                let cell = self.collectionView?.cellForItem(at: indexPath!) as! OnboardingCell
+                
+                cell.tutorialImageView.image = UIImage(named: "Onboarding_5")
+                cell.titleTextView.text = "ACCESS"
+                cell.subtitleTextView.text = "ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
+            }
         }
     }
     
