@@ -208,21 +208,6 @@ extension ARSceneViewController: ARSessionDelegate {
         }
     }
     
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        guard error is ARError else { return }
-        
-        let errorWithInfo = error as NSError
-        let messages = [
-            errorWithInfo.localizedDescription,
-            errorWithInfo.localizedFailureReason,
-            errorWithInfo.localizedRecoverySuggestion
-        ]
-        
-        // Use `flatMap(_:)` to remove optional error messages.
-        let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
-    }
-
-    
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
         return true
     }
