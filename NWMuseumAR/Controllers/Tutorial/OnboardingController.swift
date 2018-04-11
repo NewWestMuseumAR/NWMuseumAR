@@ -16,7 +16,7 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         "Onboarding_2",
         "Onboarding_3",
         "Onboarding_4",
-        "Onboarding_5",
+        // "Onboarding_5",
         ]
     
     /** Onboarding titles. */
@@ -25,7 +25,7 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         "INTERACT",
         "HAVE FUN",
         "ACCESS",
-        "ACCESS"
+        // "ACCESS"
     ]
     
     /** Onboarding Subtitles. */
@@ -34,7 +34,7 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         "UNLOCK UNIQUE ARTIFACTS",
         "FIND ARTIFACTS WITH FRIENDS",
         "FOR THE FULL EXPERIENCE",
-        "ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
+        // "ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
     ]
     
     /** Prev Button */
@@ -163,17 +163,17 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         cell.titleTextView.text = titles[indexPath.item]
         cell.subtitleTextView.text = subtitles[indexPath.item]
         
-        if indexPath.row == icons.count - 1 {
-            permissionService?.requestCameraPermission()
-            permissionService?.requestLocationPermission()
-        }
-        
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        debugPrint("Cell \(indexPath.item)")
+        
         if indexPath.row == icons.count - 1 {
-            // Last cell is visible
+            if !permissionService!.cameraGranted {
+                permissionService?.requestCameraPermission()
+                permissionService?.requestLocationPermission()
+            }
         }
     }
     
@@ -202,6 +202,25 @@ extension OnboardingController: PermissionServiceDelegate {
             print("Location Denied")
         case .camera:
             print("camera denied")
+            
+            DispatchQueue.main.async {
+                let indexPath = self.collectionView?.indexPathsForVisibleItems.first
+                let cell = self.collectionView?.cellForItem(at: indexPath!) as! OnboardingCell
+                
+                cell.tutorialImageView.image = UIImage(named: "Onboarding_5")
+                cell.titleTextView.text = "ACCESS"
+                cell.subtitleTextView.text = "ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
+                
+                self.previousButton.isEnabled = false
+                self.previousButton.layer.opacity = 0
+                
+                self.nextButton.isEnabled = false
+                self.nextButton.layer.opacity = 0
+                
+                self.pageControl.layer.opacity = 0
+                
+                self.collectionView?.isScrollEnabled = false
+            }
         }
     }
     
