@@ -25,15 +25,19 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     
     var updateUserLocationTimer: Timer?
     
-    ///Whether to show a map view
-    ///The initial value is respected
+    var rightArrowImageName: String?
+    var rightArrowImage: UIImage?
+    var rightArrowImageView: UIImageView?
+
+    var leftArrowImageName: String?
+    var leftArrowImage: UIImage?
+    var leftArrowImageView: UIImageView?
+    
+    var directionToHead: String?
     var showMapView: Bool = true
     
     var centerMapOnUserLocation: Bool = true
     
-    ///Whether to display some debugging data
-    ///This currently displays the coordinate of the best location estimate
-    ///The initial value is respected
     var displayDebugging = false
     
     var infoLabel = UILabel()
@@ -46,12 +50,14 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
         infoLabel.font = UIFont.systemFont(ofSize: 10)
         infoLabel.textAlignment = .left
         infoLabel.textColor = UIColor.white
         infoLabel.numberOfLines = 0
         sceneLocationView.addSubview(infoLabel)
+        sceneLocationView.navigationDelegate = self
         
         updateInfoLabelTimer = Timer.scheduledTimer(
             timeInterval: 0.1,
@@ -59,30 +65,34 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             selector: #selector(self.updateInfoLabel),
             userInfo: nil,
             repeats: true)
-        
-        //Set to true to display an arrow which points north.
-        //Checkout the comments in the property description and on the readme on this.
-//        sceneLocationView.orientToTrueNorth = false
-        
-//        sceneLocationView.locationEstimateMethod = .coreLocationDataOnly
-        sceneLocationView.showAxesNode = true
+        sceneLocationView.showAxesNode = false
         sceneLocationView.locationDelegate = self
         
+        self.rightArrowImageName = "rightArrow.png"
+        self.leftArrowImageName = "leftArrow.png"
+
+        self.rightArrowImage = UIImage(named: self.rightArrowImageName!)
+        leftArrowImageView = UIImageView(image: self.rightArrowImage)
+        leftArrowImageView?.transform = CGAffineTransform(scaleX: -1, y: 1)
+        rightArrowImageView = UIImageView(image: self.rightArrowImage)
+
+        leftArrowImageView?.alpha = 0.7
+        rightArrowImageView?.alpha = 0.7
+        leftArrowImageView?.isHidden = true
+        rightArrowImageView?.isHidden = true
         if displayDebugging {
             sceneLocationView.showFeaturePoints = true
         }
+        self.view.addSubview(sceneLocationView)
         
-        //Added updated location 49.2489415,-122.9899965
-        // ,,15.61
-        let pinCoordinate = CLLocationCoordinate2D(latitude: 49.2545494, longitude: -123.1587709)
-        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
-        let pinImage = UIImage(named: "pin")!
-        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
-        
-        view.addSubview(sceneLocationView)
-        
-    
+        rightArrowImageView?.frame = CGRect(x: screenWidth - 80, y: (screenHeight / 2) - 70, width: 70, height: 70)
+        leftArrowImageView?.frame = CGRect(x: 10, y: (screenHeight / 2) - 70, width: 70, height: 70)
+
+        let test = UIView()
+        test.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        test.addSubview(rightArrowImageView!)
+        test.addSubview(leftArrowImageView!)
+        view.addSubview(test)
         
         if showMapView {
             mapView.delegate = self
@@ -93,17 +103,13 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             mapView.showsPointsOfInterest = true
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
-            
+            mapView.isHidden = false
             view.addSubview(mapView)
-            self.setUpGeofenceForPlayaGrandeBeach()
-            
-            //Added
+
             if CLLocationManager.locationServicesEnabled() {
                 locationManager.delegate = self
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager.startUpdatingLocation()
-//                locationManager.startUpdatingHeading()
-                print("lcoaitonManager" + locationManager.location.debugDescription)
             } else {
                 print("not enabled")
             }
@@ -117,10 +123,11 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         locationManager.stopUpdatingLocation()
         
         let sourceCoordinates = location.coordinate
-        //            let destCoordinates = CLLocationCoordinate2DMake(49.2489415, -122.9899965)
         
-        let destCoordinates = CLLocationCoordinate2DMake(49.249815, -123.148864)
-        
+        // Location defined to NewWestMinster Museum and Archives, City of NewWestMinster, B.C., Canada
+        let destCoordinates = CLLocationCoordinate2DMake(49.2008869,-122.9161565)
+        // TODO: Add Final Destination PIN to Museum after project merge
+
         let sourcePlacemark = MKPlacemark(coordinate: sourceCoordinates)
         let destPlacemark = MKPlacemark(coordinate: destCoordinates)
         
@@ -143,12 +150,8 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 
                 let rekt = route?.polyline.boundingMapRect
                 self.mapView.setRegion(MKCoordinateRegionForMapRect(rekt!), animated: true)
-                
-                //Added
-                var isFirst = true
-                
+
                 for route in response!.routes {
-                    
                     
                     print(route.steps.count)
                     
@@ -167,63 +170,15 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                             
                             if i == pointCount - 1 {
                                 self.addAnnotationAndLabelToCoordinate(withCoordinate: coord, text: step.instructions)
-                            } else {
-                                self.addAnnotationToCoordinate(withCoordinate: coord)
                             }
-                            print("step coordinate[\(i)] = \(coord.latitude),\(coord.longitude)")
-                        }
-                        
-                        //Adding first GEOFENCE
-                        isFirst = false
-                        if  isFirst && CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-                            
-                            // 2. region data
-                            let title = "Lorrenzillo's"
-                            let coordinate = CLLocationCoordinate2DMake(array[0].latitude, array[0].longitude)
-                            print("Lorenzillos lat " + String(coordinate.latitude))
-                            print("Lorenzillos lon " + String(coordinate.longitude))
-                            let regionRadius = 200.0
-                            
-                            // 3. setup region
-                            let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude,
-                                                                                         longitude: coordinate.longitude), radius: regionRadius, identifier: title)
-                            region.notifyOnExit = true;
-                            region.notifyOnEntry = true
-                            self.locationManager.startMonitoring(for: region)
-                            
-                            // 4. setup annotation
-                            let restaurantAnnotation = MKPointAnnotation()
-                            restaurantAnnotation.coordinate = coordinate;
-                            restaurantAnnotation.title = "\(title)";
-                            self.mapView.addAnnotation(restaurantAnnotation)
-                            //
-                        }
-                        else {
-                            print("System can't track regions")
                         }
                         array.deallocate(capacity: pointCount)
                     }
                 }
             }
         })
-        
-        //            updateUserLocationTimer = Timer.scheduledTimer(
-        //                timeInterval: 0.5,
-        //                target: self,
-        //                selector: #selector(ViewController.updateUserLocation),
-        //                userInfo: nil,
-        //                repeats: true)
     }
     
-
-    func setUpGeofenceForPlayaGrandeBeach() {
-
-        let geofenceRegionCenter = CLLocationCoordinate2DMake(49.257307,-123.152949);
-        let geofenceRegion = CLCircularRegion(center: geofenceRegionCenter, radius: 100.0, identifier: "The Restaurant");
-        geofenceRegion.notifyOnExit = true;
-        geofenceRegion.notifyOnEntry = true;
-        self.locationManager.startMonitoring(for: geofenceRegion)
-    }
 
     func addAnnotationAndLabelToCoordinate(withCoordinate coordinate: CLLocationCoordinate2D, text: String) {
         
@@ -232,6 +187,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         let annotationNode = LocationAnnotationNode(location: location, image: image)
         annotationNode.scaleRelativeToDistance = true
+        annotationNode.setText(text: text)
         
         let geoText = SCNText(string: text, extrusionDepth: 1.0)
         
@@ -260,35 +216,9 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
     }
-    
-    
-    //Added: for geofencing
-    // 1. user enter region
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            print("hello")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            print("goodbye")
-        }
-    }
 
     
-    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-        print("Monitoring failed for region with identifier: \(region!.identifier)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location Manager failed with the following error: \(error)")
-    }
-    
-    
-    
     //Added: This will return the overlay polylines
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer (overlay: overlay)
         renderer.strokeColor = UIColor.blue
@@ -350,9 +280,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 
                 if let bestEstimate = self.sceneLocationView.bestLocationEstimate(),
                     let position = self.sceneLocationView.currentScenePosition() {
-
                     let translation = bestEstimate.translatedLocation(to: position)
-                    
                 }
                 
                 if self.userAnnotation == nil {
@@ -394,63 +322,30 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         }
     }
     
+    /**
+    * Handles our directional arrows as well as updates current location and node location comparison.
+    */
     @objc func updateInfoLabel() {
-        if let position = sceneLocationView.currentScenePosition() {
-            infoLabel.text = "x: \(String(format: "%.2f", position.x)), y: \(String(format: "%.2f", position.y)), z: \(String(format: "%.2f", position.z))\n"
-        }
-        
-        if let eulerAngles = sceneLocationView.currentEulerAngles() {
-            infoLabel.text!.append("Euler x: \(String(format: "%.2f", eulerAngles.x)), y: \(String(format: "%.2f", eulerAngles.y)), z: \(String(format: "%.2f", eulerAngles.z))\n")
-        }
-        
-        if let heading = sceneLocationView.locationManager.heading,
-            let accuracy = sceneLocationView.locationManager.headingAccuracy {
-            infoLabel.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
-        }
-        
-        let date = Date()
-        let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: date)
-        
-        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
-            infoLabel.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
-        }
-        //ADDED: Call this to check the next node location with respect to the current location
-        sceneLocationView.checkLocVsNode()
-
-        
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        if let touch = touches.first {
-            if touch.view != nil {
-                if (mapView == touch.view! ||
-                    mapView.recursiveSubviews().contains(touch.view!)) {
-                    centerMapOnUserLocation = false
-                } else {
-                    
-                    let location = touch.location(in: self.view)
-
-                    if location.x <= 40 && adjustNorthByTappingSidesOfScreen {
-                        print("left side of the screen")
-                        sceneLocationView.moveSceneHeadingAntiClockwise()
-                    } else if location.x >= view.frame.size.width - 40 && adjustNorthByTappingSidesOfScreen {
-                        print("right side of the screen")
-                        sceneLocationView.moveSceneHeadingClockwise()
-                    } else {
-                        let image = UIImage(named: "pin")!
-                        let annotationNode = LocationAnnotationNode(location: nil, image: image)
-                        annotationNode.scaleRelativeToDistance = true
-                        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-                    }
-                }
+        if let leftRight = sceneLocationView.leftRightLabel {
+            switch leftRight {
+            case "Left":
+                leftArrowImageView?.isHidden = false
+                rightArrowImageView?.isHidden = true
+            case "Right":
+                leftArrowImageView?.isHidden = true
+                rightArrowImageView?.isHidden = false
+            case "Straight":
+                leftArrowImageView?.isHidden = true
+                rightArrowImageView?.isHidden = true
+            default:
+                leftArrowImageView?.isHidden = true
+                rightArrowImageView?.isHidden = true
             }
         }
+        sceneLocationView.checkLocVsNode()
     }
     
     //MARK: MKMapViewDelegate
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
@@ -513,6 +408,14 @@ extension UIView {
         }
         
         return recursiveSubviews
+    }
+}
+
+extension NavigationViewController: NavigationViewControllerDelegate {
+    
+    func userFinishedNavigation() {
+        let mainPage = ProgressViewController()
+        present(mainPage, animated: true)
     }
 }
 

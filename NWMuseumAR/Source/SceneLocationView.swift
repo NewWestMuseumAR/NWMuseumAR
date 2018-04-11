@@ -47,8 +47,26 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     //ADDED:
     var numOfNodes = 0
     var nodeToBeVisited = 0
+    
+    // Queue holding all nodes along path
     var activeLocationNodeQueue = Queue<LocationNode>()
+    
+    var navigationDelegate: NavigationViewControllerDelegate?
+    
+    // Logic Bool to determine it's the view code was called
+    var isFirstRun = true
+    
+    // Stores current node being compared to
+    var curNode = SCNNode()
 
+    // Label to be checked by NavigationViewController to deterine proper direction to point arrow
+    var leftRightLabel: String?
+    
+    // Storage variables for calculating bearings
+    var destBearing : Double?
+    var myBearing : Double?
+    var destBearingPrime : Double?
+    
     public weak var locationDelegate: SceneLocationViewDelegate?
     
     ///The method to use for determining locations.
@@ -60,6 +78,7 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     public var showAxesNode = false
     
     private(set) var locationNodes = [LocationNode]()
+    private(set) var locationNodeWithText = [LocationNode]()
     
     private var sceneLocationEstimates = [SceneLocationEstimate]()
     
@@ -293,7 +312,11 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         
         locationNodes.append(locationNode)
         var numOfNodes = locationNodes.count
-        sceneNode?.addChildNode(locationNode)
+        activeLocationNodeQueue.enqueue(locationNode)
+        
+        print("")
+        
+        //sceneNode?.addChildNode(locationNode)
     }
     
     public func removeLocationNode(locationNode: LocationNode) {
@@ -312,8 +335,6 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         
         for locationNode in locationNodes {
             if !locationNode.locationConfirmed {
-                print("confirmLocationOfDistantLocationNodes: ")
-
                 let currentPoint = CGPoint.pointWithVector(vector: currentPosition)
                 let locationNodePoint = CGPoint.pointWithVector(vector: locationNode.position)
                 
@@ -516,91 +537,134 @@ extension SceneLocationView: LocationManagerDelegate {
     }
 }
 
+protocol NavigationViewControllerDelegate {
+    
+    func userFinishedNavigation()
+}
+
 @available(iOS 11.0, *)
-extension SceneLocationView{
+extension SceneLocationView {
     
-    
-    //Need to ignore the first locaitonNode, as it appears to be garbage, like 300 meters from the starting point on the map... really weird
     func checkLocVsNode(){
-        print("checkLocVsNode: nodeToBeVisited " + String(describing: nodeToBeVisited))
-
-        print("checkLocVsNode: currentLoc " + String(describing: currentLocation()))
-
-        print("----------------------------------------------------------")
         
-        //Just added this for testing purposes to see if the Queue implementation actually works, which it does
-        // I was thinking of having a queue of like 5 points, and only showing those on the map
+        // 2PI Constant
+        let circle = 2 * Double.pi
+        
         if let currentLocation = currentLocation() {
-            if locationNodes.count > 5 {
-                activeLocationNodeQueue.enqueue(locationNodes[0])
-                activeLocationNodeQueue.enqueue(locationNodes[1])
-                activeLocationNodeQueue.enqueue(locationNodes[2])
-                activeLocationNodeQueue.enqueue(locationNodes[3])
-                activeLocationNodeQueue.enqueue(locationNodes[4])
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 1asdf" + String(describing: first.location))
-                }
-                
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 2asdf" + String(describing: first.location))
-                }
-                
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 3asdf" + String(describing: first.location))
-                }
-                
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 4asfd" + String(describing: first.location))
-                }
-                
-                if let first = activeLocationNodeQueue.dequeue() {
-                    print("deque 5asdf" + String(describing: first.location))
-                }
-                
-                print("deque size: " + String(describing: activeLocationNodeQueue.isEmpty))
-                if let nextNodetoVisit = locationNodes[2].location {
-                    print("checkLocVsNode: .count " + String(describing: locationNodes.count))
-                    print("checkLocVsNode: .nextNodetoVisit " + String(describing: nextNodetoVisit))
-                    print("checkLocVsNode: .location " + String(describing: locationNodes.count))
-                    
-                    if (compareTwoPos(a: currentLocation, b: nextNodetoVisit)){
-                        //removeLocationNode(locationNode: locationNodes[nodeToBeVisited])
-                        nodeToBeVisited = nodeToBeVisited + 1
-                        print("checkLocVsNode: Reached check success")
-                    }
-                }
+            let bearingTolerance = 55.0.degreesToRadians
+        
+            // Load node variables when function is first called
+            if isFirstRun && locationNodes.count > 1 {
+                let nextNode = self.activeLocationNodeQueue.peek()!
+                curNode = nextNode
+                self.sceneNode?.addChildNode(curNode)
+                isFirstRun = false
+                return
             }
             
+            if !activeLocationNodeQueue.isEmpty {
+                
+                // Update node queue and move onto next node on arrival to current node
+                if !isFirstRun && locationNodes.count > 1 {
+                    if distanceBetweenTwoPoints(a: (curNode as! LocationNode).location, b: currentLocation) < 5.0 {
+                        curNode.removeFromParentNode()
+                        let nextNode = self.activeLocationNodeQueue.dequeue()!
+                        curNode = nextNode
+                        self.sceneNode?.addChildNode(curNode)
+                    }
+                }
+                
+                // Handle location pointer to aid user in pointing device
+                myBearing = locationManager.heading?.degreesToRadians
+                destBearing = getBearingBetweenTwoCLLocations(point1: currentLocation, point2: (curNode as! LocationNode).location).degreesToRadians
+                let bearingDiff = deltaTwoAnglesNormalizedTo2Pi(heading: myBearing!, target: destBearing!)
+                let bearingTolerancePass = bearingDiff > bearingTolerance
+                destBearingPrime = (destBearing! + .pi).truncatingRemainder(dividingBy: circle)
+                if !bearingTolerancePass {
+                    self.leftRightLabel = "Straight"
+                } else {
+                    if myBearing! > destBearing! && destBearing! > destBearingPrime! {
+                        self.leftRightLabel = "Left"
+                    } else if myBearing! > destBearingPrime! {
+                        self.leftRightLabel = "Right"
+                    } else {
+                        self.leftRightLabel = "Left"
+                    }
+                }
+            } else if !isFirstRun {
+               navigationDelegate?.userFinishedNavigation()
+            }
         }
-        
-        
     }
     
-    func compareTwoPos(a: CLLocation, b: CLLocation) -> Bool {
-        // 0.000000000005 - Precision of current latlon points
-        
-        let distLat = abs(abs(a.coordinate.latitude) - abs(b.coordinate.latitude))
-        print("Converstion distLat" + String(describing: distLat))
-        //These distance values still need some work, I belive it is currently checking in like a 20 meter radius.
-        // At 40° north or south the distance between a degree of longitude is 53 miles (85 km)
-        if abs(abs(a.coordinate.latitude) - abs(b.coordinate.latitude)) > 0.00005 {
-            print("compareTwoPos xFail: ")
-            return false;
+    /**
+     * Finds the difference between two input angles. Range: 0...PI.
+    */
+    func deltaTwoRadianAnglesNormalizedToPi (heading: Double, target: Double) -> Double {
+        let mheading = heading
+        let mtarget = target
+        let phi = (abs(mtarget - mheading).truncatingRemainder(dividingBy: 2 * .pi))
+        if phi > .pi {
+            return 2 * .pi - phi
+        } else {
+            return phi
         }
-        let distLon = abs(abs(a.coordinate.longitude) - abs(b.coordinate.longitude))
-        if distLon > 0.00005 {
-            print("compareTwoPos yFail: ")
-            return false;
-        }
-        return true;
     }
     
-    // Started to make this converter, but I decided it wasn't wo
-    func degreeToMeterConverter(degreeChange: Double) -> Double {
-        let numOfKmPerDegreeChange = 85.0 // At 40° north or south the distance between a degree of longitude is 53 miles (85 km)
-        let conversion = 1000 * (degreeChange / numOfKmPerDegreeChange)
-        print("Converstion: " + String(describing: conversion))
-        return conversion
+    /**
+     * Finds the difference between two input angles. Range: 0...2PI.
+     */
+    func deltaTwoAnglesNormalizedTo2Pi (heading: Double, target: Double) -> Double {
+        let mheading = heading
+        let mtarget = target
+        let phi = (abs(mtarget - mheading).truncatingRemainder(dividingBy: 2 * .pi))
+        return phi
+    }
+
+    func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
+    func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
+    
+    /**
+     * Finds the bearing between two CLLocation points in radians.
+     */
+    func getBearingBetweenTwoCLLocations(point1 : CLLocation, point2 : CLLocation) -> Double {
+        let circle = 2 * Double.pi
+        let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
+        let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
+        
+        let lat2 = degreesToRadians(degrees: point2.coordinate.latitude)
+        let lon2 = degreesToRadians(degrees: point2.coordinate.longitude)
+        
+        let dLon = lon2 - lon1
+        
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        var radiansBearing = atan2(y, x)
+        radiansBearing = radiansBearing + circle
+        radiansBearing = radiansBearing.truncatingRemainder(dividingBy: circle)
+        
+        return radiansToDegrees(radians: radiansBearing)
+    }
+    
+    /**
+     * Finds the distance between two CLLocation points. Haversine method.
+     */
+    func distanceBetweenTwoPoints(a: CLLocation, b: CLLocation) -> Double {
+        let earthRadius = 6371000.0
+        let lat1Radian = Double(a.coordinate.latitude).degreesToRadians
+        let lat2Radian = Double(b.coordinate.latitude).degreesToRadians
+        
+        let lon1Radian = Double(b.coordinate.longitude).degreesToRadians
+        let lon2Radian = Double(b.coordinate.longitude).degreesToRadians
+        let deltaLat = abs(lat2Radian - lat1Radian)
+        let deltaLon = abs(lon2Radian - lon1Radian)
+        
+        let temp = sin(deltaLat / 2) * sin(deltaLat / 2) + cos(lat1Radian) * cos(lat2Radian) * sin(deltaLon / 2) * sin(deltaLon / 2)
+        
+        let temp2 = 2 * atan2(sqrt(temp), sqrt(1.0 - temp))
+        
+        let result = earthRadius * temp2
+        return result
     }
 }
 
@@ -628,3 +692,5 @@ public struct Queue<T> {
         return list.first?.value
     }
 }
+
+
