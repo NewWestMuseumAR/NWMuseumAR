@@ -171,7 +171,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                                 self.addAnnotationAndLabelToCoordinate(withCoordinate: coord, text: step.instructions)
                             }
                         }
-                        array.deallocate(capacity: pointCount)
+                        array.deallocate()
                     }
                 }
             }
@@ -279,7 +279,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 
                 if let bestEstimate = self.sceneLocationView.bestLocationEstimate(),
                     let position = self.sceneLocationView.currentScenePosition() {
-                    let translation = bestEstimate.translatedLocation(to: position)
+                    _ = bestEstimate.translatedLocation(to: position)
                 }
                 
                 if self.userAnnotation == nil {

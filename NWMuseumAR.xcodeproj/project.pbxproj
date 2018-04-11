@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		44430D8CAA387F56E486A460 /* Pods_NWMuseumAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCCFF4855AE209B0DF2CE63 /* Pods_NWMuseumAR.framework */; };
 		840ADCCC202418D4004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCB202418D4004313A8 /* .gitkeep */; };
-		840ADCD020241904004313A8 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 840ADCCF20241904004313A8 /* .gitkeep */; };
 		84402601202270B200AF5839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84402600202270B200AF5839 /* AppDelegate.swift */; };
 		84402603202270B200AF5839 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402602202270B200AF5839 /* art.scnassets */; };
 		8440260A202270B200AF5839 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402609202270B200AF5839 /* Assets.xcassets */; };
@@ -33,7 +32,6 @@
 		848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAAD20648F3D00E56D77 /* LinkedList.swift */; };
 		848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FBAB920648F4700E56D77 /* NavigationViewController.swift */; };
 		84B1FC96207C297400387E94 /* NWMuseumAR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84B1FC94207C297400387E94 /* NWMuseumAR.xcdatamodeld */; };
-		84E8CFA2206DF9DB006B5FCB /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 84E8CFA1206DF9DB006B5FCB /* .gitkeep */; };
 		84E8CFA6206DFACE006B5FCB /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */; };
 		84F650D0207D7D020019D1F4 /* Artifact+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F650CF207D7D020019D1F4 /* Artifact+Extension.swift */; };
 		84F650D3207D803D0019D1F4 /* SeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F650D2207D803D0019D1F4 /* SeedData.swift */; };
@@ -59,7 +57,6 @@
 /* Begin PBXFileReference section */
 		4184AB7EBD446A16478DA598 /* Pods-NWMuseumAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWMuseumAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-NWMuseumAR/Pods-NWMuseumAR.release.xcconfig"; sourceTree = "<group>"; };
 		840ADCCB202418D4004313A8 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		840ADCCF20241904004313A8 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		844025FD202270B200AF5839 /* NWMuseumAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWMuseumAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84402600202270B200AF5839 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84402602202270B200AF5839 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -86,7 +83,6 @@
 		848FBAAD20648F3D00E56D77 /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		848FBAB920648F4700E56D77 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		84B1FC95207C297400387E94 /* NWMuseumAR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NWMuseumAR.xcdatamodel; sourceTree = "<group>"; };
-		84E8CFA1206DF9DB006B5FCB /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
 		84F650CF207D7D020019D1F4 /* Artifact+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artifact+Extension.swift"; sourceTree = "<group>"; };
 		84F650D2207D803D0019D1F4 /* SeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedData.swift; sourceTree = "<group>"; };
@@ -168,7 +164,6 @@
 				844026162022710900AF5839 /* Models */,
 				844026182022711B00AF5839 /* Controllers */,
 				844026172022711300AF5839 /* Views */,
-				844026192022712000AF5839 /* Libs */,
 				8440261A2022712600AF5839 /* Scripts */,
 				84402602202270B200AF5839 /* art.scnassets */,
 				84402609202270B200AF5839 /* Assets.xcassets */,
@@ -212,18 +207,9 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		844026192022712000AF5839 /* Libs */ = {
-			isa = PBXGroup;
-			children = (
-				84E8CFA1206DF9DB006B5FCB /* .gitkeep */,
-			);
-			path = Libs;
-			sourceTree = "<group>";
-		};
 		8440261A2022712600AF5839 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				840ADCCF20241904004313A8 /* .gitkeep */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -393,8 +379,6 @@
 				DD9BA273207DE84C008B826E /* OverlayView.xib in Resources */,
 				8468ECC420647B2D002C8723 /* Navigation.storyboard in Resources */,
 				8440260A202270B200AF5839 /* Assets.xcassets in Resources */,
-				840ADCD020241904004313A8 /* .gitkeep in Resources */,
-				84E8CFA2206DF9DB006B5FCB /* .gitkeep in Resources */,
 				DD044B29207C325400BF20FD /* Explosion.scnp in Resources */,
 				9EF7A1A2207DC30D00D126FD /* Fire.mp4 in Resources */,
 			);
@@ -624,14 +608,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F665AXEWKQ;
 				ENABLE_BITCODE = NO;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/lib/arm",
-				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.comp4977.NWMuseumAR1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -648,14 +628,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F665AXEWKQ;
 				ENABLE_BITCODE = NO;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/lib/arm",
-				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bcit.comp4977.NWMuseumAR1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

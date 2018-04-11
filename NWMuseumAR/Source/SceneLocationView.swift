@@ -311,7 +311,7 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         updatePositionAndScaleOfLocationNode(locationNode: locationNode, initialSetup: true, animated: false)
         
         locationNodes.append(locationNode)
-        var numOfNodes = locationNodes.count
+        _ = locationNodes.count
         activeLocationNodeQueue.enqueue(locationNode)
         
         print("")
