@@ -11,21 +11,14 @@ import ARKit
 
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
-    // MARK: - Basic Debugging Options
-    let IS_DEBUG: Bool = true
-    
     // MARK: - UI Outlets
     @IBOutlet weak var sceneView: ARSCNView!
     
-    // The artifact passed from the progress view controller
-    var artifactSelected: String?
+    var targetArtifactName: String?
+    var userDetectedArtifact: Bool = false
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var detectedArtifact: String? = nil
-    var isRestartAvailable = true
     var overlayMode = false
     var overlayView: OverlayView!
-    
     
     /// A serial queue for thread safety when modifying the SceneKit node graph.
     let updateQueue = DispatchQueue(label: Bundle.main.bundleIdentifier! +
@@ -71,7 +64,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func collectButton(_ sender: UIButton) {
         // don't allow click if nothing collected
-        if (detectedArtifact == nil) { return }
+        if (!userDetectedArtifact) { return }
         
         handleTouch()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
@@ -86,7 +79,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         instantiateOverlayContainer()
         
         // Set detected artifact back to nil to disable click
-        detectedArtifact = nil
+        userDetectedArtifact = false
     }
     
     @objc func continueButtonClicked(_ : UIButton) {
@@ -115,7 +108,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 extension ARSceneViewController {
     /// - Tag: Handling the touch event
     func handleTouch() {
-        if detectedArtifact == nil { return }
+        if userDetectedArtifact == nil { return }
         
         let node = sceneView.scene.rootNode.childNode(withName: "coin", recursively: true)!
 
@@ -123,9 +116,9 @@ extension ARSceneViewController {
                         rotation: node.presentation.rotation)
         fadeAndRemoveNode(node: node, time: 0.5)
         
-        detectedArtifact = nil
+        userDetectedArtifact = false
         
-        Artifact.setComplete(withTitle: artifactSelected!, to: true)
+        Artifact.setComplete(withTitle: targetArtifactName!, to: true)
     }
 }
 
@@ -211,10 +204,6 @@ extension ARSceneViewController: ARSessionDelegate {
         sceneView.delegate = self
         sceneView.session.delegate = self
         sceneView.automaticallyUpdatesLighting = true
-        
-        if IS_DEBUG {
-            sceneView.debugOptions =  [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-        }
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
@@ -239,12 +228,12 @@ extension ARSceneViewController: ARSessionDelegate {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
         
-        if IS_DEBUG {
-            artifactSelected = "Github Logo"
-        }
+//        if IS_DEBUG {
+//            targetArtifactName = "Github Logo"
+//        }
         
-        if referenceImage.name != artifactSelected {
-            debugPrint("\(referenceImage.name!) is not a match for \(artifactSelected!). Exiting.")
+        if referenceImage.name != targetArtifactName {
+            debugPrint("\(referenceImage.name!) is not a match for \(targetArtifactName!). Exiting.")
             return
         }
         
@@ -254,12 +243,12 @@ extension ARSceneViewController: ARSessionDelegate {
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
             
-            if self.IS_DEBUG {
-                self.addVideo(node: node, plane: plane, video: "notebook")
-            }
+//            if self.IS_DEBUG {
+//                self.addVideo(node: node, plane: plane, video: "notebook")
+//            }
             
-            if self.artifactSelected == "notebook" || self.artifactSelected == "Fire" {
-                self.addVideo(node: node, plane: plane, video: self.artifactSelected!)
+            if self.targetArtifactName == "notebook" || self.targetArtifactName == "Fire" {
+                self.addVideo(node: node, plane: plane, video: self.targetArtifactName!)
             }
             
             let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
@@ -275,21 +264,7 @@ extension ARSceneViewController: ARSessionDelegate {
         
         DispatchQueue.main.async {
             let imageName = referenceImage.name ?? ""
-            self.detectedArtifact = imageName
-        }
-    }
-    
-    // MARK: - Interface Actions
-    /// - Tag: Restart the entire AR session along with tracking
-    func restartExperience() {
-        guard isRestartAvailable else { return }
-        isRestartAvailable = false
-        
-        resetTracking()
-        
-        // Disable restart for a while in order to give the session time to restart.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            self.isRestartAvailable = true
+            self.userDetectedArtifact = true
         }
     }
     

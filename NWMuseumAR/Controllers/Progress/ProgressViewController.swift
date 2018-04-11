@@ -64,7 +64,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     func performSegue(withArtifactTitle title: String) {
         
         let arViewController = UIStoryboard(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "arscene") as! ARSceneViewController
-        arViewController.artifactSelected = title
+        arViewController.targetArtifactName = title
         
         show(arViewController, sender: self)
     }
