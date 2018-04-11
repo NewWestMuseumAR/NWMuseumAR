@@ -13,7 +13,6 @@ class ProgressViewController: UIViewController {
 
     // MARK: - TableView data creation
     @IBOutlet weak var tableView: UITableView!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var artifacts: [Artifact] = []
     
@@ -34,15 +33,8 @@ class ProgressViewController: UIViewController {
     //This will be replaced by database of some sort later on
     func getArtifacts()
     {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Artifact")
-        
-        do {
-            artifacts = try context.fetch(fetchRequest) as! [Artifact]
-            debugPrint(artifacts)
-            self.tableView.reloadData()
-        }catch let err as NSError {
-            print(err.debugDescription)
-        }
+        artifacts = Artifact.getAll()
+        self.tableView.reloadData()
     }
 }
 
