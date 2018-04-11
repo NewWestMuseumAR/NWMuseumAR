@@ -72,6 +72,16 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         session.pause()
     }
+    @IBAction func exitButton(_ sender: UIButton) {
+        let parent = self.parent as! UIPageViewController
+        
+        let progressViewController = UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress") as! ProgressViewController
+        parent.setViewControllers([progressViewController], direction: .reverse, animated: true, completion: nil)
+    }
+    
+    @IBAction func collectButton(_ sender: UIButton) {
+        print("collect")
+    }
 }
 
 // MARK: - Touch Handling

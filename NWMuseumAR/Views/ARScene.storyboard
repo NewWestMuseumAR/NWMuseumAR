@@ -31,16 +31,39 @@
                                     <segue destination="hTV-pz-2Mc" kind="embed" id="3rS-Ex-9tx"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6X-Jq-jv7">
+                                <rect key="frame" x="28" y="617" width="318" height="30"/>
+                                <color key="backgroundColor" red="0.53879171068817855" green="0.87543130928262858" blue="1" alpha="0.63366527288732399" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Collect">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="collectButton:" destination="RNr-b9-dAN" eventType="touchUpInside" id="wFY-Ss-pPF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xd-eb-gXO">
+                                <rect key="frame" x="334" y="40" width="30" height="39"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="22"/>
+                                <state key="normal" title="X"/>
+                                <connections>
+                                    <action selector="exitButton:" destination="RNr-b9-dAN" eventType="touchUpInside" id="BT0-MG-hlu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Efm-eH-0j7" firstAttribute="trailing" secondItem="J6X-Jq-jv7" secondAttribute="trailing" constant="29" id="5X9-ji-9ZZ"/>
                             <constraint firstAttribute="trailing" secondItem="hkR-6N-1hn" secondAttribute="trailing" id="KW9-6b-fg4"/>
+                            <constraint firstItem="9Xd-eb-gXO" firstAttribute="top" secondItem="Efm-eH-0j7" secondAttribute="top" constant="20" id="KpW-LE-8ZF"/>
                             <constraint firstItem="hkR-6N-1hn" firstAttribute="leading" secondItem="acZ-S3-OCL" secondAttribute="leading" id="MGI-Wa-6OF"/>
                             <constraint firstAttribute="bottom" secondItem="hkR-6N-1hn" secondAttribute="bottom" id="N3s-JM-94r"/>
+                            <constraint firstItem="Efm-eH-0j7" firstAttribute="bottom" secondItem="J6X-Jq-jv7" secondAttribute="bottom" constant="20" id="QO6-M6-jB8"/>
                             <constraint firstItem="Efm-eH-0j7" firstAttribute="trailing" secondItem="Iew-Qa-XPU" secondAttribute="trailing" id="SsC-kb-e9r"/>
                             <constraint firstItem="Iew-Qa-XPU" firstAttribute="leading" secondItem="Efm-eH-0j7" secondAttribute="leading" id="ZQN-aw-C3Y"/>
                             <constraint firstItem="hkR-6N-1hn" firstAttribute="top" secondItem="acZ-S3-OCL" secondAttribute="top" id="gdG-VY-Kyn"/>
                             <constraint firstItem="Iew-Qa-XPU" firstAttribute="top" secondItem="Efm-eH-0j7" secondAttribute="top" id="hoE-hu-bkd"/>
+                            <constraint firstItem="Efm-eH-0j7" firstAttribute="trailing" secondItem="9Xd-eb-gXO" secondAttribute="trailing" constant="11" id="nlJ-GG-Ot5"/>
+                            <constraint firstItem="J6X-Jq-jv7" firstAttribute="leading" secondItem="Efm-eH-0j7" secondAttribute="leading" constant="28" id="v32-P0-aBn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Efm-eH-0j7"/>
                     </view>
