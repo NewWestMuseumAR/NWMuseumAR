@@ -88,7 +88,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         rightArrowImageView?.frame = CGRect(x: screenWidth - 100, y: (screenHeight / 2) - 70, width: 70, height: 70)
         leftArrowImageView?.frame = CGRect(x: 10, y: (screenHeight / 2) - 70, width: 70, height: 70)
         
-        var myTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
 
         let test = UIView()
         test.frame = CGRect(x: 0, y: 0, width: 100, height: 100)

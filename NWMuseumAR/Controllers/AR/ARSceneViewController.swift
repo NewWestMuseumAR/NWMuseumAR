@@ -44,12 +44,37 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         // Prevent the screen from being dimmed to avoid interuppting the AR experience.
         UIApplication.shared.isIdleTimerDisabled = true
         
+        self.view.addSubview(navigationBar)
+
         // Start the AR experience
         resetTracking()
         
         guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }
+        
+        navigationExitButton.addTarget(self, action: #selector(performSeque), for: .touchUpInside)
+        navigationBar.addSubview(navigationExitButton)
+        
+        NSLayoutConstraint.activate([
+            // Scene View
+            sceneView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            sceneView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            sceneView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            sceneView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            
+            // Navigation Bar Container
+            navigationBar.leftAnchor.constraint(equalTo: view.leftAnchor),
+            navigationBar.rightAnchor.constraint(equalTo: view.rightAnchor),
+            navigationBar.topAnchor.constraint(equalTo: view.topAnchor),
+            navigationBar.heightAnchor.constraint(equalToConstant: 60),
+            
+            // Nav Exit Button
+            navigationExitButton.rightAnchor.constraint(equalTo: navigationBar.rightAnchor, constant: -14),
+            navigationExitButton.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 14),
+            navigationExitButton.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: -14),
+            navigationExitButton.widthAnchor.constraint(equalToConstant: 60)
+            ])
         
         let configuration = ARWorldTrackingConfiguration()
         configuration.detectionImages = referenceImages
@@ -63,6 +88,32 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func exitButton(_ sender: UIButton) {
         performSeque()
+    }
+    
+    /** Navigation Bar Overlay */
+    let navigationBar: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.frame = CGRect(x: 0, y: 0, width: 100, height: 60)
+        view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.17, alpha: 1.0)
+        return view
+    }()
+    
+    /** Navigation Exit Button */
+    let navigationExitButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        button.setImage(#imageLiteral(resourceName: "Exit Icon"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
+    
+    @objc func performSeque() {
+        
+        let progressViewController = ProgressViewController()
+        
+        show(progressViewController, sender: self)
     }
     
     func showOverlay() {
@@ -289,10 +340,9 @@ extension ARSceneViewController: ARSessionDelegate {
         debugPrint("Leaving \(#function)")
     }
     
-    func performSeque() {
-        
-        let progressViewController = ProgressViewController()
-        
-        show(progressViewController, sender: self)
+    /** Hide Status Bar */
+    override var prefersStatusBarHidden: Bool
+    {
+        return true
     }
 }
