@@ -21,6 +21,8 @@ class ArtifactDetailOverlay: UIView {
     @IBOutlet weak var artifactTitleView: UILabel!
     @IBOutlet weak var artifactImageView: UIImageView!
     
+    var artifactDescription: String?
+    
     // title.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.heavy)
     
     @IBAction func continueButton(_ sender: Any) {
@@ -50,7 +52,7 @@ class ArtifactDetailOverlay: UIView {
     
     func initSubviews() {
         // standard initialization logic
-        let nib = UINib(nibName: "OverlayView", bundle: nil)
+        let nib = UINib(nibName: "ArtifactDetailView", bundle: nil)
         nib.instantiate(withOwner: self, options: nil)
         contentView.frame = bounds
         addSubview(contentView)
@@ -100,6 +102,7 @@ class ArtifactDetailOverlay: UIView {
         contButton.setTitleColor(UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0), for: .normal)
         contButton.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1.0)
         contButton.layer.cornerRadius = 24
+        contButton.setTitle("Back", for: .normal)
     }
     
     func performSeque() {

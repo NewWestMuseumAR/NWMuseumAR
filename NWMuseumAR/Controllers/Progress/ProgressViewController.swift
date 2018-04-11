@@ -12,52 +12,8 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var artifacts: [Artifact]?
     
-    /** Artifact Images */
-    let images = [
-        "ARTIFACT - Wayfinding",
-        "ARTIFACT - Train",
-        "ARTIFACT - Wanted",
-        "ARTIFACT - Fire",
-        "ARTIFACT - Canoe",
-        "ARTIFACT - Proclamation",
-        "ARTIFACT - Freedom",
-        ]
-    
-    /** Artifact Titles */
-    let titles = [
-        "WAYFINDING",
-        "FIRE",
-        "TRAIN",
-        "WANTED",
-        "CANOE",
-        "DOCUMENT",
-        "FIRE",
-        ]
-    
-    /** Artifact Subtitles */
-    let subtitles = [
-        "GET TO THE MUSEUM",
-        "COLLECTED",
-        "TAP FOR A HINT",
-        "TAP FOR A HINT",
-        "TAP FOR A HINT",
-        "TAP FOR A HINT",
-        "TAP FOR A HINT",
-        ]
-    
-    /** Artifact Status */
-    let status = [
-        "WAYFINDING",
-        "UNLOCKED",
-        "LOCKED",
-        "LOCKED",
-        "LOCKED",
-        "LOCKED",
-        "LOCKED",
-        ]
-    
     var overlayMode = false
-    var overlayView: ArtifactDetailOverlay!
+    var overlayView: ArtifactDetailOverlay?
     
     /** View Loaded */
     override func viewDidLoad()
@@ -182,11 +138,11 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
             ])
     }
     
-    func showOverlay(artifactName: String) {
+    func showOverlay(artifactName: String, description: String) {
         self.overlayBlurredBackgroundView()
         overlayMode = true
         
-        instantiateOverlayContainer(artifactName: artifactName)
+        instantiateOverlayContainer(artifactName: artifactName, description: description)
         
         // Set detected artifact back to nil to disable click
     }
@@ -216,13 +172,16 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         view.addSubview(blurredBackgroundView)
     }
     
-    func instantiateOverlayContainer(artifactName: String) {
+    func instantiateOverlayContainer(artifactName: String, description: String) {
         overlayView = ArtifactDetailOverlay(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        overlayView.artifact = artifactName
-        overlayView.tag = 10
-        overlayView.image = UIImage.init(named: "" + artifactName + "Icon")
-        overlayView.parentController = self
-        view.addSubview(overlayView)
+        overlayView!.artifact = artifactName
+        overlayView!.artifactDescription = description
+        overlayView!.tag = 10
+        overlayView!.image = UIImage.init(named: "" + artifactName + "Icon")
+        overlayView!.parentController = self
+        overlayView?.victoryMessageView.text = description
+        debugPrint(description)
+        view.addSubview(overlayView!)
     }
     
     /** Sets the spacing between collection views. */
@@ -240,13 +199,15 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! ArtifactCell
         
         let artifact = artifacts![indexPath.item]
+        debugPrint(artifact.hint!)
         cell.completed = artifact.completed
         cell.imageName = artifact.title
         
         // Assign artifact details here.
         cell.artifactIcon.image = UIImage(named: artifact.image!)
         cell.artifactTitle.text = artifact.title?.uppercased()
-        cell.artifactSubtitle.text = artifact.completed ? "COLLECTED" : "TAP FOR A HINT"
+        cell.artifactDescription = artifact.hint!
+        cell.artifactSubtitle.text = artifact.completed ? "COLLECTED" : "SCAN TO UNLOCK"
         cell.backgroundColor = UIColor(red: 0.97, green: 0.96, blue: 0.98, alpha: 1.0)
         cell.parentViewController = self
         cell.setupLayout()

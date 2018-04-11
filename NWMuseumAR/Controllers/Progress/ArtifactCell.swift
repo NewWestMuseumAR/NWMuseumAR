@@ -13,6 +13,7 @@ class ArtifactCell: UICollectionViewCell
     var parentViewController: ProgressViewController?
     var completed = false
     var imageName: String?
+    var artifactDescription: String?
     
     /** Artifact Image  */
     let artifactIcon: UIImageView = {
@@ -155,7 +156,8 @@ class ArtifactCell: UICollectionViewCell
     }
     
     @objc func unlockedButtonTapped() {
-        self.parentViewController?.showOverlay(artifactName: imageName!)
+        debugPrint("Unlock button tapped \(artifactDescription)")
+        self.parentViewController?.showOverlay(artifactName: imageName!, description: artifactDescription!)
     }
     
     /** Setup layout for artifact cell. */
