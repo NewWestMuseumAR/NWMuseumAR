@@ -13,7 +13,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - Basic Debugging Options
     let IS_DEBUG: Bool = false
-    var IS_VIDEO: Bool = false
+    var IS_VIDEO: Bool = true
     
     // MARK: - UI Outlets
     @IBOutlet weak var sceneView: ARSCNView!
@@ -103,7 +103,7 @@ extension ARSceneViewController {
         let node = sceneView.scene.rootNode.childNode(withName: "artifact", recursively: true)
         
         if (node != nil) {
-            createExplosion(node: node!, geometry: node!.geometry!, position: node!.presentation.position,
+            createExplosion(node: node!, position: node!.presentation.position,
                             rotation: node!.presentation.rotation)
         }
     }
@@ -113,10 +113,9 @@ extension ARSceneViewController {
 extension ARSceneViewController {
     
     /// - Tag: Explosion - triggered on touching of node!
-    func createExplosion(node: SCNNode, geometry: SCNGeometry, position: SCNVector3,
+    func createExplosion(node: SCNNode, position: SCNVector3,
                          rotation: SCNVector4) {
         let explosion = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!
-        explosion.emitterShape = geometry
         explosion.birthLocation = .surface
         
         node.addParticleSystem(explosion)
@@ -273,6 +272,8 @@ extension ARSceneViewController: ARSessionDelegate {
                 
                 coin.rootNode.runAction(moveLoop)
                 coin.rootNode.runAction(spinLoop)
+                
+                coin.rootNode.name = "artifact"
                 
                 node.addChildNode(coin.rootNode)
             }
