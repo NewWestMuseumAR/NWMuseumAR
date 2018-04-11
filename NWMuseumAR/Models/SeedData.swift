@@ -10,10 +10,10 @@ import Foundation
 
 let SEED_DATA = [
     ["title": "Wayfinding", "hint": "Dont matter", "image": "WayfindingIcon"],
-    ["title": "Canoe", "hint": "Look for the fucking canoe", "image": "CanoeIcon"],
-    ["title": "Fire", "hint": "Look for the fucking Fire", "image": "FireIcon"],
-    ["title": "Freedom", "hint": "Look for the fucking Freedom", "image": "FreedomIcon"],
-    ["title": "Capital", "hint": "Look for the fucking Procl...", "image": "CapitalIcon"],
-    ["title": "Train", "hint": "Look for the fucking train", "image": "TrainIcon"],
-    ["title": "Wanted", "hint": "Look for the fucking wanted", "image": "WantedIcon"],
+    ["title": "Canoe", "hint": "The canoes have braved the Fraser River countless times.", "image": "CanoeIcon"],
+    ["title": "Fire", "hint": "The Great Fire of New Westminster that destroyed most of the town", "image": "FireIcon"],
+    ["title": "Freedom", "hint": "Freedom granted to Ernest Alvia Smith V.C.", "image": "FreedomIcon"],
+    ["title": "Capital", "hint": "New Westminster becomes the capital of BC", "image": "CapitalIcon"],
+    ["title": "Train", "hint": "The first train to cross the bridge!", "image": "TrainIcon"],
+    ["title": "Wanted", "hint": "Wanted: Train robber, reward: $500", "image": "WantedIcon"],
 ]

@@ -10,9 +10,10 @@ import UIKit
 
 class ArtifactCell: UICollectionViewCell
 {
-    var parentViewController: UIViewController?
+    var parentViewController: ProgressViewController?
     var completed = false
     var imageName: String?
+    var artifactDescription: String?
     
     /** Artifact Image  */
     let artifactIcon: UIImageView = {
@@ -154,6 +155,11 @@ class ArtifactCell: UICollectionViewCell
         parentViewController?.show(viewController, sender: self)
     }
     
+    @objc func unlockedButtonTapped() {
+        debugPrint("Unlock button tapped \(artifactDescription)")
+        self.parentViewController?.showOverlay(artifactName: imageName!, description: artifactDescription!)
+    }
+    
     /** Setup layout for artifact cell. */
     func setupLayout()
     {
@@ -174,7 +180,7 @@ class ArtifactCell: UICollectionViewCell
         } else {
             artifactButton = artifactButtonUnlocked
             artifactStatusIcon.image = #imageLiteral(resourceName: "Unlocked")
-            //artifactButton?.addTarget(self, action: #selector(lockedButtonTapped), for: .touchUpInside)
+            artifactButton?.addTarget(self, action: #selector(unlockedButtonTapped), for: .touchUpInside)
         }
 
         
