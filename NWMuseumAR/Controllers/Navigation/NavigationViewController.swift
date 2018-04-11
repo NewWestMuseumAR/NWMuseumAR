@@ -32,8 +32,8 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     var leftArrowImageName: String?
     var leftArrowImage: UIImage?
     var leftArrowImageView: UIImageView?
-    ///Whether to show a map view
-    ///The initial value is respected
+    
+    var directionToHead: String?
     var showMapView: Bool = true
     
     var centerMapOnUserLocation: Bool = true
@@ -50,7 +50,8 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
         infoLabel.font = UIFont.systemFont(ofSize: 10)
         infoLabel.textAlignment = .left
         infoLabel.textColor = UIColor.white
@@ -67,24 +68,32 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         sceneLocationView.showAxesNode = true
         sceneLocationView.locationDelegate = self
         
-        self.rightArrowImageName = "rightArrow.pdf"
-        self.leftArrowImageName = "leftArrow.pdf"
+        self.rightArrowImageName = "rightArrow.png"
+        self.leftArrowImageName = "leftArrow.png"
 
         self.rightArrowImage = UIImage(named: self.rightArrowImageName!)
-        self.leftArrowImage = UIImage(named: self.leftArrowImageName!)
-        
-        leftArrowImageView?.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
-        rightArrowImageView?.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
-        self.view.addSubview(leftArrowImageView!)
-        self.view.addSubview(rightArrowImageView!)
+        leftArrowImageView = UIImageView(image: self.rightArrowImage)
+        leftArrowImageView?.transform = CGAffineTransform(scaleX: -1, y: 1)
+        rightArrowImageView = UIImageView(image: self.rightArrowImage)
 
+        leftArrowImageView?.alpha = 0.7
+        rightArrowImageView?.alpha = 0.7
+        leftArrowImageView?.isHidden = true
+        rightArrowImageView?.isHidden = true
         if displayDebugging {
             sceneLocationView.showFeaturePoints = true
             
         }
         self.view.addSubview(sceneLocationView)
         
-    
+        rightArrowImageView?.frame = CGRect(x: screenWidth - 80, y: (screenHeight / 2) - 70, width: 70, height: 70)
+        leftArrowImageView?.frame = CGRect(x: 10, y: (screenHeight / 2) - 70, width: 70, height: 70)
+
+        let test = UIView()
+        test.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        test.addSubview(rightArrowImageView!)
+        test.addSubview(leftArrowImageView!)
+        view.addSubview(test)
         
         if showMapView {
             mapView.delegate = self
@@ -95,7 +104,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             mapView.showsPointsOfInterest = true
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
-            
+            mapView.isHidden = false
             view.addSubview(mapView)
 
             if CLLocationManager.locationServicesEnabled() {
@@ -118,7 +127,9 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         //            let destCoordinates = CLLocationCoordinate2DMake(49.2489415, -122.9899965)
         
 //        let destCoordinates = CLLocationCoordinate2DMake(49.249212, -123.010059)
-        let destCoordinates = CLLocationCoordinate2DMake(49.245648063009874, -122.99804483566106)
+        
+        let destCoordinates = CLLocationCoordinate2DMake(49.24662530824629, -123.00695941697575)
+//        let destCoordinates = CLLocationCoordinate2DMake(49.245648063009874, -122.99804483566106)
 
         let sourcePlacemark = MKPlacemark(coordinate: sourceCoordinates)
         let destPlacemark = MKPlacemark(coordinate: destCoordinates)
@@ -316,36 +327,73 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
     
     @objc func updateInfoLabel() {
+        //Need to add left or right arrows to different part of scenes
+        // Left is tag 0
+        if let leftRight = sceneLocationView.leftRightLabel {
+            switch leftRight {
+            case "Left":
+                leftArrowImageView?.isHidden = false
+                rightArrowImageView?.isHidden = true
+                print("switch left")
+            case "Right":
+                print("switch Right")
+                leftArrowImageView?.isHidden = true
+                rightArrowImageView?.isHidden = false
+            case "Straight":
+                print("switch Straight")
+                leftArrowImageView?.isHidden = true
+                rightArrowImageView?.isHidden = true
+            default:
+                leftArrowImageView?.isHidden = true
+                rightArrowImageView?.isHidden = true
+                print("no matching values")
+            }
+        }
+
         if let position = sceneLocationView.currentScenePosition() {
             infoLabel.text = "x: \(String(format: "%.2f", position.x)), y: \(String(format: "%.2f", position.y)), z: \(String(format: "%.2f", position.z))\n"
         }
-        
-        if let eulerAngles = sceneLocationView.currentEulerAngles() {
-            infoLabel.text!.append("Euler x: \(String(format: "%.2f", eulerAngles.x)), y: \(String(format: "%.2f", eulerAngles.y)), z: \(String(format: "%.2f", eulerAngles.z))\n")
-        }
-        
-        if let heading = sceneLocationView.locationManager.heading,
+//
+//        if let eulerAngles = sceneLocationView.currentEulerAngles() {
+//            infoLabel.text!.append("Euler x: \(String(format: "%.2f", eulerAngles.x)), y: \(String(format: "%.2f", eulerAngles.y)), z: \(String(format: "%.2f", eulerAngles.z))\n")
+//        }
+//
+        if let heading = sceneLocationView.myBearing,
             let accuracy = sceneLocationView.locationManager.headingAccuracy {
             infoLabel.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
         }
         
+        if let destBearing = sceneLocationView.destBearing {
+            infoLabel.text!.append("Target: \(destBearing)º\n")
+        }
+        
+        
+        if let destBearingPrime = sceneLocationView.destBearingPrime {
+            infoLabel.text!.append("DestBearingPrime: \(destBearingPrime)º\n")
+        }
+        
+
         if let leftRight = sceneLocationView.leftRightLabel {
             infoLabel.text!.append("leftRight: \(leftRight) \n")
         }
-        
-        if let currentLocation = sceneLocationView.locationManager.currentLocation,
-            let nextPoint = sceneLocationView.activeLocationNodeQueue.peek()?.location {
-            let nextPointDesc = sceneLocationView.activeLocationNodeQueue.peek()?.locationDescription
-            infoLabel.text!.append("Distance to next node: " + sceneLocationView.distanceBetweenTwoPoints(a: currentLocation, b: nextPoint).description)
-        }
+//
+//        if let currentLocation = sceneLocationView.locationManager.currentLocation,
+//            let nextPoint = sceneLocationView.activeLocationNodeQueue.peek()?.location {
+//            let nextPointDesc = sceneLocationView.activeLocationNodeQueue.peek()?.locationDescription
+//            infoLabel.text!.append("Distance to next node: " + sceneLocationView.distanceBetweenTwoPoints(a: currentLocation, b: nextPoint).description)
+//        }
         
         let date = Date()
         let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: date)
         
-        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
-            infoLabel.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
-        }
+//        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
+//            infoLabel.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
+//        }
         sceneLocationView.checkLocVsNode()
+    }
+    
+    func removeChildView(imageView: UIImageView) {
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -447,10 +495,8 @@ extension UIView {
 extension NavigationViewController: NavigationViewControllerDelegate {
     
     func userFinishedNavigation() {
-        let mainPage = MainPageViewController.init()
+        let mainPage = MainPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         present(mainPage, animated: true)
     }
-    
-    
 }
 

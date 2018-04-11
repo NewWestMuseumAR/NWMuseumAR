@@ -52,6 +52,9 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     var curNode = SCNNode()
     var navigationDelegate: NavigationViewControllerDelegate?
     var leftRightLabel: String?
+    var destBearing : Double?
+    var myBearing : Double?
+    var destBearingPrime : Double?
     
     public weak var locationDelegate: SceneLocationViewDelegate?
     
@@ -532,14 +535,15 @@ protocol NavigationViewControllerDelegate {
 extension SceneLocationView {
     
     func checkLocVsNode(){
+        let circle = 2 * Double.pi
         //Just added this for testing purposes to see if the Queue implementation actually works, which it does
         // I was thinking of having a queue of like 5 points, and only showing those on the map
         if let currentLocation = currentLocation() {
-            let bearingTolerance = 30.0
+            let bearingTolerance = 55.0.degreesToRadians
         
             if isFirstRun && locationNodes.count > 1 {
                 
-                var nextNode = self.activeLocationNodeQueue.peek()!
+                let nextNode = self.activeLocationNodeQueue.peek()!
                 
                 curNode = nextNode
                 self.sceneNode?.addChildNode(curNode)
@@ -555,36 +559,25 @@ extension SceneLocationView {
                         curNode = nextNode
                         self.sceneNode?.addChildNode(curNode)
                         
-                      
                     }
-                    
                 }
-                var myBearing = locationManager.heading
-                var destBearing = getBearingBetweenTwoPoints1(point1: currentLocation, point2: (curNode as! LocationNode).location)
                 
-                let bearingDiff = abs(myBearing! - destBearing)
-
-                if myBearing! < .pi / 2 {
-                    //TODO:  Add in tolerances and add in alert for when user reaches destination and make pins look gud
-                    //      Add Arrows to scene
-                    //      Stop pin appearing when user taps screen
-                    if destBearing > myBearing! && bearingDiff > bearingTolerance {
+                myBearing = locationManager.heading?.degreesToRadians
+                destBearing = getBearingBetweenTwoPoints1(point1: currentLocation, point2: (curNode as! LocationNode).location).degreesToRadians
+                let bearingDiff = diffBetweenTwoBearings2(heading: myBearing!, target: destBearing!)
+                let bearingTolerancePass = bearingDiff > bearingTolerance
+                destBearingPrime = (destBearing! + .pi).truncatingRemainder(dividingBy: circle)
+                if !bearingTolerancePass {
+                    self.leftRightLabel = "Straight"
+                } else {
+                    if myBearing! > destBearing! && destBearing! > destBearingPrime! {
                         self.leftRightLabel = "Left"
-                    } else if bearingDiff > bearingTolerance {
+                    } else if myBearing! > destBearingPrime! {
                         self.leftRightLabel = "Right"
                     } else {
-                        self.leftRightLabel = "Straight"
+                        self.leftRightLabel = "Left"
                     }
-                    
-                } else if (.pi / 2) > (.pi - myBearing! + destBearing) && bearingDiff > bearingTolerance {
-                    
-                    self.leftRightLabel = "Left"
-                } else if bearingDiff > bearingTolerance {
-                    self.leftRightLabel = "Right"
-                } else {
-                    self.leftRightLabel = "Straight"
                 }
-                
             } else if !isFirstRun {
                navigationDelegate?.userFinishedNavigation()
             }
@@ -593,11 +586,29 @@ extension SceneLocationView {
         
     }
     
+    func diffBetweenTwoBearings (heading: Double, target: Double) -> Double {
+        let mheading = heading
+        let mtarget = target
+        let phi = (abs(mtarget - mheading).truncatingRemainder(dividingBy: 2 * .pi))
+        if phi > .pi {
+            return 2 * .pi - phi
+        } else {
+            return phi
+        }
+    }
+    
+    func diffBetweenTwoBearings2 (heading: Double, target: Double) -> Double {
+        let mheading = heading
+        let mtarget = target
+        let phi = (abs(mtarget - mheading).truncatingRemainder(dividingBy: 2 * .pi))
+        return phi
+    }
+
     func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
     func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
     
     func getBearingBetweenTwoPoints1(point1 : CLLocation, point2 : CLLocation) -> Double {
-        
+        let circle = 2 * Double.pi
         let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
         let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
         
@@ -608,7 +619,9 @@ extension SceneLocationView {
         
         let y = sin(dLon) * cos(lat2)
         let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
-        let radiansBearing = atan2(y, x)
+        var radiansBearing = atan2(y, x)
+        radiansBearing = radiansBearing + circle
+        radiansBearing = radiansBearing.truncatingRemainder(dividingBy: circle)
         
         return radiansToDegrees(radians: radiansBearing)
     }
