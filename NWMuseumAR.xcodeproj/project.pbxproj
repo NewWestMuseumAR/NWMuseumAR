@@ -35,7 +35,6 @@
 		84B1FC96207C297400387E94 /* NWMuseumAR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84B1FC94207C297400387E94 /* NWMuseumAR.xcdatamodeld */; };
 		84E8CFA2206DF9DB006B5FCB /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 84E8CFA1206DF9DB006B5FCB /* .gitkeep */; };
 		84E8CFA6206DFACE006B5FCB /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */; };
-		84E8CFA8206DFED5006B5FCB /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8CFA7206DFED5006B5FCB /* StatusViewController.swift */; };
 		84F650D0207D7D020019D1F4 /* Artifact+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F650CF207D7D020019D1F4 /* Artifact+Extension.swift */; };
 		84F650D3207D803D0019D1F4 /* SeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F650D2207D803D0019D1F4 /* SeedData.swift */; };
 		9EF7A1A1207DC30D00D126FD /* notebook.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9EF7A19F207DC30C00D126FD /* notebook.mp4 */; };
@@ -90,7 +89,6 @@
 		84B1FC95207C297400387E94 /* NWMuseumAR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NWMuseumAR.xcdatamodel; sourceTree = "<group>"; };
 		84E8CFA1206DF9DB006B5FCB /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
-		84E8CFA7206DFED5006B5FCB /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		84F650CF207D7D020019D1F4 /* Artifact+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Artifact+Extension.swift"; sourceTree = "<group>"; };
 		84F650D2207D803D0019D1F4 /* SeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedData.swift; sourceTree = "<group>"; };
 		9EF7A19F207DC30C00D126FD /* notebook.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = notebook.mp4; sourceTree = "<group>"; };
@@ -245,7 +243,6 @@
 		8489A84D2036345900243C26 /* AR */ = {
 			isa = PBXGroup;
 			children = (
-				84E8CFA7206DFED5006B5FCB /* StatusViewController.swift */,
 				84E8CFA5206DFACD006B5FCB /* ARSceneViewController.swift */,
 				DD9BA270207DE804008B826E /* OverlayView.swift */,
 			);
@@ -494,7 +491,6 @@
 				84F650D3207D803D0019D1F4 /* SeedData.swift in Sources */,
 				845AA633207DD4600096D9E3 /* OnboardingController.swift in Sources */,
 				848FBAB620648F3D00E56D77 /* LocationManager.swift in Sources */,
-				84E8CFA8206DFED5006B5FCB /* StatusViewController.swift in Sources */,
 				848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
