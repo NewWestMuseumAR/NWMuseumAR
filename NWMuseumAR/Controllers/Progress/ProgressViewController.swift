@@ -10,6 +10,8 @@ import UIKit
 
 class ProgressViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var artifacts: [Artifact]?
+    
     /** Artifact Images */
     let images = [
         "ARTIFACT - Wayfinding",
@@ -58,6 +60,9 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        artifacts = Artifact.getAll()
+        
         setupViewsLayout()
         
         artifactCollectionView.dataSource = self
@@ -181,17 +186,21 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
     
     /** Sets the number of cells in the collection view. */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return artifacts!.count ?? 0
     }
     
     /** Create the sells in the collection view. */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! ArtifactCell
         
+        let artifact = artifacts![indexPath.item]
+        cell.artifact = artifact
+        debugPrint(artifact.image)
+        
         // Assign artifact details here.
-        cell.artifactIcon.image = UIImage(named: images[indexPath.item])
-        cell.artifactTitle.text = titles[indexPath.item]
-        cell.artifactSubtitle.text = subtitles[indexPath.item]
+        cell.artifactIcon.image = UIImage(named: artifact.image!)
+        cell.artifactTitle.text = artifact.title!
+        cell.artifactSubtitle.text = artifact.completed ? "COLLECTED" : "TAP FOR A HINT"
         cell.backgroundColor = UIColor(red: 0.97, green: 0.96, blue: 0.98, alpha: 1.0)
         
         return cell

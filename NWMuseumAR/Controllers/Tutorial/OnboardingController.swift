@@ -188,7 +188,9 @@ extension OnboardingController: PermissionServiceDelegate {
         case .location:
             print("Location granted")
         case .camera:
-            handleSegue()
+            DispatchQueue.main.async {
+                self.handleSegue()
+            }
             print("camera granted")
         }
     }

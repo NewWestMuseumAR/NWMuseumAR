@@ -9,10 +9,11 @@
 import Foundation
 
 let SEED_DATA = [
-    ["title": "Canoe", "hint": "Look for the fucking canoe"],
-    ["title": "Fire", "hint": "Look for the fucking Fire"],
-    ["title": "Freedom", "hint": "Look for the fucking Freedom"],
-    ["title": "Proclamation", "hint": "Look for the fucking Procl..."],
-    ["title": "Train", "hint": "Look for the fucking train"],
-    ["title": "Wanted", "hint": "Look for the fucking wanted"],
+    ["title": "Wayfinding", "hint": "Dont matter", "image": "WayfindingIcon"],
+    ["title": "Canoe", "hint": "Look for the fucking canoe", "image": "CanoeIcon"],
+    ["title": "Fire", "hint": "Look for the fucking Fire", "image": "FireIcon"],
+    ["title": "Freedom", "hint": "Look for the fucking Freedom", "image": "FreedomIcon"],
+    ["title": "Proclamation", "hint": "Look for the fucking Procl...", "image": "ProclamationIcon"],
+    ["title": "Train", "hint": "Look for the fucking train", "image": "TrainIcon"],
+    ["title": "Wanted", "hint": "Look for the fucking wanted", "image": "WantedIcon"],
 ]

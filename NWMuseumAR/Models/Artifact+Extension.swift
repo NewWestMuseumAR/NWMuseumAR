@@ -35,12 +35,13 @@ extension Artifact {
         - title: The title of the artifact
         - hint: A hint for the artifact
      */
-    static func save(withTitle title: String, hint: String) {
+    static func save(withTitle title: String, hint: String, image: String) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
         let artifact = Artifact(context: context)
         artifact.title = title
         artifact.hint = hint
+        artifact.image = image
         artifact.completed = false
         
         do {

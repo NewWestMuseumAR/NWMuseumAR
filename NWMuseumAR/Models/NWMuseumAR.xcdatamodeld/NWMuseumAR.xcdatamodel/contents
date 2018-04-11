@@ -3,9 +3,10 @@
     <entity name="Artifact" representedClassName="Artifact" syncable="YES" codeGenerationType="class">
         <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="hint" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Artifact" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="Artifact" positionX="-54" positionY="-9" width="128" height="105"/>
     </elements>
 </model>
