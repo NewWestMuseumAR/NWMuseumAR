@@ -72,7 +72,7 @@ class OnboardingCell: UICollectionViewCell {
             topImageContainerView.topAnchor.constraint(equalTo: topAnchor),
             topImageContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             topImageContainerView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+            ])
         
         // Image Layout.
         NSLayoutConstraint.activate([
@@ -80,7 +80,7 @@ class OnboardingCell: UICollectionViewCell {
             tutorialImageView.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor),
             tutorialImageView.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor),
             tutorialImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.36)
-        ])
+            ])
         
         // Title Layout and Text Set.
         NSLayoutConstraint.activate([
@@ -88,7 +88,7 @@ class OnboardingCell: UICollectionViewCell {
             titleTextView.leftAnchor.constraint(equalTo: leftAnchor),
             titleTextView.rightAnchor.constraint(equalTo: rightAnchor),
             titleTextView.bottomAnchor.constraint(equalTo: subtitleTextView.topAnchor, constant: 11)
-        ])
+            ])
         
         // Set title the tutorial pages title.
         let attributedString = NSMutableAttributedString(string: "DISCOVER")
@@ -101,14 +101,14 @@ class OnboardingCell: UICollectionViewCell {
             NSAttributedStringKey.paragraphStyle: paragraphStyle
             ], range: NSRange(location: 0, length: attributedString.length))
         titleTextView.attributedText = attributedString
-
+        
         // Subtitle Layout.
         NSLayoutConstraint.activate([
             subtitleTextView.topAnchor.constraint(equalTo: titleTextView.bottomAnchor),
             subtitleTextView.leftAnchor.constraint(equalTo: leftAnchor),
             subtitleTextView.rightAnchor.constraint(equalTo: rightAnchor),
             subtitleTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
-        ])
+            ])
         subtitleTextView.text = "Walk Around and Explore The Museum"
     }
     
