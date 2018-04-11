@@ -174,7 +174,7 @@ extension ARSceneViewController {
         planeNode.name = "artifact"
         planeNode.opacity = 1
         
-        let videoNode = SKVideoNode(fileNamed: "\(video!).mp4")
+        let videoNode = SKVideoNode(fileNamed: video! + ".mp4")
         videoNode.play()
         
         let skScene = SKScene(size: CGSize(width: 640, height: 480))
