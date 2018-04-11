@@ -414,7 +414,7 @@ extension UIView {
 extension NavigationViewController: NavigationViewControllerDelegate {
     
     func userFinishedNavigation() {
-        let mainPage = MainPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        let mainPage = ProgressViewController()
         present(mainPage, animated: true)
     }
 }
