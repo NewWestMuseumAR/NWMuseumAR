@@ -24,10 +24,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     var detectedArtifact: String? = nil
     var isRestartAvailable = true
     
-    /// The view controller that displays the status and "restart experience" UI.
-    lazy var statusViewController: StatusViewController = {
-        return childViewControllers.lazy.flatMap({ $0 as? StatusViewController }).first!
-    }()
     
     /// A serial queue for thread safety when modifying the SceneKit node graph.
     let updateQueue = DispatchQueue(label: Bundle.main.bundleIdentifier! +
@@ -42,11 +38,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         setupARDelegate()
-        
-        // Hook up status view controller callback(s).
-        statusViewController.restartExperienceHandler = { [unowned self] in
-            self.restartExperience()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -208,13 +199,12 @@ extension ARSceneViewController: ARSessionDelegate {
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        statusViewController.showTrackingQualityInfo(for: camera.trackingState, autoHide: true)
         
         switch camera.trackingState {
         case .notAvailable, .limited:
-            statusViewController.escalateFeedback(for: camera.trackingState, inSeconds: 3.0)
+            debugPrint("Tracking is limited")
         case .normal:
-            statusViewController.cancelScheduledMessage(for: .trackingStateEscalation)
+            debugPrint("Tracking is normal")
         }
     }
     
@@ -230,24 +220,8 @@ extension ARSceneViewController: ARSessionDelegate {
         
         // Use `flatMap(_:)` to remove optional error messages.
         let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
-        
-        DispatchQueue.main.async {
-            self.displayErrorMessage(title: "The AR session failed.", message: errorMessage)
-        }
     }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        statusViewController.showMessage("""
-        SESSION INTERRUPTED
-        The session will be reset after the interruption has ended.
-        """, autoHide: false)
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        statusViewController.showMessage("RESETTING SESSION")
-        
-        restartExperience()
-    }
+
     
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
         return true
@@ -297,8 +271,6 @@ extension ARSceneViewController: ARSessionDelegate {
         
         DispatchQueue.main.async {
             let imageName = referenceImage.name ?? ""
-            self.statusViewController.cancelAllScheduledMessages()
-            self.statusViewController.showMessage("Detected image “\(imageName)”")
             self.detectedArtifact = imageName
         }
     }
@@ -308,8 +280,6 @@ extension ARSceneViewController: ARSessionDelegate {
     func restartExperience() {
         guard isRestartAvailable else { return }
         isRestartAvailable = false
-        
-        statusViewController.cancelAllScheduledMessages()
         
         resetTracking()
         
@@ -334,24 +304,7 @@ extension ARSceneViewController: ARSessionDelegate {
         configuration.planeDetection = .vertical
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         
-        statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
-        
         debugPrint("Leaving \(#function)")
-    }
-    
-    // MARK: - Error handling
-    /// - Tag: Displaying error messages
-    func displayErrorMessage(title: String, message: String) {
-        // Blur the background.
-        
-        // Present an alert informing about the error that has occurred.
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
-            alertController.dismiss(animated: true, completion: nil)
-            self.resetTracking()
-        }
-        alertController.addAction(restartAction)
-        present(alertController, animated: true, completion: nil)
     }
     
     func performSeque() {
