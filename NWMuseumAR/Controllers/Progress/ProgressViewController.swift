@@ -70,6 +70,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! ProgressCell
         cell.artifactDescription.text = "complete"
         
-        Artifact.complete(withTitle: cell.name!)
+        Artifact.setComplete(withTitle: cell.name!, to: true)
+        print("Number complete now: \(Artifact.countCompleted())")
     }
 }

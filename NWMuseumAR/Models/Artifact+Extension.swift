@@ -12,6 +12,13 @@ import UIKit
 
 extension Artifact {
     
+    /**
+     Saves a new artifact to the devices local database.
+     
+     - Parameters:
+        - title: The title of the artifact
+        - hint: A hint for the artifact
+     */
     static func save(withTitle title: String, hint: String) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -27,7 +34,13 @@ extension Artifact {
         }
     }
     
-    static func complete(withTitle title: String) {
+    /**
+     Updates an artifacts complete status
+     
+     - Parameters:
+        - title: The title of the artifact
+     */
+    static func setComplete(withTitle title: String, to isComplete: Bool) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
@@ -39,11 +52,11 @@ extension Artifact {
             if test.count == 1 {
                 
                 let objectUpdate = test[0] as! NSManagedObject
-                objectUpdate.setValue(true, forKey: "completed")
+                objectUpdate.setValue(isComplete, forKey: "completed")
                 
                 do {
                     try context.save()
-                    debugPrint("Artifact completion saved")
+                    debugPrint("Artifact complete: \(isComplete)")
                 } catch {
                     print(error)
                 }
@@ -52,5 +65,28 @@ extension Artifact {
         } catch {
             print(error)
         }
+    }
+    
+    /**
+     Counts the number of completed Artifacts in the database.
+     -  Returns:
+     Number of completed artifacts, or -1 if failed
+    */
+    static func countCompleted() -> Int {
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
+        let predicate = NSPredicate(format: "completed = \(true)")
+        fetchRequest.predicate = predicate
+        
+        var completed = -1
+        
+        do {
+            completed = try context.count(for: fetchRequest)
+        } catch {
+            print(error)
+        }
+        return completed
     }
 }
