@@ -10,9 +10,12 @@ import UIKit
 
 class ArtifactCell: UICollectionViewCell
 {
+    
+    var artifact: Artifact?
+    
     /** Artifact Image  */
     let artifactIcon: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "ARTIFACT - Wayfinding"))
+        let image = UIImageView(image: #imageLiteral(resourceName: "ProclamationIcon"))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
