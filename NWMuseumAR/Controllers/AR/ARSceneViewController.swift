@@ -186,7 +186,7 @@ extension ARSceneViewController {
         plane.firstMaterial?.diffuse.contents = skScene
         plane.firstMaterial?.isDoubleSided = true
         
-        planeNode.eulerAngles.x = -.pi / 2
+        planeNode.eulerAngles.x = .pi / 2
         
         node.addChildNode(planeNode)
     }
