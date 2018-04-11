@@ -23,6 +23,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var detectedArtifact: String? = nil
     var isRestartAvailable = true
+    var overlayMode = false
+    var overlayView: OverlayView!
     
     
     /// A serial queue for thread safety when modifying the SceneKit node graph.
@@ -68,35 +70,51 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func collectButton(_ sender: UIButton) {
-        print("collect")
+        // don't allow click if nothing collected
+        if (detectedArtifact == nil) { return }
+        
+        handleTouch()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            self.collectItem()
+        }
+    }
+    
+    func collectItem() {
+        self.overlayBlurredBackgroundView()
+        overlayMode = true
+        
+        instantiateOverlayContainer()
+        
+        // Set detected artifact back to nil to disable click
+        detectedArtifact = nil
+    }
+    
+    @objc func continueButtonClicked(_ : UIButton) {
+        performSeque()
+    }
+    
+    func instantiateOverlayContainer() {
+        overlayView = OverlayView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        overlayView.caption = "You have just collected \("name of artifact")"
+        // overlayView.image = pass in image
+        overlayView.parentController = self
+        view.addSubview(overlayView)
+    }
+    
+    func overlayBlurredBackgroundView() {
+        let blurredBackgroundView = UIVisualEffectView()
+        
+        blurredBackgroundView.frame = view.frame
+        blurredBackgroundView.effect = UIBlurEffect(style: .dark)
+        
+        view.addSubview(blurredBackgroundView)
     }
 }
 
 // MARK: - Touch Handling
 extension ARSceneViewController {
-    
-    /// - Tag: Touch event detected
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        print("Touch event detected!")
-        
-        //get first touch
-        let touch = touches.first!
-        
-        //get location of touch in scene
-        let location = touch.location(in: sceneView)
-        
-        //get hit results
-        let hitResults = sceneView.hitTest(location, options: nil)
-        
-        if hitResults.count > 0 {
-            handleTouch()
-        }
-    }
-    
     /// - Tag: Handling the touch event
     func handleTouch() {
-        
         if detectedArtifact == nil { return }
         
         let node = sceneView.scene.rootNode.childNode(withName: "coin", recursively: true)!
@@ -105,8 +123,9 @@ extension ARSceneViewController {
                         rotation: node.presentation.rotation)
         fadeAndRemoveNode(node: node, time: 0.5)
         
+        detectedArtifact = nil
+        
         Artifact.setComplete(withTitle: artifactSelected!, to: true)
-     
     }
 }
 
