@@ -10,10 +10,17 @@ import UIKit
 import ARKit
 
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
-
+    
+    // MARK: - Basic Debugging Options
+    let IS_DEBUG: Bool = false
+    var IS_VIDEO: Bool = false
+    
+    // MARK: - UI Outlets
     @IBOutlet weak var sceneView: ARSCNView!
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var detectedArtifact: String? = nil
+    var isRestartAvailable = true
     
     /// The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
@@ -32,11 +39,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sceneView.delegate = self
-        sceneView.session.delegate = self
-        sceneView.automaticallyUpdatesLighting = true
-        sceneView.debugOptions =  [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-
+        setupARDelegate()
         
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
@@ -60,20 +63,22 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         let configuration = ARWorldTrackingConfiguration()
         configuration.detectionImages = referenceImages
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         session.pause()
     }
+}
+
+// MARK: - Touch Handling
+extension ARSceneViewController {
     
-    /*
-        Detect touch event
-    */
+    /// - Tag: Touch event detected
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        print("Touch event detected!")
+        
         //get first touch
         let touch = touches.first!
         
@@ -88,6 +93,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    /// - Tag: Handling the touch event
     func handleTouch() {
         if detectedArtifact == nil { return }
         
@@ -98,151 +104,73 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
                             rotation: node!.presentation.rotation)
         }
     }
+}
+
+// MARK: - Animations
+extension ARSceneViewController {
     
+    /// - Tag: Explosion - triggered on touching of node!
     func createExplosion(node: SCNNode, geometry: SCNGeometry, position: SCNVector3,
                          rotation: SCNVector4) {
         let explosion = SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!
         explosion.emitterShape = geometry
         explosion.birthLocation = .surface
-
+        
         node.addParticleSystem(explosion)
     }
     
-    // MARK: - Session management (Image detection setup)
-    
-    /// Prevents restarting the session while a restart is in progress.
-    var isRestartAvailable = true
-    
-    /// Creates a new AR configuration to run on the `session`.
-    /// - Tag: ARReferenceImage-Loading
-    func resetTracking() {
+    /// - Tag: Fades opacity of Node and removes it from it's parent node
+    func fadeAndRemoveNode(node: SCNNode, time: Double) {
         
-        
-        debugPrint("Entering \(#function)")
-        
-        
-        
-        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
-            fatalError("Missing expected asset catalog resources.")
-        }
-        
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.detectionImages = referenceImages
-        configuration.planeDetection = .vertical
-        session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-        
-        statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
-        debugPrint("Leaving \(#function)")
-    }
-    
-//    func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
-//
-//        debugPrint("Entering \(#function)")
-//
-//
-//
-//        debugPrint("Leaving \(#function)")
-//    }
-//
-//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-//
-//        debugPrint("Entering \(#function)")
-//
-//
-//
-//        debugPrint("Leaving \(#function)")
-//    }
-    
-    // MARK: - ARSCNViewDelegate (Image detection results)
-    /// - Tag: ARImageAnchor-Visualizing
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
-        debugPrint("Entering \(#function)")
-        
-        guard let imageAnchor = anchor as? ARImageAnchor else { return }
-        let referenceImage = imageAnchor.referenceImage
-        updateQueue.async {
-            
-            // Create a plane to visualize the initial position of the detected image.
-            let plane = SCNPlane(width: referenceImage.physicalSize.width,
-                                 height: referenceImage.physicalSize.height)
-            let planeNode = SCNNode(geometry: plane)
-            planeNode.opacity = 1
-            planeNode.name = "artifact"
-            
-            /* coin */
-//            let coin = SCNScene(named: "coin.scn", inDirectory: "art.scnassets")!
-//            coin.rootNode.transform = SCNMatrix4Scale(planeNode.worldTransform, 0.06, 0.06, 0.06)
-//            planeNode.addChildNode(coin.rootNode)
-            
-            /* Video plane */
-            let videoNode = SKVideoNode(fileNamed: "test1.mp4")
-            videoNode.play()
-
-            let skScene = SKScene(size: CGSize(width: 640, height: 480))
-            skScene.addChild(videoNode)
-
-            videoNode.position = CGPoint(x: skScene.size.width/2, y: skScene.size.height/2)
-            videoNode.size = skScene.size
-
-            plane.firstMaterial?.diffuse.contents = skScene
-            plane.firstMaterial?.isDoubleSided = true
-            
-            /*
-             `SCNPlane` is vertically oriented in its local coordinate space, but
-             `ARImageAnchor` assumes the image is horizontal in its local space, so
-             rotate the plane to match.
-             */
-            planeNode.eulerAngles.x = -.pi / 2
-            
-            /*
-             Image anchors are not tracked after initial detection, so create an
-             animation that limits the duration for which the plane visualization appears.
-             */
-//            planeNode.runAction(self.imageHighlightAction)
-            
-            /* add video plane to scene */
-            node.addChildNode(planeNode)
-            
-            /* add coin to scene */
-//            let newNode = SCNNode()
-//            newNode.addChildNode(planeNode)
-//
-//            newNode.transform = node.worldTransform
-//
-//            self.sceneView.scene.rootNode.addChildNode(newNode)
-            
-            debugPrint("Leaving \(#function)")
-        }
-        
-        DispatchQueue.main.async {
-            let imageName = referenceImage.name ?? ""
-            self.statusViewController.cancelAllScheduledMessages()
-            self.statusViewController.showMessage("Detected image “\(imageName)”")
-            self.detectedArtifact = imageName
-        }
-    }
-    
-    var imageHighlightAction: SCNAction {
-        return .sequence([
-                .wait(duration: 2),
-                SCNAction.moveBy(x: 0, y: 0, z: -0.01, duration: 0.5),
-                SCNAction.moveBy(x: 0, y: 0, z: 0.01, duration: 0.5),
-                .fadeOpacity(to: 0.15, duration: 0.5),
-                .fadeOpacity(to: 0.85, duration: 0.5),
-                .fadeOpacity(to: 0.15, duration: 0.5),
-                .fadeOpacity(to: 0.85, duration: 0.5),
-                .fadeOpacity(to: 0.15, duration: 0.5),
-                .fadeOpacity(to: 0.85, duration: 0.5),
-                .fadeOut(duration: 0.5),
-                .removeFromParentNode()
+        let fadeRemove = SCNAction.sequence([
+            .fadeOut(duration: time),
+            .removeFromParentNode()
             ])
+        
+        node.runAction(fadeRemove)
+    }
+    
+    /// - Tag: Moves node up and down continuously. NOTE: Depends on orientation of node...
+    func oscillateNode(node: SCNNode) {
+        let moveUp = SCNAction.moveBy(x: 0, y: 0, z: 0.05, duration: 1)
+        moveUp.timingMode = .easeInEaseOut;
+        
+        let moveDown = SCNAction.moveBy(x: 0, y: 0, z: -0.05, duration: 1)
+        moveDown.timingMode = .easeInEaseOut;
+        
+        let moveSequence = SCNAction.sequence([moveUp,moveDown])
+        let moveLoop = SCNAction.repeatForever(moveSequence)
+        
+        node.runAction(moveLoop)
+    }
+    
+    /// - Tag: Spins node continuously. NOTE: Depends on orientation of node...
+    func spinNode(node: SCNNode) {
+        let spinLoop = SCNAction.repeatForever(SCNAction.rotate(by: .pi, around: SCNVector3(0, 0, 1), duration: 5))
+        
+        node.runAction(spinLoop)
+    }
+    
+    func oscillateAndSpinNode(node: SCNNode) {
+        oscillateNode(node: node)
+        spinNode(node: node)
     }
 }
 
+
+// MARK: - ARSessionDelegate
 extension ARSceneViewController: ARSessionDelegate {
     
-    // MARK: - ARSessionDelegate
+    /// - Tag: Setup the AR delegate when loading view
+    func setupARDelegate() {
+        sceneView.delegate = self
+        sceneView.session.delegate = self
+        sceneView.automaticallyUpdatesLighting = true
+        
+        if IS_DEBUG {
+            sceneView.debugOptions =  [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        }
+    }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         statusViewController.showTrackingQualityInfo(for: camera.trackingState, autoHide: true)
@@ -290,23 +218,73 @@ extension ARSceneViewController: ARSessionDelegate {
         return true
     }
     
-    // MARK: - Error handling
-    
-    func displayErrorMessage(title: String, message: String) {
-        // Blur the background.
+    // MARK: - ARSCNViewDelegate (Image detection results)
+    /// - Tag: ARImageAnchor-Visualizing
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         
-        // Present an alert informing about the error that has occurred.
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
-            alertController.dismiss(animated: true, completion: nil)
-            self.resetTracking()
+        guard let imageAnchor = anchor as? ARImageAnchor else { return }
+        let referenceImage = imageAnchor.referenceImage
+        
+        updateQueue.async {
+            
+            // Create a plane to visualize the initial position of the detected image.
+            let plane = SCNPlane(width: referenceImage.physicalSize.width,
+                                 height: referenceImage.physicalSize.height)
+            let planeNode = SCNNode(geometry: plane)
+            planeNode.opacity = 1
+            planeNode.name = "artifact"
+            
+            if self.IS_VIDEO { // TODO: For debugging - property is at top of class
+                
+                let videoNode = SKVideoNode(fileNamed: "test1.mp4")
+                videoNode.play()
+                
+                let skScene = SKScene(size: CGSize(width: 640, height: 480))
+                skScene.addChild(videoNode)
+                
+                videoNode.position = CGPoint(x: skScene.size.width/2, y: skScene.size.height/2)
+                videoNode.size = skScene.size
+                
+                plane.firstMaterial?.diffuse.contents = skScene
+                plane.firstMaterial?.isDoubleSided = true
+                
+                planeNode.eulerAngles.x = -.pi / 2
+                
+                node.addChildNode(planeNode)
+                
+            } else { // This is if we want coin
+                
+                let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
+                coin.rootNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+                
+                let moveUp = SCNAction.moveBy(x: 0, y: 0, z: 0.05, duration: 1)
+                moveUp.timingMode = .easeInEaseOut;
+                
+                let moveDown = SCNAction.moveBy(x: 0, y: 0, z: -0.05, duration: 1)
+                moveDown.timingMode = .easeInEaseOut;
+                
+                let moveSequence = SCNAction.sequence([moveUp,moveDown])
+                let moveLoop = SCNAction.repeatForever(moveSequence)
+                
+                let spinLoop = SCNAction.repeatForever(SCNAction.rotate(by: .pi, around: SCNVector3(0, 0, 1), duration: 5))
+                
+                coin.rootNode.runAction(moveLoop)
+                coin.rootNode.runAction(spinLoop)
+                
+                node.addChildNode(coin.rootNode)
+            }
         }
-        alertController.addAction(restartAction)
-        present(alertController, animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            let imageName = referenceImage.name ?? ""
+            self.statusViewController.cancelAllScheduledMessages()
+            self.statusViewController.showMessage("Detected image “\(imageName)”")
+            self.detectedArtifact = imageName
+        }
     }
     
     // MARK: - Interface Actions
-    
+    /// - Tag: Restart the entire AR session along with tracking
     func restartExperience() {
         guard isRestartAvailable else { return }
         isRestartAvailable = false
@@ -321,31 +299,38 @@ extension ARSceneViewController: ARSessionDelegate {
         }
     }
     
-//    func completeArtifact(withName name: String) {
-//        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Artifact")
-//        let predicate = NSPredicate(format: "imageName = '\(name)'")
-//        fetchRequest.predicate = predicate
-//        do
-//        {
-//            let test = try context.fetch(fetchRequest)
-//            if test.count == 1
-//            {
-//                let objectUpdate = test[0] as! NSManagedObject
-//                objectUpdate.setValue(true, forKey: "completed")
-//                do {
-//                    try context.save()
-//                    tableView.reloadData()
-//                }
-//                catch
-//                {
-//                    print(error)
-//                }
-//            }
-//        }
-//        catch
-//        {
-//            print(error)
-//        }
-//    }
+    /// Creates a new AR configuration to run on the `session`.
+    /// - Tag: ARReferenceImage-Loading
+    func resetTracking() {
+        
+        debugPrint("Entering \(#function)")
+        
+        guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
+            fatalError("Missing expected asset catalog resources.")
+        }
+        
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.detectionImages = referenceImages
+        configuration.planeDetection = .vertical
+        session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        
+        statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
+        
+        debugPrint("Leaving \(#function)")
+    }
     
+    // MARK: - Error handling
+    /// - Tag: Displaying error messages
+    func displayErrorMessage(title: String, message: String) {
+        // Blur the background.
+        
+        // Present an alert informing about the error that has occurred.
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
+            alertController.dismiss(animated: true, completion: nil)
+            self.resetTracking()
+        }
+        alertController.addAction(restartAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
