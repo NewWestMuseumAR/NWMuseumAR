@@ -16,13 +16,11 @@ class ArtifactCell: UICollectionViewCell
     
     /** Artifact Image  */
     let artifactIcon: UIImageView = {
-        let image = UIImageView(image: #imageLiteral(resourceName: "ProclamationIcon"))
+        let image = UIImageView(image: #imageLiteral(resourceName: "WantedIcon"))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
-    
-    let artifactStatus: Bool = false
     
     /** Artifact Status Icon */
     let artifactStatusIcon: UIImageView = {
@@ -44,7 +42,7 @@ class ArtifactCell: UICollectionViewCell
         title.isEditable = false
         title.isScrollEnabled = false
         title.isSelectable = false
-        title.text = "WAYFINDING"
+        title.text = "NAVIGATE"
         return title
     }()
     
@@ -162,6 +160,8 @@ class ArtifactCell: UICollectionViewCell
         debugPrint(artifactTitle.text)
 
         if artifactTitle.text == "WAYFINDING" {
+            artifactTitle.text = "NAVIGATE"
+            artifactSubtitle.text = "FIND YOUR WAY"
             artifactButton = artifactButtonWayfinding
             artifactStatusIcon.image = #imageLiteral(resourceName: "Unlocked")
             artifactButton?.addTarget(self, action: #selector(wayfindingButtonTapped), for: .touchUpInside)
