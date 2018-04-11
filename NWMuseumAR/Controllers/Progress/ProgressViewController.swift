@@ -62,6 +62,7 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArtifactCell") as! ProgressCell
         //call setArtifact function in ProgressCell.swift
         cell.setArtifact(artifact: artifact)
+        cell.parentViewController = self
         //return the cell after update with icon and description
         return cell
     }
@@ -70,7 +71,17 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! ProgressCell
         cell.artifactDescription.text = "complete"
         
-        Artifact.setComplete(withTitle: cell.name!, to: true)
+        Artifact.setComplete(withTitle: cell.title!, to: true)
         print("Number complete now: \(Artifact.countCompleted())")
+    }
+    
+    // Function for starting new AR Scene with reference to table data
+    func performSegue(withArtifactTitle title: String) {
+        
+        let parent = self.parent as! UIPageViewController
+        
+        let arViewController = UIStoryboard(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "arscene") as! ARSceneViewController
+        arViewController.artifactSelected = title
+        parent.setViewControllers([arViewController], direction: .forward, animated: true, completion: nil)
     }
 }

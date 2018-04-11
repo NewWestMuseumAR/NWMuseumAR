@@ -26,7 +26,6 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         super.viewDidLoad()
         
         self.delegate = self
-        self.dataSource = self
         
         setViewControllers([subViewControllers[0]], direction: .forward, animated: true, completion: nil)
     }

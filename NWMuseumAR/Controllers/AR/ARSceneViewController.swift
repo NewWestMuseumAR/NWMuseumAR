@@ -18,6 +18,9 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - UI Outlets
     @IBOutlet weak var sceneView: ARSCNView!
     
+    // The artifact passed from the progress view controller
+    var artifactSelected: String?
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var detectedArtifact: String? = nil
     var isRestartAvailable = true
