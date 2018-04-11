@@ -12,6 +12,7 @@ class ArtifactCell: UICollectionViewCell
 {
     var parentViewController: UIViewController?
     var completed = false
+    var imageName: String?
     
     /** Artifact Image  */
     let artifactIcon: UIImageView = {
@@ -146,7 +147,7 @@ class ArtifactCell: UICollectionViewCell
     
     @objc func lockedButtonTapped() {
         let viewController = UIStoryboard.init(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "arscene") as! ARSceneViewController
-        viewController.targetArtifactName = artifactTitle.text
+        viewController.targetArtifactName = imageName
         parentViewController?.show(viewController, sender: self)
     }
     

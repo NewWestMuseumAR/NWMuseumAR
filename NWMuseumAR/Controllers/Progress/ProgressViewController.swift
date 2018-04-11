@@ -194,8 +194,8 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! ArtifactCell
         
         let artifact = artifacts![indexPath.item]
-        debugPrint(artifact.title)
         cell.completed = artifact.completed
+        cell.imageName = artifact.title
         
         // Assign artifact details here.
         cell.artifactIcon.image = UIImage(named: artifact.image!)
