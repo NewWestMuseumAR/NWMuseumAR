@@ -626,7 +626,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F665AXEWKQ;
+				DEVELOPMENT_TEAM = G9QGD8G3YE;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
@@ -650,7 +650,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F665AXEWKQ;
+				DEVELOPMENT_TEAM = G9QGD8G3YE;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NWMuseumAR/Libs/Vuforia/vuforia-sdk-ios-7-0-50/build/include\"";
 				INFOPLIST_FILE = NWMuseumAR/Info.plist;
