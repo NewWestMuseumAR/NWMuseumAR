@@ -10,9 +10,8 @@ import UIKit
 
 class ArtifactCell: UICollectionViewCell
 {
-    
-    var artifact: Artifact?
     var parentViewController: UIViewController?
+    var completed = false
     
     /** Artifact Image  */
     let artifactIcon: UIImageView = {
@@ -21,6 +20,8 @@ class ArtifactCell: UICollectionViewCell
         image.contentMode = .scaleAspectFit
         return image
     }()
+    
+    let artifactStatus: Bool = false
     
     /** Artifact Status Icon */
     let artifactStatusIcon: UIImageView = {
@@ -96,7 +97,6 @@ class ArtifactCell: UICollectionViewCell
         button.setTitleColor(UIColor(red: 0.99, green: 0.50, blue: 0.51, alpha: 1.0), for: .normal)
         button.backgroundColor = UIColor(red: 0.99, green: 0.93, blue: 0.91, alpha: 1.0)
         button.layer.cornerRadius = 17
-        button.addTarget(self, action: #selector(lockedButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -137,7 +137,6 @@ class ArtifactCell: UICollectionViewCell
     /** Initial Load. */
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
     }
     
     /** Required for overridding cell. */
@@ -147,38 +146,38 @@ class ArtifactCell: UICollectionViewCell
     
     @objc func lockedButtonTapped() {
         let viewController = UIStoryboard.init(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "arscene") as! ARSceneViewController
-        viewController.targetArtifactName = artifact!.title
+        viewController.targetArtifactName = artifactTitle.text
+        parentViewController?.show(viewController, sender: self)
+    }
     
-
+    @objc func wayfindingButtonTapped() {
+        let viewController = NavigationViewController()
         parentViewController?.show(viewController, sender: self)
     }
     
     /** Setup layout for artifact cell. */
-    fileprivate func setupLayout()
+    func setupLayout()
     {
-        // TODO: Add more logic to decide button.
-        if artifact == nil {
-            artifactButton = artifactButtonLocked
-            artifactButton?.addTarget(self, action: #selector(lockedButtonTapped), for: .touchUpInside)
+        debugPrint(artifactTitle.text)
 
-        } else if artifact!.title == "Wayfinding" {
-            artifactButton = artifactButtonLocked
-            artifactButton?.addTarget(self, action: #selector(lockedButtonTapped), for: .touchUpInside)
+        if artifactTitle.text == "WAYFINDING" {
+            artifactButton = artifactButtonWayfinding
+            artifactStatusIcon.image = #imageLiteral(resourceName: "Unlocked")
+            artifactButton?.addTarget(self, action: #selector(wayfindingButtonTapped), for: .touchUpInside)
 
-        } else if artifact!.completed == false {
+        } else if !completed {
             artifactButton = artifactButtonLocked
+            artifactStatusIcon.image = #imageLiteral(resourceName: "Locked")
             artifactButton?.addTarget(self, action: #selector(lockedButtonTapped), for: .touchUpInside)
 
         } else {
             artifactButton = artifactButtonUnlocked
-            artifactButton?.addTarget(self, action: #selector(lockedButtonTapped), for: .touchUpInside)
-
+            artifactStatusIcon.image = #imageLiteral(resourceName: "Unlocked")
+            //artifactButton?.addTarget(self, action: #selector(lockedButtonTapped), for: .touchUpInside)
         }
 
         
         // TODO: Add more logic to decide locked/unlocked icon.
-        artifactStatusIcon.image = #imageLiteral(resourceName: "Locked")
-        artifactStatusIcon.image = #imageLiteral(resourceName: "Unlocked")
         
         /** Add Views */
         addSubview(artifactCellContainer)

@@ -291,7 +291,7 @@ extension ARSceneViewController: ARSessionDelegate {
     
     func performSeque() {
         
-        let progressViewController = UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress") as! ProgressViewController
+        let progressViewController = ProgressViewController()
         
         show(progressViewController, sender: self)
     }

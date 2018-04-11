@@ -124,7 +124,7 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         subtitle.backgroundColor = nil
         subtitle.text = "0 COLLECTED"
         
-        let attributedString = NSMutableAttributedString(string: "0 COLLECTED")
+        let attributedString = NSMutableAttributedString(string: "\(Artifact.countCompleted()) COMPLETED")
         let paragraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.alignment = .center
         attributedString.addAttributes([
@@ -194,7 +194,8 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! ArtifactCell
         
         let artifact = artifacts![indexPath.item]
-        cell.artifact = artifact
+        debugPrint(artifact.title)
+        cell.completed = artifact.completed
         
         // Assign artifact details here.
         cell.artifactIcon.image = UIImage(named: artifact.image!)
@@ -202,7 +203,7 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         cell.artifactSubtitle.text = artifact.completed ? "COLLECTED" : "TAP FOR A HINT"
         cell.backgroundColor = UIColor(red: 0.97, green: 0.96, blue: 0.98, alpha: 1.0)
         cell.parentViewController = self
-        
+        cell.setupLayout()
         return cell
     }
     
