@@ -72,11 +72,9 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         session.pause()
     }
+    
     @IBAction func exitButton(_ sender: UIButton) {
-        let parent = self.parent as! UIPageViewController
-        
-        let progressViewController = UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress") as! ProgressViewController
-        parent.setViewControllers([progressViewController], direction: .reverse, animated: true, completion: nil)
+        performSeque()
     }
     
     @IBAction func collectButton(_ sender: UIButton) {
@@ -346,5 +344,12 @@ extension ARSceneViewController: ARSessionDelegate {
         }
         alertController.addAction(restartAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func performSeque() {
+        let parent = self.parent as! UIPageViewController
+        
+        let progressViewController = UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress") as! ProgressViewController
+        parent.setViewControllers([progressViewController], direction: .reverse, animated: true, completion: nil)
     }
 }
