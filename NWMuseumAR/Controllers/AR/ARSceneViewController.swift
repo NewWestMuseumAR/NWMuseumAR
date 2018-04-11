@@ -13,7 +13,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - Basic Debugging Options
     let IS_DEBUG: Bool = true
-    var IS_VIDEO: Bool = false
     
     // MARK: - UI Outlets
     @IBOutlet weak var sceneView: ARSCNView!
@@ -168,6 +167,29 @@ extension ARSceneViewController {
         oscillateNode(node: node)
         spinNode(node: node)
     }
+    
+    /// - Tag: Adds video to node
+    func addVideo(node: SCNNode, plane: SCNPlane, video: String?) {
+        let planeNode = SCNNode(geometry: plane)
+        planeNode.name = "artifact"
+        planeNode.opacity = 1
+        
+        let videoNode = SKVideoNode(fileNamed: "\(video!).mp4")
+        videoNode.play()
+        
+        let skScene = SKScene(size: CGSize(width: 640, height: 480))
+        skScene.addChild(videoNode)
+        
+        videoNode.position = CGPoint(x: skScene.size.width/2, y: skScene.size.height/2)
+        videoNode.size = skScene.size
+        
+        plane.firstMaterial?.diffuse.contents = skScene
+        plane.firstMaterial?.isDoubleSided = true
+        
+        planeNode.eulerAngles.x = -.pi / 2
+        
+        node.addChildNode(planeNode)
+    }
 }
 
 
@@ -254,40 +276,23 @@ extension ARSceneViewController: ARSessionDelegate {
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
             
-            if self.IS_VIDEO { // TODO: For debugging - property is at top of class
-                
-                let planeNode = SCNNode(geometry: plane)
-                planeNode.name = "artifact"
-                planeNode.opacity = 1
-                
-                let videoNode = SKVideoNode(fileNamed: "test1.mp4")
-                videoNode.play()
-                
-                let skScene = SKScene(size: CGSize(width: 640, height: 480))
-                skScene.addChild(videoNode)
-                
-                videoNode.position = CGPoint(x: skScene.size.width/2, y: skScene.size.height/2)
-                videoNode.size = skScene.size
-                
-                plane.firstMaterial?.diffuse.contents = skScene
-                plane.firstMaterial?.isDoubleSided = true
-                
-                planeNode.eulerAngles.x = -.pi / 2
-                
-                node.addChildNode(planeNode)
-                
-            } else { // This is if we want coin
-                
-                let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
-                let coinNode = coin.rootNode
-                
-                coinNode.name = "coin"
-                coinNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
-                
-                self.oscillateAndSpinNode(node: coinNode)
-                
-                node.addChildNode(coinNode)
+            if self.IS_DEBUG {
+                self.addVideo(node: node, plane: plane, video: "notebook")
             }
+            
+            if self.artifactSelected == "notebook" || self.artifactSelected == "Fire" {
+                self.addVideo(node: node, plane: plane, video: self.artifactSelected!)
+            }
+            
+            let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
+            let coinNode = coin.rootNode
+            
+            coinNode.name = "coin"
+            coinNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+            
+            self.oscillateAndSpinNode(node: coinNode)
+            
+            node.addChildNode(coinNode)
         }
         
         DispatchQueue.main.async {
