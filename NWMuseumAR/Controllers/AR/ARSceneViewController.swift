@@ -13,7 +13,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - Basic Debugging Options
     let IS_DEBUG: Bool = true
-    var IS_VIDEO: Bool = false
     
     // MARK: - UI Outlets
     @IBOutlet weak var sceneView: ARSCNView!
@@ -27,10 +26,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     var overlayMode = false
     var overlayView: OverlayView!
     
-    /// The view controller that displays the status and "restart experience" UI.
-    lazy var statusViewController: StatusViewController = {
-        return childViewControllers.lazy.flatMap({ $0 as? StatusViewController }).first!
-    }()
     
     /// A serial queue for thread safety when modifying the SceneKit node graph.
     let updateQueue = DispatchQueue(label: Bundle.main.bundleIdentifier! +
@@ -45,11 +40,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         setupARDelegate()
-        
-        // Hook up status view controller callback(s).
-        statusViewController.restartExperienceHandler = { [unowned self] in
-            self.restartExperience()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -187,6 +177,29 @@ extension ARSceneViewController {
         oscillateNode(node: node)
         spinNode(node: node)
     }
+    
+    /// - Tag: Adds video to node
+    func addVideo(node: SCNNode, plane: SCNPlane, video: String?) {
+        let planeNode = SCNNode(geometry: plane)
+        planeNode.name = "artifact"
+        planeNode.opacity = 1
+        
+        let videoNode = SKVideoNode(fileNamed: video! + ".mp4")
+        videoNode.play()
+        
+        let skScene = SKScene(size: CGSize(width: 640, height: 480))
+        skScene.addChild(videoNode)
+        
+        videoNode.position = CGPoint(x: skScene.size.width/2, y: skScene.size.height/2)
+        videoNode.size = skScene.size
+        
+        plane.firstMaterial?.diffuse.contents = skScene
+        plane.firstMaterial?.isDoubleSided = true
+        
+        planeNode.eulerAngles.x = .pi / 2
+        
+        node.addChildNode(planeNode)
+    }
 }
 
 
@@ -205,45 +218,13 @@ extension ARSceneViewController: ARSessionDelegate {
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        statusViewController.showTrackingQualityInfo(for: camera.trackingState, autoHide: true)
         
         switch camera.trackingState {
         case .notAvailable, .limited:
-            statusViewController.escalateFeedback(for: camera.trackingState, inSeconds: 3.0)
+            debugPrint("Tracking is limited")
         case .normal:
-            statusViewController.cancelScheduledMessage(for: .trackingStateEscalation)
+            debugPrint("Tracking is normal")
         }
-    }
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        guard error is ARError else { return }
-        
-        let errorWithInfo = error as NSError
-        let messages = [
-            errorWithInfo.localizedDescription,
-            errorWithInfo.localizedFailureReason,
-            errorWithInfo.localizedRecoverySuggestion
-        ]
-        
-        // Use `flatMap(_:)` to remove optional error messages.
-        let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
-        
-        DispatchQueue.main.async {
-            self.displayErrorMessage(title: "The AR session failed.", message: errorMessage)
-        }
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        statusViewController.showMessage("""
-        SESSION INTERRUPTED
-        The session will be reset after the interruption has ended.
-        """, autoHide: false)
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        statusViewController.showMessage("RESETTING SESSION")
-        
-        restartExperience()
     }
     
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
@@ -273,46 +254,27 @@ extension ARSceneViewController: ARSessionDelegate {
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
             
-            if self.IS_VIDEO { // TODO: For debugging - property is at top of class
-                
-                let planeNode = SCNNode(geometry: plane)
-                planeNode.name = "artifact"
-                planeNode.opacity = 1
-                
-                let videoNode = SKVideoNode(fileNamed: "test1.mp4")
-                videoNode.play()
-                
-                let skScene = SKScene(size: CGSize(width: 640, height: 480))
-                skScene.addChild(videoNode)
-                
-                videoNode.position = CGPoint(x: skScene.size.width/2, y: skScene.size.height/2)
-                videoNode.size = skScene.size
-                
-                plane.firstMaterial?.diffuse.contents = skScene
-                plane.firstMaterial?.isDoubleSided = true
-                
-                planeNode.eulerAngles.x = -.pi / 2
-                
-                node.addChildNode(planeNode)
-                
-            } else { // This is if we want coin
-                
-                let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
-                let coinNode = coin.rootNode
-                
-                coinNode.name = "coin"
-                coinNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
-                
-                self.oscillateAndSpinNode(node: coinNode)
-                
-                node.addChildNode(coinNode)
+            if self.IS_DEBUG {
+                self.addVideo(node: node, plane: plane, video: "notebook")
             }
+            
+            if self.artifactSelected == "notebook" || self.artifactSelected == "Fire" {
+                self.addVideo(node: node, plane: plane, video: self.artifactSelected!)
+            }
+            
+            let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
+            let coinNode = coin.rootNode
+            
+            coinNode.name = "coin"
+            coinNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+            
+            self.oscillateAndSpinNode(node: coinNode)
+            
+            node.addChildNode(coinNode)
         }
         
         DispatchQueue.main.async {
             let imageName = referenceImage.name ?? ""
-            self.statusViewController.cancelAllScheduledMessages()
-            self.statusViewController.showMessage("Detected image “\(imageName)”")
             self.detectedArtifact = imageName
         }
     }
@@ -322,8 +284,6 @@ extension ARSceneViewController: ARSessionDelegate {
     func restartExperience() {
         guard isRestartAvailable else { return }
         isRestartAvailable = false
-        
-        statusViewController.cancelAllScheduledMessages()
         
         resetTracking()
         
@@ -348,30 +308,13 @@ extension ARSceneViewController: ARSessionDelegate {
         configuration.planeDetection = .vertical
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         
-        statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
-        
         debugPrint("Leaving \(#function)")
     }
     
-    // MARK: - Error handling
-    /// - Tag: Displaying error messages
-    func displayErrorMessage(title: String, message: String) {
-        // Blur the background.
-        
-        // Present an alert informing about the error that has occurred.
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let restartAction = UIAlertAction(title: "Restart Session", style: .default) { _ in
-            alertController.dismiss(animated: true, completion: nil)
-            self.resetTracking()
-        }
-        alertController.addAction(restartAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     func performSeque() {
-        let parent = self.parent as! UIPageViewController
         
         let progressViewController = UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress") as! ProgressViewController
-        parent.setViewControllers([progressViewController], direction: .reverse, animated: true, completion: nil)
+        
+        show(progressViewController, sender: self)
     }
 }

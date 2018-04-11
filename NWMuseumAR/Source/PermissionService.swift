@@ -26,6 +26,9 @@ class PermissionService: NSObject {
     private var locationManager: CLLocationManager!
     public var delegate: PermissionServiceDelegate?
     
+    private(set) public var locationGranted: Bool = false
+    private(set) public var cameraGranted: Bool = false
+    
     override init() {
         super.init()
     }
@@ -48,6 +51,7 @@ class PermissionService: NSObject {
             AVCaptureDevice.requestAccess(for: .video) { (granted: Bool) in
                 
                 if granted {
+                    self.cameraGranted = true
                     self.delegate?.permissionService(didGrant: .camera)
                 } else {
                     self.delegate?.permissionService(didDeny: .camera)
@@ -61,8 +65,6 @@ extension PermissionService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
-        debugPrint("Entering \(#function)")
-        
         if !CLLocationManager.locationServicesEnabled() {
             self.delegate?.permissionService(didFail: .location)
             return
@@ -72,6 +74,7 @@ extension PermissionService: CLLocationManagerDelegate {
             
         case .authorizedAlways,
              .authorizedWhenInUse:
+            locationGranted = true
             self.delegate?.permissionService(didGrant: .location)
             
         case  .notDetermined:
@@ -81,7 +84,5 @@ extension PermissionService: CLLocationManagerDelegate {
              .restricted:
             self.delegate?.permissionService(didDeny: .location)
         }
-        
-        debugPrint("Leaving \(#function)")
     }
 }
