@@ -14,6 +14,8 @@
 		8440260A202270B200AF5839 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402609202270B200AF5839 /* Assets.xcassets */; };
 		8440260D202270B200AF5839 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8440260B202270B200AF5839 /* LaunchScreen.storyboard */; };
 		84595D2F207E76BE00B11C32 /* lottie_confetti_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 84595D2E207E76BE00B11C32 /* lottie_confetti_data.json */; };
+		84595D34207E774100B11C32 /* ArtifactDetailOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84595D33207E774100B11C32 /* ArtifactDetailOverlay.swift */; };
+		84595D36207E77B500B11C32 /* ArtifactDetailOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84595D35207E77B500B11C32 /* ArtifactDetailOverlay.xib */; };
 		845AA631207DD43C0096D9E3 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AA630207DD43C0096D9E3 /* OnboardingCell.swift */; };
 		845AA633207DD4600096D9E3 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AA632207DD4600096D9E3 /* OnboardingController.swift */; };
 		845AA636207E0FF60096D9E3 /* ArtifactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AA635207E0FF60096D9E3 /* ArtifactCell.swift */; };
@@ -63,6 +65,8 @@
 		8440260C202270B200AF5839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8440260E202270B200AF5839 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84595D2E207E76BE00B11C32 /* lottie_confetti_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_confetti_data.json; sourceTree = "<group>"; };
+		84595D33207E774100B11C32 /* ArtifactDetailOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactDetailOverlay.swift; sourceTree = "<group>"; };
+		84595D35207E77B500B11C32 /* ArtifactDetailOverlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtifactDetailOverlay.xib; sourceTree = "<group>"; };
 		845AA630207DD43C0096D9E3 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		845AA632207DD4600096D9E3 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		845AA635207E0FF60096D9E3 /* ArtifactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactCell.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 				8440260B202270B200AF5839 /* LaunchScreen.storyboard */,
 				8468ECC320647B2D002C8723 /* Navigation.storyboard */,
 				DD9BA272207DE84C008B826E /* OverlayView.xib */,
+				84595D35207E77B500B11C32 /* ArtifactDetailOverlay.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 			children = (
 				8461B1F6202E31F100733885 /* ProgressViewController.swift */,
 				845AA635207E0FF60096D9E3 /* ArtifactCell.swift */,
+				84595D33207E774100B11C32 /* ArtifactDetailOverlay.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -363,6 +369,7 @@
 				8440260D202270B200AF5839 /* LaunchScreen.storyboard in Resources */,
 				FB608EED204CECCC00441AB6 /* Localizable.strings in Resources */,
 				840ADCCC202418D4004313A8 /* .gitkeep in Resources */,
+				84595D36207E77B500B11C32 /* ArtifactDetailOverlay.xib in Resources */,
 				DD044B28207C325400BF20FD /* spark.png in Resources */,
 				DD9BA273207DE84C008B826E /* OverlayView.xib in Resources */,
 				8468ECC420647B2D002C8723 /* Navigation.storyboard in Resources */,
@@ -440,6 +447,7 @@
 				848FBAB520648F3D00E56D77 /* SceneLocationView.swift in Sources */,
 				84B1FC96207C297400387E94 /* NWMuseumAR.xcdatamodeld in Sources */,
 				848FBAB320648F3D00E56D77 /* CGPoint+Extensions.swift in Sources */,
+				84595D34207E774100B11C32 /* ArtifactDetailOverlay.swift in Sources */,
 				848FBAAF20648F3D00E56D77 /* SceneLocationEstimate.swift in Sources */,
 				848FBAB420648F3D00E56D77 /* CLLocation+Extensions.swift in Sources */,
 				845AA631207DD43C0096D9E3 /* OnboardingCell.swift in Sources */,

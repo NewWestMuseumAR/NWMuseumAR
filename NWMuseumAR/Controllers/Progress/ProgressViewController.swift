@@ -56,6 +56,9 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         "LOCKED",
         ]
     
+    var overlayMode = false
+    var overlayView: ArtifactDetailOverlay!
+    
     /** View Loaded */
     override func viewDidLoad()
     {
@@ -177,6 +180,32 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
             artifactCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
             artifactCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
+    }
+    
+    func showOverlay(artifactName: String) {
+        self.overlayBlurredBackgroundView()
+        overlayMode = true
+        
+        instantiateOverlayContainer(artifactName: artifactName)
+        
+        // Set detected artifact back to nil to disable click
+    }
+    
+    func overlayBlurredBackgroundView() {
+        let blurredBackgroundView = UIVisualEffectView()
+        
+        blurredBackgroundView.frame = view.frame
+        blurredBackgroundView.effect = UIBlurEffect(style: .dark)
+        
+        view.addSubview(blurredBackgroundView)
+    }
+    
+    func instantiateOverlayContainer(artifactName: String) {
+        overlayView = ArtifactDetailOverlay(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        overlayView.artifact = artifactName
+        overlayView.image = UIImage.init(named: "" + artifactName + "Icon")
+        overlayView.parentController = self
+        view.addSubview(overlayView)
     }
     
     /** Sets the spacing between collection views. */
