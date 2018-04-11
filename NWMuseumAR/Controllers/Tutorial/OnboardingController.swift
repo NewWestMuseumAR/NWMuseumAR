@@ -210,6 +210,16 @@ extension OnboardingController: PermissionServiceDelegate {
                 cell.tutorialImageView.image = UIImage(named: "Onboarding_5")
                 cell.titleTextView.text = "ACCESS"
                 cell.subtitleTextView.text = "ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
+                
+                self.previousButton.isEnabled = false
+                self.previousButton.layer.opacity = 0
+                
+                self.nextButton.isEnabled = false
+                self.nextButton.layer.opacity = 0
+                
+                self.pageControl.layer.opacity = 0
+                
+                self.collectionView?.isScrollEnabled = false
             }
         }
     }
