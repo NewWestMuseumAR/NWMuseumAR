@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if launchedBefore  {
                 // Skip Tutorial
-                homeViewController = MainPageViewController()
+                homeViewController = ProgressViewController()
             } else {
                 // Show tutorial, add launchedbefore to storage
                 let layout = UICollectionViewFlowLayout()

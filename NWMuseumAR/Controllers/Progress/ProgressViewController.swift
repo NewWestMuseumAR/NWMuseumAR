@@ -78,10 +78,9 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     // Function for starting new AR Scene with reference to table data
     func performSegue(withArtifactTitle title: String) {
         
-        let parent = self.parent as! UIPageViewController
-        
         let arViewController = UIStoryboard(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "arscene") as! ARSceneViewController
         arViewController.artifactSelected = title
-        parent.setViewControllers([arViewController], direction: .forward, animated: true, completion: nil)
+        
+        show(arViewController, sender: self)
     }
 }

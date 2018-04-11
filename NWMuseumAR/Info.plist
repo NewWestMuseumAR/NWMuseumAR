@@ -25,7 +25,7 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Your location helps our app guide you to the museum.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Yes</string>
+	<string>Your location helps our app guide you to the museum.</string>
 	<key>PrefersOpenGL</key>
 	<false/>
 	<key>UILaunchStoryboardName</key>

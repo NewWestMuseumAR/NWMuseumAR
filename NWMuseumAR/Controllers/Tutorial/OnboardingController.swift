@@ -79,8 +79,10 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
     }
     
     @objc private func handleSegue() {
-        let mainPageController = MainPageViewController()
-        show(mainPageController, sender: nil)
+        let progressController = UIStoryboard(name: "Progress", bundle: nil)
+            .instantiateViewController(withIdentifier: "progress") as! ProgressViewController
+        
+        show(progressController, sender: nil)
     }
     
     /** Page Control */
@@ -167,6 +169,12 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         }
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == icons.count - 1 {
+            // Last cell is visible
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
