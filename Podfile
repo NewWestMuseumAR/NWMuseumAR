@@ -6,7 +6,4 @@ target 'NWMuseumAR' do
   use_frameworks!
 
   # Pods for NWMuseumAR
-  pod "Alamofire"
-  pod 'ARCL'
-  pod 'CocoaLumberjack'
 end

@@ -9,7 +9,6 @@
 import UIKit
 import SceneKit
 import MapKit
-import CocoaLumberjack
 
 @available(iOS 11.0, *)
 class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, SceneLocationViewDelegate {
