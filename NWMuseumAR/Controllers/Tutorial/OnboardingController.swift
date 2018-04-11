@@ -79,9 +79,7 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
     }
     
     @objc private func handleSegue() {
-        let progressController = UIStoryboard(name: "Progress", bundle: nil)
-            .instantiateViewController(withIdentifier: "progress") as! ProgressViewController
-        
+        let progressController = ProgressViewController()
         show(progressController, sender: nil)
     }
     

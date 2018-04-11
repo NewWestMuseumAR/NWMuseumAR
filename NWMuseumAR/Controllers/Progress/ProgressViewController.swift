@@ -1,71 +1,204 @@
 //
-//  ProgressViewController.swift
-//  NWMuseumAR
+//  ProgressController.swift
+//  NewWestAr
 //
-//  Created by Harrison Milbradt on 2018-02-09.
-//  Copyright © 2018 NWMuseumAR. All rights reserved.
+//  Created by Justin Leung on 4/10/18.
+//  Copyright © 2018 Justin Leung. All rights reserved.
 //
 
 import UIKit
-import CoreData
 
-class ProgressViewController: UIViewController {
-
-    // MARK: - TableView data creation
-    @IBOutlet weak var tableView: UITableView!
+class ProgressViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var artifacts: [Artifact] = []
+    /** Artifact Images */
+    let images = [
+        "ARTIFACT - Wayfinding",
+        "ARTIFACT - Train",
+        "ARTIFACT - Wanted",
+        "ARTIFACT - Fire",
+        "ARTIFACT - Canoe",
+        "ARTIFACT - Proclamation",
+        "ARTIFACT - Freedom",
+        ]
     
+    /** Artifact Titles */
+    let titles = [
+        "WAYFINDING",
+        "FIRE",
+        "TRAIN",
+        "WANTED",
+        "CANOE",
+        "DOCUMENT",
+        "FIRE",
+        ]
+    
+    /** Artifact Subtitles */
+    let subtitles = [
+        "GET TO THE MUSEUM",
+        "COLLECTED",
+        "TAP FOR A HINT",
+        "TAP FOR A HINT",
+        "TAP FOR A HINT",
+        "TAP FOR A HINT",
+        "TAP FOR A HINT",
+        ]
+    
+    /** Artifact Status */
+    let status = [
+        "WAYFINDING",
+        "UNLOCKED",
+        "LOCKED",
+        "LOCKED",
+        "LOCKED",
+        "LOCKED",
+        "LOCKED",
+        ]
+    
+    /** View Loaded */
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        getArtifacts()
+        setupViewsLayout()
         
-        //assigned tableview to the controller
-        //in order to use the extension methods
-        tableView.delegate = self
-        tableView.dataSource = self
-        // Do any additional setup after loading the view.
+        artifactCollectionView.dataSource = self
+        artifactCollectionView.delegate = self
+        
+        view.backgroundColor = UIColor(red: 0.97, green: 0.96, blue: 0.98, alpha: 1.0)
     }
-
-    //creates an array of artifacts as dummy data for testing
-    //This will be replaced by database of some sort later on
-    func getArtifacts()
+    
+    /** Artifacts Collection View */
+    let artifactCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 200, height: 200), collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = UIColor(red: 0.97, green: 0.96, blue: 0.98, alpha: 1.0)
+        collectionView.register(ArtifactCell.self, forCellWithReuseIdentifier: "cellId")
+        return collectionView
+    }()
+    
+    /** Top Container Wrapper */
+    lazy var topContainer: UIView = {
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 310)
+        container.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Top Page Container"))
+        return container
+    }()
+    
+    /** Title */
+    let topContainerTitle: UITextView = {
+        let title = UITextView()
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.textAlignment = .center
+        title.textColor = .mainTitleDark
+        title.isEditable = false
+        title.isScrollEnabled = false
+        title.isSelectable = false
+        title.backgroundColor = nil
+        let attributedString = NSMutableAttributedString(string: "ARTIFACTS")
+        let paragraphStyle = NSMutableParagraphStyle.init()
+        paragraphStyle.alignment = .center
+        attributedString.addAttributes([
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy),
+            NSAttributedStringKey.kern: 3,
+            NSAttributedStringKey.foregroundColor: UIColor(red: 0.26, green: 0.28, blue: 0.37, alpha: 1.0),
+            NSAttributedStringKey.paragraphStyle: paragraphStyle
+            ], range: NSRange(location: 0, length: attributedString.length))
+        title.attributedText = attributedString
+        return title
+    }()
+    
+    /** Subtitle */
+    let topContainerSubtitle: UITextView = {
+        let subtitle = UITextView()
+        subtitle.translatesAutoresizingMaskIntoConstraints = false
+        subtitle.isEditable = false
+        subtitle.isScrollEnabled = false
+        subtitle.isSelectable = false
+        subtitle.backgroundColor = nil
+        subtitle.text = "0 COLLECTED"
+        
+        let attributedString = NSMutableAttributedString(string: "0 COLLECTED")
+        let paragraphStyle = NSMutableParagraphStyle.init()
+        paragraphStyle.alignment = .center
+        attributedString.addAttributes([
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.medium),
+            NSAttributedStringKey.kern: 2.5,
+            NSAttributedStringKey.foregroundColor: UIColor(red: 0.67, green: 0.69, blue: 0.73, alpha: 1.0),
+            NSAttributedStringKey.paragraphStyle: paragraphStyle
+            ], range: NSRange(location: 0, length: attributedString.length))
+        subtitle.attributedText = attributedString
+        
+        return subtitle
+    }()
+    
+    fileprivate func setupViewsLayout()
     {
-        artifacts = Artifact.getAll()
-        self.tableView.reloadData()
+        // Top container
+        let topContainer = UIView()
+        topContainer.translatesAutoresizingMaskIntoConstraints = false
+        topContainer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 310)
+        topContainer.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Top Page Container"))
+        view.addSubview(topContainer)
+        NSLayoutConstraint.activate([
+            topContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            topContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            topContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            topContainer.heightAnchor.constraint(equalToConstant: 310)
+            ])
+        
+        // Top title.
+        topContainer.addSubview(topContainerTitle)
+        NSLayoutConstraint.activate([
+            topContainerTitle.bottomAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -33),
+            topContainerTitle.leftAnchor.constraint(equalTo: topContainer.leftAnchor),
+            topContainerTitle.rightAnchor.constraint(equalTo: topContainer.rightAnchor)
+            ])
+        
+        // Number of artifacts collected.
+        topContainer.addSubview(topContainerSubtitle)
+        NSLayoutConstraint.activate([
+            topContainerSubtitle.bottomAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -14),
+            topContainerSubtitle.leftAnchor.constraint(equalTo: topContainer.leftAnchor),
+            topContainerSubtitle.rightAnchor.constraint(equalTo: topContainer.rightAnchor)
+            ])
+        
+        // Artifact Collection View
+        view.addSubview(artifactCollectionView)
+        NSLayoutConstraint.activate([
+            artifactCollectionView.topAnchor.constraint(equalTo: topContainer.bottomAnchor),
+            artifactCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            artifactCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            artifactCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
-}
-
-//find the cell and display info as needed
-extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
     
-    // MARK: - UITableViewDataSource, UITableViewDelegate
-    //this function sets how mant rolls are we displaying
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //display all the artifacts in the array
-        return artifacts.count
+    /** Sets the spacing between collection views. */
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //select an artifact based on the row number
-        let artifact = artifacts[indexPath.row]
-        //create an instance of the cell on that roll
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ArtifactCell") as! ProgressCell
-        //call setArtifact function in ProgressCell.swift
-        cell.setArtifact(artifact: artifact)
-        cell.parentViewController = self
-        //return the cell after update with icon and description
+    /** Sets the number of cells in the collection view. */
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    /** Create the sells in the collection view. */
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! ArtifactCell
+        
+        // Assign artifact details here.
+        cell.artifactIcon.image = UIImage(named: images[indexPath.item])
+        cell.artifactTitle.text = titles[indexPath.item]
+        cell.artifactSubtitle.text = subtitles[indexPath.item]
+        cell.backgroundColor = UIColor(red: 0.97, green: 0.96, blue: 0.98, alpha: 1.0)
+        
         return cell
     }
     
-    // Function for starting new AR Scene with reference to table data
-    func performSegue(withArtifactTitle title: String) {
-        
-        let arViewController = UIStoryboard(name: "ARScene", bundle: nil).instantiateViewController(withIdentifier: "arscene") as! ARSceneViewController
-        arViewController.targetArtifactName = title
-        
-        show(arViewController, sender: self)
+    /** Sets the size of each cell. */
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 120)
     }
 }
