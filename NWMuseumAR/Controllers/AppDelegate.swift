@@ -34,11 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let homeViewController: UIViewController
         
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
         // iOS 11.3 required, ARWorldTracking capable chip required
         if ARWorldTrackingConfiguration.isSupported, #available(iOS 11.3, *){
             
             let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-            
+            // Show tutorial, add launchedbefore to storage
+
             if launchedBefore  {
                 // Skip Tutorial
                 homeViewController = ProgressViewController()
@@ -60,10 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         } else {
-            fatalError("Device not supported")
-            // TODO: - Set this to unsupported device controller
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
+            homeViewController = DeviceNotSupportedViewController(collectionViewLayout: layout)
         }
         
         // Show our starting controller to the user
