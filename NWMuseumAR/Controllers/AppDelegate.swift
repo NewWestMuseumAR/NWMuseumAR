@@ -41,10 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if launchedBefore  {
                 // Skip Tutorial
-                homeViewController = MainPageViewController()
+                homeViewController = ProgressViewController()
             } else {
                 // Show tutorial, add launchedbefore to storage
-                homeViewController = TutorialPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+                let layout = UICollectionViewFlowLayout()
+                layout.scrollDirection = .horizontal
+                homeViewController = OnboardingController(collectionViewLayout: layout)
+                // TODO: - Remove this shit
                 //UserDefaults.standard.set(true, forKey: "launchedBefore")
             }
             
@@ -58,7 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             // TODO: - Set this to unsupported device controller
-            homeViewController = TutorialPageViewController()
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            homeViewController = OnboardingController(collectionViewLayout: layout)
         }
 
         // Show our starting controller to the user
