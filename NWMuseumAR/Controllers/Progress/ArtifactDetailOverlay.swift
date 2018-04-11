@@ -52,7 +52,7 @@ class ArtifactDetailOverlay: UIView {
     
     func initSubviews() {
         // standard initialization logic
-        let nib = UINib(nibName: "ArtifactDetailView", bundle: nil)
+        let nib = UINib(nibName: "ArtifactDetailOverlay", bundle: nil)
         nib.instantiate(withOwner: self, options: nil)
         contentView.frame = bounds
         addSubview(contentView)
