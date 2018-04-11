@@ -109,6 +109,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             // Added
             mapView.showsUserLocation = true
             mapView.showsPointsOfInterest = true
+            locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
             mapView.isHidden = true
             view.addSubview(mapView)

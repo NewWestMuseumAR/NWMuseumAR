@@ -132,8 +132,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     func instantiateOverlayContainer() {
         overlayView = OverlayView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        overlayView.artifact = targetArtifactName!
-        overlayView.image = UIImage.init(named: "" + targetArtifactName! + "Icon")
+        overlayView.caption = "You have just collected \(targetArtifactName!)"
+        // overlayView.image = pass in image
         overlayView.parentController = self
         view.addSubview(overlayView)
     }
