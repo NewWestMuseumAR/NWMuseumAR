@@ -59,6 +59,12 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         sceneLocationView.addSubview(infoLabel)
         sceneLocationView.navigationDelegate = self
         
+        navigationExitButton.addTarget(self, action: #selector(performSeque), for: .touchUpInside)
+        navigationBar.addSubview(navigationExitButton)
+
+        
+       
+        
         updateInfoLabelTimer = Timer.scheduledTimer(
             timeInterval: 0.1,
             target: self,
@@ -116,7 +122,41 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 print("not enabled")
             }
         }
+        self.view.addSubview(navigationBar)
+        
+        NSLayoutConstraint.activate([
+            // Navigation Bar Container
+            navigationBar.leftAnchor.constraint(equalTo: view.leftAnchor),
+            navigationBar.rightAnchor.constraint(equalTo: view.rightAnchor),
+            navigationBar.topAnchor.constraint(equalTo: view.topAnchor),
+            navigationBar.heightAnchor.constraint(equalToConstant: 60),
+            
+            // Nav Exit Button
+            navigationExitButton.rightAnchor.constraint(equalTo: navigationBar.rightAnchor, constant: -14),
+            navigationExitButton.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 14),
+            navigationExitButton.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: -14),
+            navigationExitButton.widthAnchor.constraint(equalToConstant: 60)
+            ])
     }
+    
+    /** Navigation Bar Overlay */
+    let navigationBar: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.frame = CGRect(x: 0, y: 0, width: 100, height: 60)
+        view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.17, alpha: 1.0)
+        return view
+    }()
+    
+    /** Navigation Exit Button */
+    let navigationExitButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        button.setImage(#imageLiteral(resourceName: "Exit Icon"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
     
     @objc func runTimedCode(sender: UIButton!) {
         let oldCenter = leftArrowImageView?.center
@@ -140,6 +180,13 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             })
         }
         
+    }
+    
+    @objc func performSeque() {
+        
+        let progressViewController = ProgressViewController()
+        
+        show(progressViewController, sender: self)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -442,6 +489,12 @@ extension NavigationViewController: NavigationViewControllerDelegate {
     func userFinishedNavigation() {
         let mainPage = ProgressViewController()
         present(mainPage, animated: true)
+    }
+    
+    /** Hide Status Bar */
+    override var prefersStatusBarHidden: Bool
+    {
+        return true
     }
 }
 
