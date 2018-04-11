@@ -32,6 +32,9 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(sceneTapped))
+        sceneView.addGestureRecognizer(tap)
+        
         setupARDelegate()
     }
     
@@ -62,17 +65,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         performSeque()
     }
     
-    @IBAction func collectButton(_ sender: UIButton) {
-        // don't allow click if nothing collected
-        if (!userDetectedArtifact) { return }
-        
-        handleTouch()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-            self.collectItem()
-        }
-    }
-    
-    func collectItem() {
+    func showOverlay() {
         self.overlayBlurredBackgroundView()
         overlayMode = true
         
@@ -88,7 +81,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     func instantiateOverlayContainer() {
         overlayView = OverlayView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        overlayView.caption = "You have just collected \("name of artifact")"
+        overlayView.caption = "You have just collected \(targetArtifactName!)"
         // overlayView.image = pass in image
         overlayView.parentController = self
         view.addSubview(overlayView)
@@ -106,19 +99,33 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
 // MARK: - Touch Handling
 extension ARSceneViewController {
-    /// - Tag: Handling the touch event
-    func handleTouch() {
-        if userDetectedArtifact == nil { return }
-        
-        let node = sceneView.scene.rootNode.childNode(withName: "coin", recursively: true)!
+    
+    @objc func sceneTapped(recognizer :UITapGestureRecognizer) {
+        if userDetectedArtifact == false { return }
 
-        createExplosion(node: node, position: node.presentation.position,
-                        rotation: node.presentation.rotation)
-        fadeAndRemoveNode(node: node, time: 0.5)
+        let sceneView = recognizer.view as! ARSCNView
+        let touchLocation = recognizer.location(in: sceneView)
         
-        userDetectedArtifact = false
+        let hitResults = sceneView.hitTest(touchLocation, options: [:])
         
-        Artifact.setComplete(withTitle: targetArtifactName!, to: true)
+        if !hitResults.isEmpty {
+ 
+            guard let hitResult = hitResults.first else { return }
+            
+            let coinNode = hitResult.node
+            
+            createExplosion(node: coinNode, position: coinNode.presentation.position,
+                            rotation: coinNode.presentation.rotation)
+            fadeAndRemoveNode(node: coinNode, time: 0.5)
+            
+            userDetectedArtifact = false
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.25) {
+                
+                Artifact.setComplete(withTitle: self.targetArtifactName!, to: true)
+                self.showOverlay()
+            }
+        }
     }
 }
 
@@ -228,9 +235,10 @@ extension ARSceneViewController: ARSessionDelegate {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
         
-//        if IS_DEBUG {
-//            targetArtifactName = "Github Logo"
-//        }
+        // TODO: - Comment out for production
+        if referenceImage.name == "Github Logo" {
+            referenceImage.name = "Fire"
+        }
         
         if referenceImage.name != targetArtifactName {
             debugPrint("\(referenceImage.name!) is not a match for \(targetArtifactName!). Exiting.")
@@ -240,16 +248,12 @@ extension ARSceneViewController: ARSessionDelegate {
         updateQueue.async {
             
             // Create a plane to visualize the initial position of the detected image.
-            let plane = SCNPlane(width: referenceImage.physicalSize.width,
-                                 height: referenceImage.physicalSize.height)
+//            let plane = SCNPlane(width: referenceImage.physicalSize.width,
+//                                 height: referenceImage.physicalSize.height)
             
-//            if self.IS_DEBUG {
-//                self.addVideo(node: node, plane: plane, video: "notebook")
+//            if self.targetArtifactName == "notebook" || self.targetArtifactName == "Fire" {
+//                self.addVideo(node: node, plane: plane, video: self.targetArtifactName!)
 //            }
-            
-            if self.targetArtifactName == "notebook" || self.targetArtifactName == "Fire" {
-                self.addVideo(node: node, plane: plane, video: self.targetArtifactName!)
-            }
             
             let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
             let coinNode = coin.rootNode
@@ -263,7 +267,6 @@ extension ARSceneViewController: ARSessionDelegate {
         }
         
         DispatchQueue.main.async {
-            let imageName = referenceImage.name ?? ""
             self.userDetectedArtifact = true
         }
     }
