@@ -12,8 +12,8 @@ import ARKit
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - Basic Debugging Options
-    let IS_DEBUG: Bool = false
-    var IS_VIDEO: Bool = true
+    let IS_DEBUG: Bool = true
+    var IS_VIDEO: Bool = false
     
     // MARK: - UI Outlets
     @IBOutlet weak var sceneView: ARSCNView!
@@ -98,14 +98,17 @@ extension ARSceneViewController {
     
     /// - Tag: Handling the touch event
     func handleTouch() {
+        
         if detectedArtifact == nil { return }
         
-        let node = sceneView.scene.rootNode.childNode(withName: "artifact", recursively: true)
+        let node = sceneView.scene.rootNode.childNode(withName: "coin", recursively: true)!
+
+        createExplosion(node: node, position: node.presentation.position,
+                        rotation: node.presentation.rotation)
+        fadeAndRemoveNode(node: node, time: 0.5)
         
-        if (node != nil) {
-            createExplosion(node: node!, position: node!.presentation.position,
-                            rotation: node!.presentation.rotation)
-        }
+        Artifact.setComplete(withTitle: artifactSelected!, to: true)
+     
     }
 }
 
@@ -219,6 +222,7 @@ extension ARSceneViewController: ARSessionDelegate {
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
         return true
     }
+
     
     // MARK: - ARSCNViewDelegate (Image detection results)
     /// - Tag: ARImageAnchor-Visualizing
@@ -227,16 +231,26 @@ extension ARSceneViewController: ARSessionDelegate {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
         
+        if IS_DEBUG {
+            artifactSelected = "Github Logo"
+        }
+        
+        if referenceImage.name != artifactSelected {
+            debugPrint("\(referenceImage.name!) is not a match for \(artifactSelected!). Exiting.")
+            return
+        }
+        
         updateQueue.async {
             
             // Create a plane to visualize the initial position of the detected image.
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
-            let planeNode = SCNNode(geometry: plane)
-            planeNode.opacity = 1
-            planeNode.name = "artifact"
             
             if self.IS_VIDEO { // TODO: For debugging - property is at top of class
+                
+                let planeNode = SCNNode(geometry: plane)
+                planeNode.name = "artifact"
+                planeNode.opacity = 1
                 
                 let videoNode = SKVideoNode(fileNamed: "test1.mp4")
                 videoNode.play()
@@ -257,25 +271,14 @@ extension ARSceneViewController: ARSessionDelegate {
             } else { // This is if we want coin
                 
                 let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
-                coin.rootNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+                let coinNode = coin.rootNode
                 
-                let moveUp = SCNAction.moveBy(x: 0, y: 0, z: 0.05, duration: 1)
-                moveUp.timingMode = .easeInEaseOut;
+                coinNode.name = "coin"
+                coinNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
                 
-                let moveDown = SCNAction.moveBy(x: 0, y: 0, z: -0.05, duration: 1)
-                moveDown.timingMode = .easeInEaseOut;
+                self.oscillateAndSpinNode(node: coinNode)
                 
-                let moveSequence = SCNAction.sequence([moveUp,moveDown])
-                let moveLoop = SCNAction.repeatForever(moveSequence)
-                
-                let spinLoop = SCNAction.repeatForever(SCNAction.rotate(by: .pi, around: SCNVector3(0, 0, 1), duration: 5))
-                
-                coin.rootNode.runAction(moveLoop)
-                coin.rootNode.runAction(spinLoop)
-                
-                coin.rootNode.name = "artifact"
-                
-                node.addChildNode(coin.rootNode)
+                node.addChildNode(coinNode)
             }
         }
         
