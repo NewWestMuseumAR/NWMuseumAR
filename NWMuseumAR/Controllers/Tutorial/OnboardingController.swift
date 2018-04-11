@@ -11,30 +11,30 @@ import UIKit
 class OnboardingController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     /** Onboarding icons.  */
-    let icons = [
+    var icons = [
         "Onboarding_1",
         "Onboarding_2",
         "Onboarding_3",
         "Onboarding_4",
-        //"",
-    ]
+        "Onboarding_5",
+        ]
     
     /** Onboarding titles. */
-    let titles = [
+    var titles = [
         "DISCOVER",
         "INTERACT",
         "HAVE FUN",
         "ACCESS",
-        //"ACCESS"
+        "ACCESS"
     ]
     
     /** Onboarding Subtitles. */
-    let subtitles = [
+    var subtitles = [
         "EXPLORE THE MUSEUM",
         "UNLOCK UNIQUE ARTIFACTS",
         "FIND ARTIFACTS WITH FRIENDS",
         "FOR THE FULL EXPERIENCE",
-        //"ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
+        "ALLOW CAMERA & LOCATION\nACCESS IN YOUR SETTINGS"
     ]
     
     /** Prev Button */
@@ -59,12 +59,13 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         return button
     }()
     
+    private var permissionService: PermissionService?
+    
     @objc private func handleNext()
     {
         let nextIndex = min(pageControl.currentPage + 1, icons.count - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         
-        debugPrint("nextIndex")
         pageControl.currentPage = nextIndex
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
@@ -136,6 +137,9 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         super.viewDidLoad()
         setupBottomControls()
         
+        permissionService = PermissionService()
+        permissionService?.delegate = self
+        
         collectionView?.backgroundColor = .mainBackground
         collectionView?.register(OnboardingCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
@@ -157,6 +161,11 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         cell.titleTextView.text = titles[indexPath.item]
         cell.subtitleTextView.text = subtitles[indexPath.item]
         
+        if indexPath.row == icons.count - 1 {
+            permissionService?.requestCameraPermission()
+            permissionService?.requestLocationPermission()
+        }
+        
         return cell
     }
     
@@ -173,6 +182,7 @@ extension OnboardingController: PermissionServiceDelegate {
         case .location:
             print("Location granted")
         case .camera:
+            handleSegue()
             print("camera granted")
         }
     }

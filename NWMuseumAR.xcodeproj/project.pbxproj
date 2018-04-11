@@ -14,8 +14,8 @@
 		84402603202270B200AF5839 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402602202270B200AF5839 /* art.scnassets */; };
 		8440260A202270B200AF5839 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84402609202270B200AF5839 /* Assets.xcassets */; };
 		8440260D202270B200AF5839 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8440260B202270B200AF5839 /* LaunchScreen.storyboard */; };
-		845AA62A207DCD8F0096D9E3 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AA628207DCD8F0096D9E3 /* OnboardingController.swift */; };
-		845AA62B207DCD8F0096D9E3 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AA629207DCD8F0096D9E3 /* OnboardingCell.swift */; };
+		845AA631207DD43C0096D9E3 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AA630207DD43C0096D9E3 /* OnboardingCell.swift */; };
+		845AA633207DD4600096D9E3 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AA632207DD4600096D9E3 /* OnboardingController.swift */; };
 		8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F4202E30C700733885 /* MainPageViewController.swift */; };
 		8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461B1F6202E31F100733885 /* ProgressViewController.swift */; };
 		8468ECC420647B2D002C8723 /* Navigation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8468ECC320647B2D002C8723 /* Navigation.storyboard */; };
@@ -67,8 +67,8 @@
 		84402609202270B200AF5839 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8440260C202270B200AF5839 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8440260E202270B200AF5839 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		845AA628207DCD8F0096D9E3 /* OnboardingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingController.swift; path = ../../../../NewWestUI/NewWestAr/Onboarding/OnboardingController.swift; sourceTree = "<group>"; };
-		845AA629207DCD8F0096D9E3 /* OnboardingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingCell.swift; path = ../../../../NewWestUI/NewWestAr/Onboarding/OnboardingCell.swift; sourceTree = "<group>"; };
+		845AA630207DD43C0096D9E3 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
+		845AA632207DD4600096D9E3 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		8461B1F4202E30C700733885 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		8461B1F6202E31F100733885 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		8468ECC320647B2D002C8723 /* Navigation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Navigation.storyboard; sourceTree = "<group>"; };
@@ -234,8 +234,8 @@
 		845AA61F207DC7320096D9E3 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				845AA628207DCD8F0096D9E3 /* OnboardingController.swift */,
-				845AA629207DCD8F0096D9E3 /* OnboardingCell.swift */,
+				845AA630207DD43C0096D9E3 /* OnboardingCell.swift */,
+				845AA632207DD4600096D9E3 /* OnboardingController.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -470,7 +470,6 @@
 			files = (
 				84F650D0207D7D020019D1F4 /* Artifact+Extension.swift in Sources */,
 				8461B1F7202E31F100733885 /* ProgressViewController.swift in Sources */,
-				845AA62B207DCD8F0096D9E3 /* OnboardingCell.swift in Sources */,
 				848FBAB720648F3D00E56D77 /* SCNNode+Extensions.swift in Sources */,
 				D985EF372036D2B00072B377 /* ProgressCell.swift in Sources */,
 				848FBAB520648F3D00E56D77 /* SceneLocationView.swift in Sources */,
@@ -478,6 +477,7 @@
 				848FBAB320648F3D00E56D77 /* CGPoint+Extensions.swift in Sources */,
 				848FBAAF20648F3D00E56D77 /* SceneLocationEstimate.swift in Sources */,
 				848FBAB420648F3D00E56D77 /* CLLocation+Extensions.swift in Sources */,
+				845AA631207DD43C0096D9E3 /* OnboardingCell.swift in Sources */,
 				8461B1F5202E30C700733885 /* MainPageViewController.swift in Sources */,
 				84402601202270B200AF5839 /* AppDelegate.swift in Sources */,
 				848FBAB220648F3D00E56D77 /* LocationNode.swift in Sources */,
@@ -488,7 +488,7 @@
 				847A2632207C703300D81192 /* PermissionService.swift in Sources */,
 				848FBABA20648F4700E56D77 /* NavigationViewController.swift in Sources */,
 				84F650D3207D803D0019D1F4 /* SeedData.swift in Sources */,
-				845AA62A207DCD8F0096D9E3 /* OnboardingController.swift in Sources */,
+				845AA633207DD4600096D9E3 /* OnboardingController.swift in Sources */,
 				848FBAB620648F3D00E56D77 /* LocationManager.swift in Sources */,
 				84E8CFA8206DFED5006B5FCB /* StatusViewController.swift in Sources */,
 				848FBAB820648F3D00E56D77 /* LinkedList.swift in Sources */,
