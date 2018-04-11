@@ -27,6 +27,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
     var rightArrowImageName: String?
     var rightArrowImage: UIImage?
     var rightArrowImageView: UIImageView?
+    var backButtonImageView: UIImageView?
     
     var leftArrowImageName: String?
     var leftArrowImage: UIImage?
@@ -83,10 +84,12 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             sceneLocationView.showFeaturePoints = true
         }
         self.view.addSubview(sceneLocationView)
-        
-        rightArrowImageView?.frame = CGRect(x: screenWidth - 80, y: (screenHeight / 2) - 70, width: 70, height: 70)
+
+        rightArrowImageView?.frame = CGRect(x: screenWidth - 100, y: (screenHeight / 2) - 70, width: 70, height: 70)
         leftArrowImageView?.frame = CGRect(x: 10, y: (screenHeight / 2) - 70, width: 70, height: 70)
         
+        var myTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+
         let test = UIView()
         test.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         test.addSubview(rightArrowImageView!)
@@ -102,7 +105,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             mapView.showsPointsOfInterest = true
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
-            mapView.isHidden = false
+            mapView.isHidden = true
             view.addSubview(mapView)
             
             if CLLocationManager.locationServicesEnabled() {
@@ -113,6 +116,30 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 print("not enabled")
             }
         }
+    }
+    
+    @objc func runTimedCode(sender: UIButton!) {
+        let oldCenter = leftArrowImageView?.center
+        let newCenter = CGPoint(x: (oldCenter?.x)!-90, y: (oldCenter?.y)!)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
+            self.leftArrowImageView?.center = newCenter
+        }) { (success: Bool) in
+            print("Succeeded in moving")
+            UIView.animate(withDuration: 0, delay: 0, options: .curveLinear, animations: {
+                self.leftArrowImageView?.center = oldCenter!
+            })
+        }
+        let oldCenterR = rightArrowImageView?.center
+        let newCenterR = CGPoint(x: (oldCenterR?.x)!+90, y: (oldCenterR?.y)!)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
+            self.rightArrowImageView?.center = newCenterR
+        }) { (success: Bool) in
+            print("Succeeded in moving")
+            UIView.animate(withDuration: 0, delay: 0, options: .curveLinear, animations: {
+                self.rightArrowImageView?.center = oldCenterR!
+            })
+        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
