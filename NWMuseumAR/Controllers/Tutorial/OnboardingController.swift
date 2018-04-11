@@ -170,8 +170,10 @@ class OnboardingController: UICollectionViewController, UICollectionViewDelegate
         debugPrint("Cell \(indexPath.item)")
         
         if indexPath.row == icons.count - 1 {
-            permissionService?.requestCameraPermission()
-            permissionService?.requestLocationPermission()
+            if !permissionService!.cameraGranted {
+                permissionService?.requestCameraPermission()
+                permissionService?.requestLocationPermission()
+            }
         }
     }
     
