@@ -61,7 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             // TODO: - Set this to unsupported device controller
-            homeViewController = TutorialPageViewController()
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            homeViewController = OnboardingController(collectionViewLayout: layout)
         }
 
         // Show our starting controller to the user
