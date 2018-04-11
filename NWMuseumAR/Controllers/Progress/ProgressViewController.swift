@@ -186,7 +186,7 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
     
     /** Sets the number of cells in the collection view. */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return artifacts!.count ?? 0
+        return artifacts?.count ?? 0
     }
     
     /** Create the sells in the collection view. */
@@ -195,13 +195,13 @@ class ProgressViewController: UIViewController, UICollectionViewDataSource, UICo
         
         let artifact = artifacts![indexPath.item]
         cell.artifact = artifact
-        debugPrint(artifact.image)
         
         // Assign artifact details here.
         cell.artifactIcon.image = UIImage(named: artifact.image!)
-        cell.artifactTitle.text = artifact.title!
+        cell.artifactTitle.text = artifact.title?.uppercased()
         cell.artifactSubtitle.text = artifact.completed ? "COLLECTED" : "TAP FOR A HINT"
         cell.backgroundColor = UIColor(red: 0.97, green: 0.96, blue: 0.98, alpha: 1.0)
+        cell.parentViewController = self
         
         return cell
     }
