@@ -12,6 +12,22 @@ import UIKit
 
 extension Artifact {
     
+    static func getAll() -> [Artifact] {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Artifact")
+        var artifacts: [Artifact] = []
+        
+        do {
+            artifacts = try context.fetch(fetchRequest) as! [Artifact]
+            debugPrint(artifacts)
+            return artifacts
+        }catch let err as NSError {
+            print(err.debugDescription)
+            return artifacts
+        }
+    }
+    
     /**
      Saves a new artifact to the devices local database.
      

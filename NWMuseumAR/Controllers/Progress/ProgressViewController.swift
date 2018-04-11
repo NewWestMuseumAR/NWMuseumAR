@@ -13,7 +13,6 @@ class ProgressViewController: UIViewController {
 
     // MARK: - TableView data creation
     @IBOutlet weak var tableView: UITableView!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var artifacts: [Artifact] = []
     
@@ -34,20 +33,14 @@ class ProgressViewController: UIViewController {
     //This will be replaced by database of some sort later on
     func getArtifacts()
     {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Artifact")
-        
-        do {
-            artifacts = try context.fetch(fetchRequest) as! [Artifact]
-            debugPrint(artifacts)
-            self.tableView.reloadData()
-        }catch let err as NSError {
-            print(err.debugDescription)
-        }
+        artifacts = Artifact.getAll()
+        self.tableView.reloadData()
     }
 }
 
 //find the cell and display info as needed
 extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
+    
     // MARK: - UITableViewDataSource, UITableViewDelegate
     //this function sets how mant rolls are we displaying
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,14 +58,6 @@ extension ProgressViewController: UITableViewDataSource, UITableViewDelegate {
         cell.parentViewController = self
         //return the cell after update with icon and description
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! ProgressCell
-        cell.artifactDescription.text = "complete"
-        
-        Artifact.setComplete(withTitle: cell.title!, to: true)
-        print("Number complete now: \(Artifact.countCompleted())")
     }
     
     // Function for starting new AR Scene with reference to table data
