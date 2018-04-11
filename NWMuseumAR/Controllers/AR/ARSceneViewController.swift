@@ -45,7 +45,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         UIApplication.shared.isIdleTimerDisabled = true
         
         self.view.addSubview(navigationBar)
-
+        
         // Start the AR experience
         resetTracking()
         
@@ -132,8 +132,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     func instantiateOverlayContainer() {
         overlayView = OverlayView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        overlayView.caption = "You have just collected \(targetArtifactName!)"
-        // overlayView.image = pass in image
+        overlayView.artifact = targetArtifactName!
+        overlayView.image = UIImage.init(named: "" + targetArtifactName! + "Icon")
         overlayView.parentController = self
         view.addSubview(overlayView)
     }
@@ -153,14 +153,14 @@ extension ARSceneViewController {
     
     @objc func sceneTapped(recognizer :UITapGestureRecognizer) {
         if userDetectedArtifact == false { return }
-
+        
         let sceneView = recognizer.view as! ARSCNView
         let touchLocation = recognizer.location(in: sceneView)
         
         let hitResults = sceneView.hitTest(touchLocation, options: [:])
         
         if !hitResults.isEmpty {
- 
+            
             guard let hitResult = hitResults.first else { return }
             
             let coinNode = hitResult.node
@@ -277,7 +277,7 @@ extension ARSceneViewController: ARSessionDelegate {
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
         return true
     }
-
+    
     
     // MARK: - ARSCNViewDelegate (Image detection results)
     /// - Tag: ARImageAnchor-Visualizing
@@ -299,12 +299,12 @@ extension ARSceneViewController: ARSessionDelegate {
         updateQueue.async {
             
             // Create a plane to visualize the initial position of the detected image.
-//            let plane = SCNPlane(width: referenceImage.physicalSize.width,
-//                                 height: referenceImage.physicalSize.height)
+            //            let plane = SCNPlane(width: referenceImage.physicalSize.width,
+            //                                 height: referenceImage.physicalSize.height)
             
-//            if self.targetArtifactName == "notebook" || self.targetArtifactName == "Fire" {
-//                self.addVideo(node: node, plane: plane, video: self.targetArtifactName!)
-//            }
+            //            if self.targetArtifactName == "notebook" || self.targetArtifactName == "Fire" {
+            //                self.addVideo(node: node, plane: plane, video: self.targetArtifactName!)
+            //            }
             
             let coin = SCNScene(named: "coin.dae", inDirectory: "art.scnassets")!
             let coinNode = coin.rootNode

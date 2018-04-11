@@ -6,4 +6,5 @@ target 'NWMuseumAR' do
   use_frameworks!
 
   # Pods for NWMuseumAR
+  pod "lottie-ios"
 end
