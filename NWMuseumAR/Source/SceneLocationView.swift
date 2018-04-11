@@ -47,11 +47,22 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     //ADDED:
     var numOfNodes = 0
     var nodeToBeVisited = 0
+    
+    // Queue holding all nodes along path
     var activeLocationNodeQueue = Queue<LocationNode>()
-    var isFirstRun = true
-    var curNode = SCNNode()
+    
     var navigationDelegate: NavigationViewControllerDelegate?
+    
+    // Logic Bool to determine it's the view code was called
+    var isFirstRun = true
+    
+    // Stores current node being compared to
+    var curNode = SCNNode()
+
+    // Label to be checked by NavigationViewController to deterine proper direction to point arrow
     var leftRightLabel: String?
+    
+    // Storage variables for calculating bearings
     var destBearing : Double?
     var myBearing : Double?
     var destBearingPrime : Double?
@@ -535,16 +546,16 @@ protocol NavigationViewControllerDelegate {
 extension SceneLocationView {
     
     func checkLocVsNode(){
+        
+        // 2PI Constant
         let circle = 2 * Double.pi
-        //Just added this for testing purposes to see if the Queue implementation actually works, which it does
-        // I was thinking of having a queue of like 5 points, and only showing those on the map
+        
         if let currentLocation = currentLocation() {
             let bearingTolerance = 55.0.degreesToRadians
         
+            // Load node variables when function is first called
             if isFirstRun && locationNodes.count > 1 {
-                
                 let nextNode = self.activeLocationNodeQueue.peek()!
-                
                 curNode = nextNode
                 self.sceneNode?.addChildNode(curNode)
                 isFirstRun = false
@@ -552,19 +563,21 @@ extension SceneLocationView {
             }
             
             if !activeLocationNodeQueue.isEmpty {
+                
+                // Update node queue and move onto next node on arrival to current node
                 if !isFirstRun && locationNodes.count > 1 {
                     if distanceBetweenTwoPoints(a: (curNode as! LocationNode).location, b: currentLocation) < 5.0 {
                         curNode.removeFromParentNode()
                         let nextNode = self.activeLocationNodeQueue.dequeue()!
                         curNode = nextNode
                         self.sceneNode?.addChildNode(curNode)
-                        
                     }
                 }
                 
+                // Handle location pointer to aid user in pointing device
                 myBearing = locationManager.heading?.degreesToRadians
-                destBearing = getBearingBetweenTwoPoints1(point1: currentLocation, point2: (curNode as! LocationNode).location).degreesToRadians
-                let bearingDiff = diffBetweenTwoBearings2(heading: myBearing!, target: destBearing!)
+                destBearing = getBearingBetweenTwoCLLocations(point1: currentLocation, point2: (curNode as! LocationNode).location).degreesToRadians
+                let bearingDiff = deltaTwoAnglesNormalizedTo2Pi(heading: myBearing!, target: destBearing!)
                 let bearingTolerancePass = bearingDiff > bearingTolerance
                 destBearingPrime = (destBearing! + .pi).truncatingRemainder(dividingBy: circle)
                 if !bearingTolerancePass {
@@ -581,12 +594,13 @@ extension SceneLocationView {
             } else if !isFirstRun {
                navigationDelegate?.userFinishedNavigation()
             }
-            
         }
-        
     }
     
-    func diffBetweenTwoBearings (heading: Double, target: Double) -> Double {
+    /**
+     * Finds the difference between two input angles. Range: 0...PI.
+    */
+    func deltaTwoRadianAnglesNormalizedToPi (heading: Double, target: Double) -> Double {
         let mheading = heading
         let mtarget = target
         let phi = (abs(mtarget - mheading).truncatingRemainder(dividingBy: 2 * .pi))
@@ -597,7 +611,10 @@ extension SceneLocationView {
         }
     }
     
-    func diffBetweenTwoBearings2 (heading: Double, target: Double) -> Double {
+    /**
+     * Finds the difference between two input angles. Range: 0...2PI.
+     */
+    func deltaTwoAnglesNormalizedTo2Pi (heading: Double, target: Double) -> Double {
         let mheading = heading
         let mtarget = target
         let phi = (abs(mtarget - mheading).truncatingRemainder(dividingBy: 2 * .pi))
@@ -607,7 +624,10 @@ extension SceneLocationView {
     func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
     func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
     
-    func getBearingBetweenTwoPoints1(point1 : CLLocation, point2 : CLLocation) -> Double {
+    /**
+     * Finds the bearing between two CLLocation points in radians.
+     */
+    func getBearingBetweenTwoCLLocations(point1 : CLLocation, point2 : CLLocation) -> Double {
         let circle = 2 * Double.pi
         let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
         let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
@@ -626,13 +646,9 @@ extension SceneLocationView {
         return radiansToDegrees(radians: radiansBearing)
     }
     
-    func compareTwoPos(a: CLLocation, b: CLLocation) -> Bool {
-        if distanceBetweenTwoPoints(a: a, b: b) > 10.0 {
-            return false;
-        }
-        return true;
-    }
-    
+    /**
+     * Finds the distance between two CLLocation points. Haversine method.
+     */
     func distanceBetweenTwoPoints(a: CLLocation, b: CLLocation) -> Double {
         let earthRadius = 6371000.0
         let lat1Radian = Double(a.coordinate.latitude).degreesToRadians
@@ -650,7 +666,6 @@ extension SceneLocationView {
         let result = earthRadius * temp2
         return result
     }
-    
 }
 
 public struct Queue<T> {

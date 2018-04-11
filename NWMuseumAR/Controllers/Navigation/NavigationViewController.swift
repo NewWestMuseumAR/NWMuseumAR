@@ -65,7 +65,7 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
             selector: #selector(self.updateInfoLabel),
             userInfo: nil,
             repeats: true)
-        sceneLocationView.showAxesNode = true
+        sceneLocationView.showAxesNode = false
         sceneLocationView.locationDelegate = self
         
         self.rightArrowImageName = "rightArrow.png"
@@ -82,7 +82,6 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         rightArrowImageView?.isHidden = true
         if displayDebugging {
             sceneLocationView.showFeaturePoints = true
-            
         }
         self.view.addSubview(sceneLocationView)
         
@@ -124,12 +123,10 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         locationManager.stopUpdatingLocation()
         
         let sourceCoordinates = location.coordinate
-        //            let destCoordinates = CLLocationCoordinate2DMake(49.2489415, -122.9899965)
         
-//        let destCoordinates = CLLocationCoordinate2DMake(49.249212, -123.010059)
-        
-        let destCoordinates = CLLocationCoordinate2DMake(49.24662530824629, -123.00695941697575)
-//        let destCoordinates = CLLocationCoordinate2DMake(49.245648063009874, -122.99804483566106)
+        // Location defined to NewWestMinster Museum and Archives, City of NewWestMinster, B.C., Canada
+        let destCoordinates = CLLocationCoordinate2DMake(49.2008869,-122.9161565)
+        // TODO: Add Final Destination PIN to Museum after project merge
 
         let sourcePlacemark = MKPlacemark(coordinate: sourceCoordinates)
         let destPlacemark = MKPlacemark(coordinate: destCoordinates)
@@ -222,7 +219,6 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
 
     
     //Added: This will return the overlay polylines
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer (overlay: overlay)
         renderer.strokeColor = UIColor.blue
@@ -326,107 +322,30 @@ class NavigationViewController: UIViewController, MKMapViewDelegate, CLLocationM
         }
     }
     
+    /**
+    * Handles our directional arrows as well as updates current location and node location comparison.
+    */
     @objc func updateInfoLabel() {
-        //Need to add left or right arrows to different part of scenes
-        // Left is tag 0
         if let leftRight = sceneLocationView.leftRightLabel {
             switch leftRight {
             case "Left":
                 leftArrowImageView?.isHidden = false
                 rightArrowImageView?.isHidden = true
-                print("switch left")
             case "Right":
-                print("switch Right")
                 leftArrowImageView?.isHidden = true
                 rightArrowImageView?.isHidden = false
             case "Straight":
-                print("switch Straight")
                 leftArrowImageView?.isHidden = true
                 rightArrowImageView?.isHidden = true
             default:
                 leftArrowImageView?.isHidden = true
                 rightArrowImageView?.isHidden = true
-                print("no matching values")
             }
         }
-
-        if let position = sceneLocationView.currentScenePosition() {
-            infoLabel.text = "x: \(String(format: "%.2f", position.x)), y: \(String(format: "%.2f", position.y)), z: \(String(format: "%.2f", position.z))\n"
-        }
-//
-//        if let eulerAngles = sceneLocationView.currentEulerAngles() {
-//            infoLabel.text!.append("Euler x: \(String(format: "%.2f", eulerAngles.x)), y: \(String(format: "%.2f", eulerAngles.y)), z: \(String(format: "%.2f", eulerAngles.z))\n")
-//        }
-//
-        if let heading = sceneLocationView.myBearing,
-            let accuracy = sceneLocationView.locationManager.headingAccuracy {
-            infoLabel.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
-        }
-        
-        if let destBearing = sceneLocationView.destBearing {
-            infoLabel.text!.append("Target: \(destBearing)º\n")
-        }
-        
-        
-        if let destBearingPrime = sceneLocationView.destBearingPrime {
-            infoLabel.text!.append("DestBearingPrime: \(destBearingPrime)º\n")
-        }
-        
-
-        if let leftRight = sceneLocationView.leftRightLabel {
-            infoLabel.text!.append("leftRight: \(leftRight) \n")
-        }
-//
-//        if let currentLocation = sceneLocationView.locationManager.currentLocation,
-//            let nextPoint = sceneLocationView.activeLocationNodeQueue.peek()?.location {
-//            let nextPointDesc = sceneLocationView.activeLocationNodeQueue.peek()?.locationDescription
-//            infoLabel.text!.append("Distance to next node: " + sceneLocationView.distanceBetweenTwoPoints(a: currentLocation, b: nextPoint).description)
-//        }
-        
-        let date = Date()
-        let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: date)
-        
-//        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
-//            infoLabel.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
-//        }
         sceneLocationView.checkLocVsNode()
     }
     
-    func removeChildView(imageView: UIImageView) {
-
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        if let touch = touches.first {
-            if touch.view != nil {
-                if (mapView == touch.view! ||
-                    mapView.recursiveSubviews().contains(touch.view!)) {
-                    centerMapOnUserLocation = false
-                } else {
-                    
-                    let location = touch.location(in: self.view)
-
-                    if location.x <= 40 && adjustNorthByTappingSidesOfScreen {
-                        print("left side of the screen")
-                        sceneLocationView.moveSceneHeadingAntiClockwise()
-                    } else if location.x >= view.frame.size.width - 40 && adjustNorthByTappingSidesOfScreen {
-                        print("right side of the screen")
-                        sceneLocationView.moveSceneHeadingClockwise()
-                    } else {
-                        let image = UIImage(named: "pin")!
-                        let annotationNode = LocationAnnotationNode(location: nil, image: image)
-                        annotationNode.scaleRelativeToDistance = true
-                        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-                    }
-                }
-            }
-        }
-    }
-    
     //MARK: MKMapViewDelegate
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
