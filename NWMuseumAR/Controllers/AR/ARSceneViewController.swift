@@ -72,6 +72,14 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillDisappear(animated)
         session.pause()
     }
+    
+    @IBAction func exitButton(_ sender: UIButton) {
+        performSeque()
+    }
+    
+    @IBAction func collectButton(_ sender: UIButton) {
+        print("collect")
+    }
 }
 
 // MARK: - Touch Handling
@@ -339,5 +347,12 @@ extension ARSceneViewController: ARSessionDelegate {
         }
         alertController.addAction(restartAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func performSeque() {
+        let parent = self.parent as! UIPageViewController
+        
+        let progressViewController = UIStoryboard(name: "Progress", bundle: nil).instantiateViewController(withIdentifier: "progress") as! ProgressViewController
+        parent.setViewControllers([progressViewController], direction: .reverse, animated: true, completion: nil)
     }
 }
