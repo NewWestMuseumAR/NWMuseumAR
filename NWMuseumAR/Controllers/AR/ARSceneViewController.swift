@@ -310,7 +310,7 @@ extension ARSceneViewController: ARSessionDelegate {
             let coinNode = coin.rootNode
             
             coinNode.name = "coin"
-            coinNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+            coinNode.scale = SCNVector3(x: 0.8, y: 0.8, z: 0.8)
             
             self.oscillateAndSpinNode(node: coinNode)
             
